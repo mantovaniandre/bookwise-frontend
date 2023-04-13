@@ -1,0 +1,35 @@
+title {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.matcard {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    max-width: 500px;   
+}
+
+.forgotPassword{
+    display: flex;
+    justify-content: end;
+    align-items: center;
+}
+
+.login {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.dontHaveAccount {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+span a {
+    text-decoration: none;
+}
