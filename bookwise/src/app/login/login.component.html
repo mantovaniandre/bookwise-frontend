@@ -1,1 +1,45 @@
-<p>login works!</p>
+<mat-toolbar color="primary">
+    <div class="container">
+      <span style="font-family: 'Rajdhani', sans-serif; font-size: 30px;">BookWise</span>
+    </div>
+</mat-toolbar>
+<mat-card class="container matcard" style="margin-top: 100px;">
+    <mat-card-header>
+        <mat-card-title style="color: #3f51b5; font-size: 30px;">Login</mat-card-title>
+    </mat-card-header>
+    <form [formGroup]="loginFormGroup">
+        <div class="roll">
+            <mat-form-field appearance="outline" style="width: 400px; margin-top: 30px;">
+                <mat-label>Email</mat-label>
+                <input matInput style="font-size: 13px;"formControlName="email" type="email" required [email]="true">
+                <mat-error *ngIf="loginFormGroup.get('email')?.hasError('required')">Required field</mat-error>
+                <mat-error *ngIf="loginFormGroup.get('email')?.hasError('email')">Invalid Email</mat-error>
+                <mat-icon matSuffix>mail</mat-icon>
+            </mat-form-field>
+        </div>
+        <div class="roll">
+            <mat-form-field appearance="outline" style="width: 400px; margin-top: 20px;">
+                <mat-label>Password</mat-label>
+                <input matInput style="font-size: 13px;" formControlName="password" type="password" required>
+                <mat-error *ngIf="loginFormGroup.get('password')?.hasError('required')">Required field</mat-error>
+                <mat-icon matSuffix>password</mat-icon>
+            </mat-form-field>
+        </div>
+        <div class="roll">
+            <div class="forgotPassword">
+                <span style="color: #0077CC">Forgot Password?</span>
+            </div>
+        </div>
+        <div class="roll" style="margin-top: 20px;">
+            <div class="login">
+                <button style="width: 200px;" mat-button mat-raised-button color="primary">Login</button>
+            </div>
+        </div>
+        <div class="roll" style="margin-top: 30px; margin-bottom: 50px;">
+            <div class="dontHaveAccount"> 
+                <span style="color: black">Don't have an account? <a style="color: #0077CC;" href="/register">Create an account</a></span>
+            </div>
+        </div>
+    </form>
+    <mat-divider></mat-divider>
+</mat-card>

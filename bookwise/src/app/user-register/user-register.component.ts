@@ -3,6 +3,8 @@ import { Component } from '@angular/core';
 import { FormBuilder, Validators} from '@angular/forms';
 import { map } from 'rxjs/operators';
 import { BinListResponse } from 'src/app/utils/interface/binListResponse';
+import { UserRegisterService } from '../utils/service/user-register-service';
+import { UserRegisterRequest } from '../utils/request/user-register-request';
 
 @Component({
   selector: 'app-user-register',
@@ -51,7 +53,7 @@ export class UserRegisterComponent {
 
   emailFormControl = this.firstFormGroup.get('email');
 
-  constructor(private fb: FormBuilder, private http: HttpClient) {}
+  constructor(private fb: FormBuilder, private http: HttpClient, private userRegisterService: UserRegisterService) {}
 
   searchCep() {
     const zipCode = this.secondFormGroup.controls.zipCode.value;
@@ -168,7 +170,47 @@ export class UserRegisterComponent {
     event.target.value = input;
   }
   
-  
+  register(){
+    if(this.firstFormGroup.valid && this.secondFormGroup.valid && this.thirdFormGroup.valid){
+      let user: UserRegisterRequest  = {
+        firstName: this.firstFormGroup.get('firstName')?.value || '',
+        lastName: this.firstFormGroup.get('lastName')?.value || '',
+        email: this.firstFormGroup.get('email')?.value || '',
+        password: this.firstFormGroup.get('password')?.value || '',
+        cpf: this.firstFormGroup.get('cpf')?.value || '',
+        phone: this.firstFormGroup.get('phone')?.value || '',
+        birthday: this.firstFormGroup.get('birthday')?.value || '',
+        usertype: this.firstFormGroup.get('usertype')?.value || '',
+        gender: this.firstFormGroup.get('gender')?.value || '',
+        zipCode: this.secondFormGroup.get('zipCode')?.value || '',
+        street: this.secondFormGroup.get('street')?.value || '',
+        number: this.secondFormGroup.get('number')?.value || '',
+        complement: this.secondFormGroup.get('complement')?.value || '',
+        neighborhood: this.secondFormGroup.get('neighborhood')?.value || '',
+        city: this.secondFormGroup.get('city')?.value || '',
+        state: this.secondFormGroup.get('state')?.value || '',
+        country: this.secondFormGroup.get('country')?.value || '',
+        cardNumber: this.thirdFormGroup.get('cardNumber')?.value || '',
+        typeCard: this.thirdFormGroup.get('typeCard')?.value || '',
+        flag: this.thirdFormGroup.get('flag')?.value || '',
+        bank: this.thirdFormGroup.get('bank')?.value || '',
+        countryBank: this.thirdFormGroup.get('countryBank')?.value || '',
+        cardName: this.thirdFormGroup.get('cardName')?.value || '',
+        expiration: this.thirdFormGroup.get('expiration')?.value || '',
+        cvv: this.thirdFormGroup.get('cvv')?.value || '',
+      }
+      this.userRegisterService.registerUser(user).subscribe({
+        next: (response: any) => {
+          console.log(response);
+          // Faça algo com a resposta do backend, como exibir uma mensagem de sucesso
+        },
+        error: (error: any) => {
+          console.error(error);
+          // Faça algo com o erro retornado pelo backend, como exibir uma mensagem de erro
+        }
+      });
+    }
+  }
    
 
 }
