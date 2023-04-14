@@ -6,6 +6,7 @@ import { BinListResponse } from 'src/app/utils/interface/binListResponse';
 import { UserRegisterService } from '../utils/service/user-register-service';
 import { UserRegisterRequest } from '../utils/request/user-register-request';
 
+
 @Component({
   selector: 'app-user-register',
   templateUrl: './user-register.component.html',
@@ -152,10 +153,18 @@ export class UserRegisterComponent {
     event.target.value = input; 
   }
 
-  validateFirstName(event: any) {
+  formatCEP(event: any) {
+    let input = event.target.value;
+    const cleanedCEP = input.replace(/\D/g, ''); // remove tudo que não é número
+    const formattedCEP = cleanedCEP.slice(0, 5) + '-' + cleanedCEP.slice(5, 8); // adiciona os hifens
+    return formattedCEP;
+  }
+  
+
+  formatCharacter(event: any) {
     let input = event.target.value;
     input = input.replace(/[^a-zA-Z\s]/g, '');
-    event.target.value = input;
+    return event.target.value = input;
   }
 
   validateLastName(event: any) {
@@ -169,33 +178,65 @@ export class UserRegisterComponent {
     input = input.replace(/[^a-zA-Z\s]/g, '');
     event.target.value = input;
   }
+
+  removeSpecialCharacters(str: string): string {
+    return str.normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, '')
+      .replace(/[^\w\s]/gi, '');
+  }
+
+  formatDate(date: string) {
+    const dateValue: string | null = date;
+    const formattedDate: string | null = dateValue ? new Date(dateValue).toLocaleDateString('pt-BR') : null;
+    return formattedDate;
+  }
+
+  removeSpecialCharsAndJoinNumbers(str: string): string {
+    return str.replace(/\D/g, '');
+  }
   
   register(){
     if(this.firstFormGroup.valid && this.secondFormGroup.valid && this.thirdFormGroup.valid){
+      
+      let cpf = this.removeSpecialCharacters(this.firstFormGroup.get('cpf')?.value || '');
+      let phone = this.removeSpecialCharsAndJoinNumbers(this.firstFormGroup.get('phone')?.value || '');
+      let birthday = this.formatDate(this.firstFormGroup.get('birthday')?.value || '');
+      let street = this.removeSpecialCharacters(this.secondFormGroup.get('street')?.value || '');
+      let complement = this.removeSpecialCharacters(this.secondFormGroup.get('complement')?.value || '');
+      let neighborhood = this.removeSpecialCharacters(this.secondFormGroup.get('neighborhood')?.value || '');
+      let city = this.removeSpecialCharacters(this.secondFormGroup.get('city')?.value || '');
+      let state = this.removeSpecialCharacters(this.secondFormGroup.get('state')?.value || '');
+      let country = this.removeSpecialCharacters(this.secondFormGroup.get('country')?.value || '');
+      let typeCard = this.removeSpecialCharacters(this.thirdFormGroup.get('typeCard')?.value || '');
+      let flag = this.removeSpecialCharacters(this.thirdFormGroup.get('flag')?.value || '');
+      let bank = this.removeSpecialCharacters(this.thirdFormGroup.get('bank')?.value || '');
+      let countryBank = this.removeSpecialCharacters(this.thirdFormGroup.get('countryBank')?.value || '');
+
+
       let user: UserRegisterRequest  = {
-        firstName: this.firstFormGroup.get('firstName')?.value || '',
-        lastName: this.firstFormGroup.get('lastName')?.value || '',
-        email: this.firstFormGroup.get('email')?.value || '',
+        firstName: this.firstFormGroup.get('firstName')?.value?.toUpperCase() || '',
+        lastName: this.firstFormGroup.get('lastName')?.value?.toUpperCase() || '',
+        email: this.firstFormGroup.get('email')?.value?.toUpperCase() || '',
         password: this.firstFormGroup.get('password')?.value || '',
-        cpf: this.firstFormGroup.get('cpf')?.value || '',
-        phone: this.firstFormGroup.get('phone')?.value || '',
-        birthday: this.firstFormGroup.get('birthday')?.value || '',
-        usertype: this.firstFormGroup.get('usertype')?.value || '',
-        gender: this.firstFormGroup.get('gender')?.value || '',
+        cpf: cpf || '',
+        phone: '55' + phone || '',
+        birthday: birthday,
+        usertype: this.firstFormGroup.get('usertype')?.value?.toUpperCase() || '',
+        gender: this.firstFormGroup.get('gender')?.value?.toUpperCase() || '',
         zipCode: this.secondFormGroup.get('zipCode')?.value || '',
-        street: this.secondFormGroup.get('street')?.value || '',
+        street: street.toUpperCase() || '',
         number: this.secondFormGroup.get('number')?.value || '',
-        complement: this.secondFormGroup.get('complement')?.value || '',
-        neighborhood: this.secondFormGroup.get('neighborhood')?.value || '',
-        city: this.secondFormGroup.get('city')?.value || '',
-        state: this.secondFormGroup.get('state')?.value || '',
-        country: this.secondFormGroup.get('country')?.value || '',
+        complement: complement.toUpperCase() || '',
+        neighborhood: neighborhood.toUpperCase() || '',
+        city: city.toUpperCase(),
+        state: state.toUpperCase() || '',
+        country: country.toUpperCase() || '',
         cardNumber: this.thirdFormGroup.get('cardNumber')?.value || '',
-        typeCard: this.thirdFormGroup.get('typeCard')?.value || '',
-        flag: this.thirdFormGroup.get('flag')?.value || '',
-        bank: this.thirdFormGroup.get('bank')?.value || '',
-        countryBank: this.thirdFormGroup.get('countryBank')?.value || '',
-        cardName: this.thirdFormGroup.get('cardName')?.value || '',
+        typeCard: typeCard.toUpperCase() || '',
+        flag: flag.toUpperCase() || '',
+        bank: bank.toUpperCase() || '',
+        countryBank: countryBank.toUpperCase() || '',
+        cardName: this.thirdFormGroup.get('cardName')?.value?.toUpperCase() || '',
         expiration: this.thirdFormGroup.get('expiration')?.value || '',
         cvv: this.thirdFormGroup.get('cvv')?.value || '',
       }
@@ -214,3 +255,11 @@ export class UserRegisterComponent {
    
 
 }
+function deburr(city: string): string {
+  throw new Error('Function not implemented.');
+}
+
+function moment(dateValue: string) {
+  throw new Error('Function not implemented.');
+}
+

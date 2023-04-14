@@ -16,14 +16,14 @@
           <div class="col">
             <mat-form-field appearance="outline" style="width: 250px;">
               <mat-label>First Name</mat-label>
-              <input matInput style="font-size: 13px;" formControlName="firstName" maxlength="20" type="text" required (input)="validateFirstName($event)">
+              <input matInput style="font-size: 13px;" formControlName="firstName" maxlength="20" type="text" required (input)="formatCharacter($event)">
               <mat-error *ngIf="firstFormGroup.get('firstName')?.hasError('required')">Required field</mat-error>
             </mat-form-field>
           </div>
           <div class="col">
             <mat-form-field appearance="outline" style="width: 250px;">
               <mat-label>Last Name</mat-label>
-              <input matInput style="font-size: 13px;" formControlName="lastName" maxlength="20" type="text" required (input)="validateLastName($event)">
+              <input matInput style="font-size: 13px;" formControlName="lastName" maxlength="20" type="text" required (input)="formatCharacter($event)">
               <mat-error *ngIf="firstFormGroup.get('lastName')?.hasError('required')">Required field</mat-error>
             </mat-form-field>
           </div>
@@ -73,8 +73,8 @@
             <mat-form-field appearance="outline" style="width: 250px;">
               <mat-label>User Type</mat-label>
               <mat-select style="font-size: 13px;" formControlName="usertype" required>
-                <mat-option value="1">Admin</mat-option>
-                <mat-option value="2">Client</mat-option>
+                <mat-option value="Admin">Admin</mat-option>
+                <mat-option value="Client">Client</mat-option>
               </mat-select>
               <mat-error *ngIf="firstFormGroup.get('usertype')?.hasError('required')">Required field</mat-error>
             </mat-form-field>
@@ -104,7 +104,7 @@
           <div class="col">
             <mat-form-field appearance="outline" style="width: 250px;">
               <mat-label>Zip Code</mat-label>
-              <input matInput style="font-size: 13px;" formControlName="zipCode" maxlength="9" required (input)="searchCep()" (input)="validateZipCode($event)">
+              <input matInput style="font-size: 13px;" formControlName="zipCode" maxlength="8" required (input)="validateZipCode($event); searchCep()">
               <mat-error *ngIf="secondFormGroup.get('zipCode')?.hasError('required')">Required field</mat-error>
             </mat-form-field>
           </div>
@@ -118,7 +118,7 @@
           <div class="col">
             <mat-form-field appearance="outline" style="width: 250px;">
               <mat-label>Number</mat-label>
-              <input matInput style="font-size: 13px;" formControlName="number" required maxlength="05" (input)="validateNumberStreet($event)">
+              <input matInput style="font-size: 13px;" formControlName="number" required maxlength="05">
               <mat-error *ngIf="secondFormGroup.get('number')?.hasError('required')">Required field</mat-error>
             </mat-form-field>
           </div>
@@ -210,7 +210,7 @@
           <div class="col">
             <mat-form-field appearance="outline" style="width: 250px;">
               <mat-label>Card Name</mat-label>
-              <input matInput style="font-size: 13px;" formControlName="cardName" maxlength="50" required (input)="validateCardName($event)">
+              <input matInput style="font-size: 13px;" formControlName="cardName" maxlength="50" required (input)="formatCharacter($event)">
               <mat-error *ngIf="thirdFormGroup.get('cardName')?.hasError('required')">Required field</mat-error>
             </mat-form-field>
           </div>
