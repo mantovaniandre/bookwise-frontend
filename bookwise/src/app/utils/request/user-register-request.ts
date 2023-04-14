@@ -5,7 +5,7 @@ export interface UserRegisterRequest {
     password: string;
     cpf: string;
     phone: string;
-    birthday: string;
+    birthday: string | null;
     usertype: string;
     gender: string;
     zipCode: string;
