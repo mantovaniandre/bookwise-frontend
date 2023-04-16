@@ -104,7 +104,7 @@
           <div class="col">
             <mat-form-field appearance="outline" style="width: 250px;">
               <mat-label>Zip Code</mat-label>
-              <input matInput style="font-size: 13px;" formControlName="zipCode" maxlength="8" required (input)="validateZipCode($event); searchCep()">
+              <input matInput style="font-size: 13px;" formControlName="zipCode" maxlength="9" required (input)="validateZipCode($event)" (blur)="searchCep($event)">
               <mat-error *ngIf="secondFormGroup.get('zipCode')?.hasError('required')">Required field</mat-error>
             </mat-form-field>
           </div>
@@ -173,7 +173,7 @@
           <div class="col">
             <mat-form-field appearance="outline" style="width: 250px;">
               <mat-label>Card Number</mat-label>
-              <input matInput style="font-size: 13px;" formControlName="cardNumber" maxlength="16" placeholder="0000 0000 0000 0000" required (input)="validateCreditCardNumber($event)">
+              <input matInput style="font-size: 13px;" formControlName="cardNumber" maxlength="19" placeholder="0000 0000 0000 0000" required (blur)="validateCreditCardNumber($event)">
               <mat-error *ngIf="thirdFormGroup.get('cardNumber')?.hasError('required')">Required field</mat-error>
             </mat-form-field>
           </div>

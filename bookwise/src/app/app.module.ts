@@ -19,6 +19,7 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { MatButtonModule } from '@angular/material/button';
 import { HttpClientModule } from '@angular/common/http';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { AuthService } from './auth.service';
 
 
 
@@ -50,7 +51,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
     HttpClientModule,
     MatToolbarModule
   ],
-  providers: [MatDatepickerModule],
+  providers: [MatDatepickerModule, AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
