@@ -1,10 +1,10 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { FormBuilder, Validators} from '@angular/forms';
-import { UserRegisterService } from '../utils/service/user-register-service';
-import { UserRegisterRequest } from '../utils/request/user-register-request';
-import { SearchCreditCardService } from '../utils/service/search-credit-card-service';
-import { SearchCepService } from '../utils/service/search-cep-service';
+import { UserRegisterService } from '../utils/service/user-register.service';
+import { UserRegisterRequest } from '../utils/request/user-register.request';
+import { SearchCreditCardService } from '../utils/service/search-credit-card.service';
+import { SearchCepService } from '../utils/service/search-cep.service';
 import Swal from 'sweetalert2';
 
 
@@ -60,7 +60,6 @@ export class UserRegisterComponent {
     let zipCode = event.target.value;
     this.searchCepService.searchCepService(zipCode).subscribe({
       next: (response: any) => {
-        console.log('RESPONSE: ', response)
         this.secondFormGroup.patchValue({
           street: response.logradouro,
           neighborhood: response.bairro,
@@ -70,8 +69,11 @@ export class UserRegisterComponent {
         });
       },
       error: (error: HttpErrorResponse) => {
-        console.error(error);
-        // Faça algo com o erro retornado pelo backend, como exibir uma mensagem de erro
+        Swal.fire({
+          icon: 'error',
+          title: 'CEP error!',
+          text: 'An error occurred while trying to find the address for this CEP. Please try again later or enter a different CEP.',
+        });
       }
     })
   }
@@ -87,6 +89,11 @@ export class UserRegisterComponent {
         });
       },
       error: (error: any) => {
+        Swal.fire({
+          icon: 'error',
+          title: 'Credit card error!',
+          text: 'An error occurred while validating your credit card. Please check your card information and try again later.',
+        });
       }
     }); 
   }
@@ -247,7 +254,10 @@ export class UserRegisterComponent {
             icon: 'success',
             title: 'Successful registration!',
             text: response.message,
-        });
+            timer: 3000
+        }).then(() => {
+          window.location.href = '/login';
+        })
       },
         error: (error: HttpErrorResponse) => {
           if(error.error.message == `Email ${user.email} already exists.`)

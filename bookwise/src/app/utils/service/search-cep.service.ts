@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { ZipCodeResponse } from '../response/zip-code-response';
+import { ZipCodeResponse } from '../response/zip-code.response';
 
 @Injectable({
   providedIn: 'root'
