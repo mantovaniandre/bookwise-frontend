@@ -6,7 +6,7 @@ import { UserRegisterComponent } from './user-register/user-register.component';
 import { LoginComponent } from './login/login.component';
 import { HomeComponent } from './home/home.component';
 import { MatCardModule } from '@angular/material/card';
-import { AppRoutingModule } from './app-routing.service';
+import { AppRoutingModule } from './utils/service/app-routing.service';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -19,9 +19,10 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { MatButtonModule } from '@angular/material/button';
 import { HttpClientModule } from '@angular/common/http';
 import { MatToolbarModule } from '@angular/material/toolbar';
-
-
-
+import { AuthService } from './utils/service/auth.service';
+import { HeaderComponent } from './header/header.component';
+import { FooterComponent } from './footer/footer.component';
+import { MatGridListModule } from '@angular/material/grid-list';
 
 
 @NgModule({
@@ -29,7 +30,9 @@ import { MatToolbarModule } from '@angular/material/toolbar';
     AppComponent,
     UserRegisterComponent,
     LoginComponent,
-    HomeComponent
+    HomeComponent,
+    HeaderComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
@@ -48,9 +51,11 @@ import { MatToolbarModule } from '@angular/material/toolbar';
     MatNativeDateModule,
     MatButtonModule,
     HttpClientModule,
-    MatToolbarModule
+    MatToolbarModule,
+    MatGridListModule,
+
   ],
-  providers: [MatDatepickerModule],
+  providers: [MatDatepickerModule, AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

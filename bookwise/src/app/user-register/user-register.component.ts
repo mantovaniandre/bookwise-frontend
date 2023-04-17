@@ -1,10 +1,11 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { FormBuilder, Validators} from '@angular/forms';
-import { map } from 'rxjs/operators';
-import { BinListResponse } from 'src/app/utils/interface/binListResponse';
-import { UserRegisterService } from '../utils/service/user-register-service';
-import { UserRegisterRequest } from '../utils/request/user-register-request';
+import { UserRegisterService } from '../utils/service/user-register.service';
+import { UserRegisterRequest } from '../utils/request/user-register.request';
+import { SearchCreditCardService } from '../utils/service/search-credit-card.service';
+import { SearchCepService } from '../utils/service/search-cep.service';
+import Swal from 'sweetalert2';
 
 
 @Component({
@@ -14,7 +15,7 @@ import { UserRegisterRequest } from '../utils/request/user-register-request';
 })
 export class UserRegisterComponent {
 
-  emailIsValid: boolean = true;
+  isLinear = false;
 
   firstFormGroup = this.fb.group({
     firstName: ['', Validators.required],
@@ -50,45 +51,51 @@ export class UserRegisterComponent {
     cvv: ['', Validators.required],
   });
 
-  isLinear = false;
+  constructor(private fb: FormBuilder, 
+              private userRegisterService: UserRegisterService,
+              private searchCreditCardService: SearchCreditCardService,
+              private searchCepService: SearchCepService) {}
 
-  emailFormControl = this.firstFormGroup.get('email');
-
-  constructor(private fb: FormBuilder, private http: HttpClient, private userRegisterService: UserRegisterService) {}
-
-  searchCep() {
-    const zipCode = this.secondFormGroup.controls.zipCode.value;
-    this.http.get(`https://viacep.com.br/ws/${zipCode}/json/`).subscribe((data: any) => {
-      if (data.erro) {
-        console.log('CEP inválido!');
-        return;
+  async searchCep(event: any) {
+    let zipCode = event.target.value;
+    this.searchCepService.searchCepService(zipCode).subscribe({
+      next: (response: any) => {
+        this.secondFormGroup.patchValue({
+          street: response.logradouro,
+          neighborhood: response.bairro,
+          city: response.cidade,
+          state: response.estado,
+          country: "Brasil",
+        });
+      },
+      error: (error: HttpErrorResponse) => {
+        Swal.fire({
+          icon: 'error',
+          title: 'CEP error!',
+          text: 'An error occurred while trying to find the address for this CEP. Please try again later or enter a different CEP.',
+        });
       }
-
-      this.secondFormGroup.patchValue({
-        street: data.logradouro,
-        neighborhood: data.bairro,
-        city: data.localidade,
-        state: data.uf,
-        country: 'Brasil'
-      });
-    });
+    })
   }
 
   searchCreditCard(cardNumber: any) {
-    let bin = cardNumber.replace(/\s/g, '').slice(0, 6);
-    return this.http.get<BinListResponse>(`https://lookup.binlist.net/${bin}`)
-      .pipe(
-        map((response: any)  => {
-          if(!response.error){
-            this.thirdFormGroup.patchValue({
-              typeCard: response['type'],
-              flag : response['scheme'],
-              bank: response.bank.name,
-              countryBank: response['country']['name'],
-            })
-          }
-        })
-      ).subscribe();    
+    this.searchCreditCardService.searchCreditCardService(cardNumber).subscribe({
+      next: (response: any) => {
+        this.thirdFormGroup.patchValue({
+          bank: response.bank.name,
+          typeCard: response.type,
+          flag: response.scheme,
+          countryBank: response.country.name,
+        });
+      },
+      error: (error: any) => {
+        Swal.fire({
+          icon: 'error',
+          title: 'Credit card error!',
+          text: 'An error occurred while validating your credit card. Please check your card information and try again later.',
+        });
+      }
+    }); 
   }
 
   validateCreditCardNumber(event: any) {
@@ -138,19 +145,19 @@ export class UserRegisterComponent {
   }
 
   validateEmail(event: any): void {
-    console.log('event: ', event)
+    let emailIsValid: boolean = true;
     const emailPattern = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/i;
-    console.log('emailPattern: ', emailPattern)
     const emailValue = event.target.value;
-    console.log('event.target.value: ', event.target.value)
-    this.emailIsValid = emailPattern.test(emailValue);
-    console.log('emailIsValid: ', this.emailIsValid)
+    emailIsValid = emailPattern.test(emailValue);
   }
 
-  validateZipCode(event: any){
+  validateZipCode(event: any) {
     let input = event.target.value;
-    input = input.replace(/[^0-9]/g, '');
-    event.target.value = input; 
+    input = input.replace(/\D/g, ''); // Remove tudo que não for número
+    if (input.length > 5) { // Se o CEP tiver 5 ou mais dígitos, insere o "-"
+      input = `${input.substr(0, 5)}-${input.substr(5)}`;
+    }
+    event.target.value = input;
   }
 
   formatCEP(event: any) {
@@ -159,7 +166,6 @@ export class UserRegisterComponent {
     const formattedCEP = cleanedCEP.slice(0, 5) + '-' + cleanedCEP.slice(5, 8); // adiciona os hifens
     return formattedCEP;
   }
-  
 
   formatCharacter(event: any) {
     let input = event.target.value;
@@ -182,7 +188,8 @@ export class UserRegisterComponent {
   removeSpecialCharacters(str: string): string {
     return str.normalize('NFD')
       .replace(/[\u0300-\u036f]/g, '')
-      .replace(/[^\w\s]/gi, '');
+      .replace(/[^\w\s]/gi, '')
+      .replace('-', '');
   }
 
   formatDate(date: string) {
@@ -211,6 +218,7 @@ export class UserRegisterComponent {
       let flag = this.removeSpecialCharacters(this.thirdFormGroup.get('flag')?.value || '');
       let bank = this.removeSpecialCharacters(this.thirdFormGroup.get('bank')?.value || '');
       let countryBank = this.removeSpecialCharacters(this.thirdFormGroup.get('countryBank')?.value || '');
+      let zipCode = this.removeSpecialCharacters(this.secondFormGroup.get('zipCode')?.value || '');
 
 
       let user: UserRegisterRequest  = {
@@ -223,7 +231,7 @@ export class UserRegisterComponent {
         birthday: birthday,
         usertype: this.firstFormGroup.get('usertype')?.value?.toUpperCase() || '',
         gender: this.firstFormGroup.get('gender')?.value?.toUpperCase() || '',
-        zipCode: this.secondFormGroup.get('zipCode')?.value || '',
+        zipCode: zipCode || '',
         street: street.toUpperCase() || '',
         number: this.secondFormGroup.get('number')?.value || '',
         complement: complement.toUpperCase() || '',
@@ -240,26 +248,38 @@ export class UserRegisterComponent {
         expiration: this.thirdFormGroup.get('expiration')?.value || '',
         cvv: this.thirdFormGroup.get('cvv')?.value || '',
       }
-      this.userRegisterService.registerUser(user).subscribe({
+      this.userRegisterService.registerUserService(user).subscribe({
         next: (response: any) => {
-          console.log(response);
-          // Faça algo com a resposta do backend, como exibir uma mensagem de sucesso
-        },
-        error: (error: any) => {
-          console.error(error);
-          // Faça algo com o erro retornado pelo backend, como exibir uma mensagem de erro
+          Swal.fire({
+            icon: 'success',
+            title: 'Successful registration!',
+            text: response.message,
+            timer: 3000
+        }).then(() => {
+          window.location.href = '/login';
+        })
+      },
+        error: (error: HttpErrorResponse) => {
+          if(error.error.message == `Email ${user.email} already exists.`)
+            Swal.fire({
+              icon: 'error',
+              title: 'Registry error!',
+              text: 'Email already exists.',
+          });
+          if(error.error.message == `CPF ${user.cpf} already exists.`)
+            Swal.fire({
+              icon: 'error',
+              title: 'Registry error!',
+              text: 'CPF already exists.',
+          });else{
+            Swal.fire({
+              icon: 'error',
+              title: 'Registry error!',
+              text: 'An error occurred while registering the user. Please try again later.',
+          })
+          }
         }
       });
     }
   }
-   
-
 }
-function deburr(city: string): string {
-  throw new Error('Function not implemented.');
-}
-
-function moment(dateValue: string) {
-  throw new Error('Function not implemented.');
-}
-
