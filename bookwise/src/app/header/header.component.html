@@ -1,41 +1,40 @@
-<div> 
-    <div style="height: 100px; background-color: white;" >
-        <div class="container">
-            <form [formGroup]="myForm">
-                <div class="row">
-                    <div class="col" style="display: flex; justify-content: center; align-items: center;">
-                        <span style="font-family: 'Rajdhani', sans-serif; font-size: 30px; color: #3f51b5;">BookWise</span>
-                    </div>
-                    <div class="col-12 col-sm-6" style="display: flex; justify-content: center; align-items: center;">
-                        <mat-form-field appearance="outline" style="margin-top: 20px; width: 120px;">
-                            <mat-select style="font-size: 13px;border-radius: 0;" formControlName="search" [(value)]="selected">
-                                <mat-option value="author">Author</mat-option>
-                                <mat-option value="book">Book</mat-option>
-                                <mat-option value="category">Category</mat-option>
-                            </mat-select>
-                        </mat-form-field>
-                        <mat-form-field appearance="outline" style="margin-top: 20px; width: 250px;">
-                            <input matInput placeholder="Pesquisar" style="width: 250px;">
-                            <button mat-icon-button matSuffix (click)="search()">
-                                <mat-icon>search</mat-icon>
-                            </button>
-                        </mat-form-field>
-                    </div>
-                    <div class="col" style="display: flex; justify-content: center; align-items: center;">
-                        <button mat-icon-button>
-                        <mat-icon style="font-size: 25px;">person</mat-icon>
+<div style="background-color: white; border: 2px solid orange;" >
+    <div class="container" style="border: 2px solid orange;">
+        <form [formGroup]="myForm">
+            <div class="row">
+                <div class="col" style="display: flex; justify-content: center; align-items: center;">
+                    <span style="font-family: 'Rajdhani', sans-serif; font-size: 30px; color: #3f51b5;">BookWise</span>
+                </div>
+                <div class="col-12 col-sm-6" style="display: flex; justify-content: center; align-items: center;">
+                    <mat-form-field appearance="outline" style="margin-top: 20px; width: 120px;">
+                        <mat-select style="font-family: 'Rajdhani', sans-serif;" formControlName="search" [(value)]="selected">
+                            <mat-option style="font-family: 'Rajdhani', sans-serif;" value="author">Author</mat-option>
+                            <mat-option style="font-family: 'Rajdhani', sans-serif;" value="book">Book</mat-option>
+                            <mat-option style="font-family: 'Rajdhani', sans-serif;" value="category">Category</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    <mat-form-field appearance="outline" style="margin-top: 20px; width: 250px;">
+                        <input style="font-family: 'Rajdhani', sans-serif;" matInput placeholder="Pesquisar" style="width: 250px;">
+                        <button mat-icon-button matSuffix (click)="search()">
+                            <mat-icon>search</mat-icon>
                         </button>
-                        <div>
-                            <span style="font-family: 'Rajdhani', sans-serif; font-size: 15px; color: #3f51b5;">Olá, André!</span>
-                        </div>
-                    </div>
-                    <div class="col" style="display: flex; justify-content: center; align-items: center;">
-                        <button mat-icon-button>
-                        <mat-icon style="font-size: 25px;">shopping_cart</mat-icon>
-                        </button>
+                    </mat-form-field>
+                </div>
+                <div class="col" style="display: flex; justify-content: center; align-items: center;">
+                    <button mat-icon-button>
+                    <mat-icon style="font-size: 25px;">person</mat-icon>
+                    </button>
+                    <div>
+                        <span style="font-family: 'Rajdhani', sans-serif; font-size: 15px; color: #3f51b5;">Olá, André!</span>
                     </div>
                 </div>
-            </form>
-        </div>
+                <div class="col" style="display: flex; justify-content: center; align-items: center;">
+                    <button mat-icon-button>
+                    <mat-icon style="font-size: 25px;">shopping_cart</mat-icon>
+                    </button>
+                </div>
+            </div>
+        </form>
     </div>
-</div>   
+</div>
+  

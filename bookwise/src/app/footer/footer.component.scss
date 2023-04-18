@@ -1,0 +1,28 @@
+.icon-custom {
+    font-size: 2rem;
+    color: white;
+}
+
+.input-group-text::before {
+    color: red;
+  }
+
+.button{
+    color: gray;
+    border: 1px solid white;
+    background-color: white;
+}
+
+.search{
+    color: gray;
+    border: 1px solid white;
+    background-color: white;
+}
+
+::-webkit-input-placeholder {
+    font-family: 'Rajdhani', sans-serif;
+}
+
+ul {
+    list-style-type: none;
+}
