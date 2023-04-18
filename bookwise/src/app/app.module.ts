@@ -23,6 +23,7 @@ import { AuthService } from './utils/service/auth.service';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { MatGridListModule } from '@angular/material/grid-list';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 @NgModule({
@@ -53,9 +54,13 @@ import { MatGridListModule } from '@angular/material/grid-list';
     HttpClientModule,
     MatToolbarModule,
     MatGridListModule,
+    NgbModule
 
   ],
-  providers: [MatDatepickerModule, AuthService],
+  providers: [MatDatepickerModule, AuthService, {
+    provide: Window,
+    useValue: window,
+  },],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

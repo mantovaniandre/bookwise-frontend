@@ -1,4 +1,4 @@
-import { Component, TemplateRef, ViewChild } from '@angular/core';
+import { Component, Inject, TemplateRef, ViewChild } from '@angular/core';
 import { AuthService } from '../utils/service/auth.service';
 
 
@@ -12,14 +12,18 @@ export class HomeComponent {
   header!: TemplateRef<any>;
 
   books = [
-    {title: 'Book 1', author: 'Author 1', image: 'https://via.placeholder.com/150', category: 'Category 1'},
-    {title: 'Book 2', author: 'Author 2', image: 'https://via.placeholder.com/150', category: 'Category 1'},
-    {title: 'Book 3', author: 'Author 3', image: 'https://via.placeholder.com/150', category: 'Category 1'},
-    {title: 'Book 4', author: 'Author 4', image: 'https://via.placeholder.com/150', category: 'Category 1'},
-    {title: 'Book 5', author: 'Author 5', image: 'https://via.placeholder.com/150', category: 'Category 2'},
-    {title: 'Book 6', author: 'Author 6', image: 'https://via.placeholder.com/150', category: 'Category 2'},
-    {title: 'Book 7', author: 'Author 7', image: 'https://via.placeholder.com/150', category: 'Category 2'},
-    {title: 'Book 8', author: 'Author 8', image: 'https://via.placeholder.com/150', category: 'Category 2'}
+    {title: 'Book 1', author: 'Author 1', image: 'https://m.media-amazon.com/images/I/51Xby92J9KL._SX346_BO1,204,203,200_.jpg', category: 'Aventura'},
+    {title: 'Book 2', author: 'Author 2', image: 'https://m.media-amazon.com/images/I/41suUFbw-eL._SY344_BO1,204,203,200_QL70_ML2_.jpg', category: 'Aventura'},
+    {title: 'Book 3', author: 'Author 3', image: 'https://m.media-amazon.com/images/I/51cB4wSNxQL._SY344_BO1,204,203,200_QL70_ML2_.jpg', category: 'Aventura'},
+    {title: 'Book 4', author: 'Author 4', image: 'https://m.media-amazon.com/images/I/519kRFUvDOL._SY344_BO1,204,203,200_QL70_ML2_.jpg', category: 'Aventura'},
+    {title: 'Book 5', author: 'Author 5', image: 'https://m.media-amazon.com/images/I/519kRFUvDOL._SY344_BO1,204,203,200_QL70_ML2_.jpg', category: 'Aventura'},
+    {title: 'Book 6', author: 'Author 6', image: 'https://m.media-amazon.com/images/I/51cB4wSNxQL._SY344_BO1,204,203,200_QL70_ML2_.jpg', category: 'Aventura'},
+    {title: 'Book 1', author: 'Author 1', image: 'https://m.media-amazon.com/images/I/51Xby92J9KL._SX346_BO1,204,203,200_.jpg', category: 'Romance'},
+    {title: 'Book 2', author: 'Author 2', image: 'https://m.media-amazon.com/images/I/41suUFbw-eL._SY344_BO1,204,203,200_QL70_ML2_.jpg', category: 'Romance'},
+    {title: 'Book 3', author: 'Author 3', image: 'https://m.media-amazon.com/images/I/51cB4wSNxQL._SY344_BO1,204,203,200_QL70_ML2_.jpg', category: 'Romance'},
+    {title: 'Book 4', author: 'Author 4', image: 'https://m.media-amazon.com/images/I/519kRFUvDOL._SY344_BO1,204,203,200_QL70_ML2_.jpg', category: 'Romance'},
+    {title: 'Book 5', author: 'Author 5', image: 'https://m.media-amazon.com/images/I/519kRFUvDOL._SY344_BO1,204,203,200_QL70_ML2_.jpg', category: 'Romance'},
+    {title: 'Book 6', author: 'Author 6', image: 'https://m.media-amazon.com/images/I/51cB4wSNxQL._SY344_BO1,204,203,200_QL70_ML2_.jpg', category: 'Romance'},
   ];
 
   booksChunks: { [key: string]: any[] } = {};
@@ -27,15 +31,21 @@ export class HomeComponent {
 
   defaultHeader!: TemplateRef<any>;
   
-  constructor(private authService: AuthService,) {}
+  constructor(private authService: AuthService,
+              @Inject(Window) private window: Window) {}
 
   ngOnInit(): void {
+    const width = this.window.innerWidth;
     this.categories = this.getCategories();
     this.booksChunks = this.chunk(this.books, 4);
   }
 
   getCategories(): string[] {
     return [...new Set(this.books.map(book => book.category))];
+  }
+
+  isSmallScreen() {
+    return this.window.innerWidth < 768;
   }
 
 
