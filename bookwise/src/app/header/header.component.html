@@ -1,11 +1,11 @@
-<div style="background-color: white; border: 2px solid orange;" >
-    <div class="container" style="border: 2px solid orange;">
+<div style="background-color: white;">
+    <div class="container">
         <form [formGroup]="myForm">
             <div class="row">
                 <div class="col" style="display: flex; justify-content: center; align-items: center;">
                     <span style="font-family: 'Rajdhani', sans-serif; font-size: 30px; color: #3f51b5;">BookWise</span>
                 </div>
-                <div class="col-12 col-sm-6" style="display: flex; justify-content: center; align-items: center;">
+                <div class="col" style="display: flex; justify-content: center; align-items: center;">
                     <mat-form-field appearance="outline" style="margin-top: 20px; width: 120px;">
                         <mat-select style="font-family: 'Rajdhani', sans-serif;" formControlName="search" [(value)]="selected">
                             <mat-option style="font-family: 'Rajdhani', sans-serif;" value="author">Author</mat-option>
@@ -21,20 +21,27 @@
                     </mat-form-field>
                 </div>
                 <div class="col" style="display: flex; justify-content: center; align-items: center;">
-                    <button mat-icon-button>
-                    <mat-icon style="font-size: 25px;">person</mat-icon>
-                    </button>
-                    <div>
-                        <span style="font-family: 'Rajdhani', sans-serif; font-size: 15px; color: #3f51b5;">Olá, André!</span>
-                    </div>
-                </div>
+                    <nav class="navbar navbar-expand navbar-light bg-light">
+                        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                            <ul class="navbar-nav">
+                                <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <i class="bi bi-person icon-custom"></i>
+                                    <span style="font-family: 'Rajdhani', sans-serif; font-size: 15px; color: #3f51b5;">Olá, André!</span>
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <a style="font-family: 'Rajdhani', sans-serif; font-size: 15px; color: #3f51b5;" class="dropdown-item" href="#">Meus pedidos</a>
+                                    <a style="font-family: 'Rajdhani', sans-serif; font-size: 15px; color: #3f51b5;"class="dropdown-item" href="#">Minha conta</a>
+                                </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </nav>
+                </div>                  
                 <div class="col" style="display: flex; justify-content: center; align-items: center;">
-                    <button mat-icon-button>
-                    <mat-icon style="font-size: 25px;">shopping_cart</mat-icon>
-                    </button>
+                    <i class="bi bi-cart icon-custom"></i>
                 </div>
             </div>
         </form>
     </div>
 </div>
-  

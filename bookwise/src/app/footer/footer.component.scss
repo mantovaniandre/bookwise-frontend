@@ -3,20 +3,14 @@
     color: white;
 }
 
-.input-group-text::before {
-    color: red;
-  }
-
-.button{
-    color: gray;
-    border: 1px solid white;
-    background-color: white;
+.icon-custom-search{
+    font-size: 1.5rem;
+    color: white;
+    padding-left: 20px;
 }
 
-.search{
-    color: gray;
-    border: 1px solid white;
-    background-color: white;
+.input-group-text::before {
+    color: red;
 }
 
 ::-webkit-input-placeholder {
@@ -25,4 +19,10 @@
 
 ul {
     list-style-type: none;
+}
+
+.buttonSearch {
+
+    color: white;
+    border: 1px solid white;
 }
