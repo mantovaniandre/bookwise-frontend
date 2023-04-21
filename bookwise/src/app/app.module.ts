@@ -25,6 +25,9 @@ import { FooterComponent } from './footer/footer.component';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { LearnMoreComponent } from './learn-more/learn-more.component';
+import { SearcBookComponent } from './searc-book/searc-book.component';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MyAccountComponent } from './my-account/my-account.component';
 
 
 @NgModule({
@@ -35,7 +38,9 @@ import { LearnMoreComponent } from './learn-more/learn-more.component';
     HomeComponent,
     HeaderComponent,
     FooterComponent,
-    LearnMoreComponent
+    LearnMoreComponent,
+    SearcBookComponent,
+    MyAccountComponent
   ],
   imports: [
     BrowserModule,
@@ -56,7 +61,8 @@ import { LearnMoreComponent } from './learn-more/learn-more.component';
     HttpClientModule,
     MatToolbarModule,
     MatGridListModule,
-    NgbModule
+    NgbModule,
+    MatPaginatorModule
 
   ],
   providers: [MatDatepickerModule, AuthService, {

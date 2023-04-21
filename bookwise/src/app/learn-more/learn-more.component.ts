@@ -6,5 +6,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./learn-more.component.scss']
 })
 export class LearnMoreComponent {
-
+  isEditing: boolean = false;
 }

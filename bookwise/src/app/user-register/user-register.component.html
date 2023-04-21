@@ -1,239 +1,172 @@
-<mat-toolbar color="primary">
-  <div class="container">
-    <span style="font-family: 'Rajdhani', sans-serif; font-size: 30px;">BookWise</span>
+<app-header></app-header>
+<div class="container" id="form-steps" style="margin-top: 100px; margin-bottom: 100px;">
+  <div class="card">
+    <div class="card-header" style="font-family: 'Rajdhani', sans-serif;">Personal Data</div>
+    <div class="card-body">
+      <div class="form-group">
+        <form>
+          <div class="row" style="padding-top: 20px;">
+              <div class="col-12 col-md-4">
+                  <label style="font-family: 'Rajdhani', sans-serif;" for="firstName" class="form-label">First Name</label>
+                  <input style="font-family: 'Rajdhani', sans-serif;" type="text" class="form-control">
+              </div>
+              <div class="col-12 col-md-4">
+                  <label style="font-family: 'Rajdhani', sans-serif;" for="lastName" class="form-label">Last Name</label>
+                  <input style="font-family: 'Rajdhani', sans-serif;" type="text" class="form-control">
+              </div>
+              <div class="col-12 col-md-4">
+                  <label style="font-family: 'Rajdhani', sans-serif;" for="email" class="form-label">Email</label>
+                  <input style="font-family: 'Rajdhani', sans-serif;"type="text" class="form-control">
+              </div>
+          </div>
+          <div class="row" style="padding-top: 20px;">
+              <div class="col-12 col-md-4">
+                  <label style="font-family: 'Rajdhani', sans-serif;" for="password" class="form-label">Password</label>
+                  <input style="font-family: 'Rajdhani', sans-serif;" type="text" class="form-control">
+              </div>
+              <div class="col-12 col-md-4">
+                  <label style="font-family: 'Rajdhani', sans-serif;" for="cpf" class="form-label">CPF</label>
+                  <input style="font-family: 'Rajdhani', sans-serif;" type="text" class="form-control">
+              </div>
+              <div class="col-12 col-md-4">
+                  <label style="font-family: 'Rajdhani', sans-serif;" for="phone" class="form-label">Phone</label>
+                  <input style="font-family: 'Rajdhani', sans-serif;" type="text" class="form-control">
+              </div> 
+          </div>
+          <div class="row" style="padding-top: 20px;">
+              <div class="col-12 col-md-4">
+                  <label style="font-family: 'Rajdhani', sans-serif;" for="birthday" class="form-label">Birthday</label>
+                  <input type="date" class="form-control" id="birthday" name="birthday" style="font-family: 'Rajdhani', sans-serif;">
+              </div>
+              <div class="col-12 col-md-4" style="padding-top: 9px;">
+                  <label style="font-family: 'Rajdhani', sans-serif;" for="gender">User Type</label>
+                  <select style="font-family: 'Rajdhani', sans-serif;" class="form-select" name="usertype">
+                      <option value=""></option>
+                      <option value="Admin">Admin</option>
+                      <option value="Client">Client</option>
+                  </select>
+              </div>
+              <div class="col-12 col-md-4" style="padding-top: 9px;">
+                  <label style="font-family: 'Rajdhani', sans-serif;" for="gender">Gender</label>
+                  <select style="font-family: 'Rajdhani', sans-serif;" class="form-select" id="gender" name="gender">
+                      <option value=""></option>
+                      <option value="Masculine">Masculine</option>
+                      <option value="Feminine">Feminine</option>
+                  </select>
+              </div>   
+          </div>
+        </form>
+      </div>
+      <div class="row justify-content-end" style="padding: 20px;">
+        <div class="col-auto d-flex align-items-center">
+          <a class="next pointer" style="color: #007bff; font-family: 'Rajdhani', sans-serif;">Next</a>
+      </div>
+    </div>
+    </div>
   </div>
-</mat-toolbar>
-<mat-card class="container" style="margin-top: 100px;">
-  <mat-card-header>
-      <mat-card-title style="font-style: italic; color: #3f51b5;">User Registration</mat-card-title>
-  </mat-card-header>
-  <mat-divider></mat-divider>
-  <mat-stepper [linear]="isLinear" #stepper style="margin-top: 30px;">
-    <mat-step [stepControl]="firstFormGroup">
-      <form [formGroup]="firstFormGroup">
-        <ng-template matStepLabel>user</ng-template>
-        <div class="row" style="margin-top: 20px;">
-          <div class="col">
-            <mat-form-field appearance="outline" style="width: 250px;">
-              <mat-label>First Name</mat-label>
-              <input matInput style="font-size: 13px;" formControlName="firstName" maxlength="20" type="text" required (input)="formatCharacter($event)">
-              <mat-error *ngIf="firstFormGroup.get('firstName')?.hasError('required')">Required field</mat-error>
-            </mat-form-field>
+  <div class="card d-none">
+    <div class="card-header" style="font-family: 'Rajdhani', sans-serif;" >Address</div>
+    <div class="card-body">
+      <div class="form-group">
+        <form>
+          <div class="row" style="padding-top: 20px;">
+              <div class="col-12 col-md-4">
+                  <label style="font-family: 'Rajdhani', sans-serif;" for="zipCode" class="form-label">Zip Code</label>
+                  <input style="font-family: 'Rajdhani', sans-serif;" type="text" class="form-control">
+              </div>
+              <div class="col-12 col-md-4">
+                  <label style="font-family: 'Rajdhani', sans-serif;" for="street" class="form-label">Street</label>
+                  <input style="font-family: 'Rajdhani', sans-serif;" type="text" class="form-control">
+              </div>
+              <div class="col-12 col-md-4">
+                  <label style="font-family: 'Rajdhani', sans-serif;" for="number" class="form-label">Number</label>
+                  <input style="font-family: 'Rajdhani', sans-serif;" type="text" class="form-control">
+              </div>
           </div>
-          <div class="col">
-            <mat-form-field appearance="outline" style="width: 250px;">
-              <mat-label>Last Name</mat-label>
-              <input matInput style="font-size: 13px;" formControlName="lastName" maxlength="20" type="text" required (input)="formatCharacter($event)">
-              <mat-error *ngIf="firstFormGroup.get('lastName')?.hasError('required')">Required field</mat-error>
-            </mat-form-field>
+          <div class="row" style="padding-top: 20px;">
+              <div class="col-12 col-md-4">
+                  <label style="font-family: 'Rajdhani', sans-serif;" for="complement" class="form-label">Complement</label>
+                  <input style="font-family: 'Rajdhani', sans-serif;" type="text" class="form-control">
+              </div>
+              <div class="col-12 col-md-4">
+                  <label style="font-family: 'Rajdhani', sans-serif;" for="neighborhood" class="form-label">Neighborhood</label>
+                  <input style="font-family: 'Rajdhani', sans-serif;" type="text" class="form-control">
+              </div>
+              <div class="col-12 col-md-4">
+                  <label style="font-family: 'Rajdhani', sans-serif;" for="phone" class="form-label">City</label>
+                  <input style="font-family: 'Rajdhani', sans-serif;" type="text" class="form-control">
+              </div> 
           </div>
-          <div class="col">
-            <mat-form-field appearance="outline" style="width: 250px;">
-              <mat-label>Email</mat-label>
-              <input matInput style="font-size: 13px;"formControlName="email" type="email" required [email]="true">
-              <mat-error *ngIf="firstFormGroup.get('email')?.hasError('required')">Required field</mat-error>
-              <mat-error *ngIf="firstFormGroup.get('email')?.hasError('email')">Invalid Email</mat-error>
-            </mat-form-field>
+          <div class="row" style="padding-top: 20px;">
+              <div class="col-12 col-md-4">
+                  <label style="font-family: 'Rajdhani', sans-serif;" for="state" class="form-label">State</label>
+                  <input style="font-family: 'Rajdhani', sans-serif;" type="text" class="form-control">
+              </div>
+              <div class="col-12 col-md-4">
+                  <label style="font-family: 'Rajdhani', sans-serif;" for="country" class="form-label">Country</label>
+                  <input style="font-family: 'Rajdhani', sans-serif;" type="text" class="form-control">
+              </div>
           </div>
-          <div class="col">
-            <mat-form-field appearance="outline" style="width: 250px;">
-              <mat-label>Password</mat-label>
-              <input matInput style="font-size: 13px;" formControlName="password" type="password" required>
-              <mat-error *ngIf="firstFormGroup.get('password')?.hasError('required')">Required field</mat-error>
-            </mat-form-field>
+        </form>
+      </div>
+      <div class="row justify-content-end" style="padding: 20px;">
+        <div class="col-auto d-flex align-items-center">
+          <a class="prev mr-3 pointer" style="color: #007bff; margin-right: 20px; font-family: 'Rajdhani', sans-serif;">Previous</a>
+          <a class="next ml-3 pointer" style="color: #007bff; font-family: 'Rajdhani', sans-serif;">Next</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="card d-none">
+    <div class="card-header" style="font-family: 'Rajdhani', sans-serif;">Payment</div>
+    <div class="card-body">
+      <form>
+        <div class="row" style="padding-top: 20px;">
+          <div class="col-12 col-md-4">
+              <label style="font-family: 'Rajdhani', sans-serif;" for="cardNumber" class="form-label">Card Number</label>
+              <input style="font-family: 'Rajdhani', sans-serif;" type="text" class="form-control">
+          </div>
+          <div class="col-12 col-md-4">
+              <label style="font-family: 'Rajdhani', sans-serif;" for="typeCard" class="form-label">Type Card</label>
+              <input style="font-family: 'Rajdhani', sans-serif;" type="text" class="form-control">
+          </div>
+          <div class="col-12 col-md-4">
+              <label style="font-family: 'Rajdhani', sans-serif;" for="flag" class="form-label">Flag</label>
+              <input style="font-family: 'Rajdhani', sans-serif;" type="text" class="form-control">
           </div>
         </div>
-        <div class="row" style="margin-top: 20px;">
-          <div class="col">
-            <mat-form-field appearance="outline" style="width: 250px;">
-              <mat-label>CPF</mat-label>
-              <input matInput style="font-size: 13px;" formControlName="cpf" maxlength="14" required (input)="formatCPF($event)">
-              <mat-error *ngIf="firstFormGroup.get('cpf')?.hasError('required')">Required field</mat-error>
-            </mat-form-field>
+        <div class="row" style="padding-top: 20px;">
+          <div class="col-12 col-md-4">
+              <label style="font-family: 'Rajdhani', sans-serif;" for="bank" class="form-label">Bank</label>
+              <input style="font-family: 'Rajdhani', sans-serif;" type="text" class="form-control">
           </div>
-          <div class="col">
-            <mat-form-field appearance="outline" style="width: 250px;">
-              <mat-label>Phone</mat-label>
-              <input matInput style="font-size: 13px;" formControlName="phone" maxlength="15" required (input)="formatPhone($event)">
-              <mat-error *ngIf="firstFormGroup.get('phone')?.hasError('required')">Required field</mat-error>
-            </mat-form-field>
+          <div class="col-12 col-md-4">
+              <label style="font-family: 'Rajdhani', sans-serif;" for="country" class="form-label">Country</label>
+              <input style="font-family: 'Rajdhani', sans-serif;" type="text" class="form-control">
           </div>
-          <div class="col">
-            <mat-form-field class="example-full-width" appearance="outline" style="width: 250px;">
-              <mat-label>Birthday</mat-label>
-              <input formControlName="birthday" style="font-size: 13px;" maxlength="10" matInput [matDatepicker]="picker">
-              <mat-datepicker-toggle matIconSuffix [for]="picker">
-                <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
-              </mat-datepicker-toggle>
-              <mat-datepicker #picker></mat-datepicker>
-              <mat-error *ngIf="firstFormGroup.get('birthday')?.hasError('required')">Required field</mat-error>
-            </mat-form-field>
-          </div>
-          <div class="col">
-            <mat-form-field appearance="outline" style="width: 250px;">
-              <mat-label>User Type</mat-label>
-              <mat-select style="font-size: 13px;" formControlName="usertype" required>
-                <mat-option value="Admin">Admin</mat-option>
-                <mat-option value="Client">Client</mat-option>
-              </mat-select>
-              <mat-error *ngIf="firstFormGroup.get('usertype')?.hasError('required')">Required field</mat-error>
-            </mat-form-field>
-          </div>
+          <div class="col-12 col-md-4">
+              <label style="font-family: 'Rajdhani', sans-serif;" for="cardName" class="form-label">Card Name</label>
+              <input style="font-family: 'Rajdhani', sans-serif;" type="text" class="form-control">
+          </div> 
         </div>
-        <div class="row" style="margin-top: 20px;">
-          <div class="col">
-            <mat-form-field appearance="outline" style="width: 250px;">
-              <mat-label>Gender</mat-label>
-              <mat-select style="font-size: 13px;" formControlName="gender" required>
-                <mat-option value="Masculine">Masculine</mat-option>
-                <mat-option value="Feminine">Feminine</mat-option>
-              </mat-select>
-              <mat-error *ngIf="firstFormGroup.get('gender')?.hasError('required')">Required field</mat-error>
-            </mat-form-field>
+        <div class="row" style="padding-top: 20px;">
+          <div class="col-12 col-md-4">
+              <label style="font-family: 'Rajdhani', sans-serif;" for="expiration" class="form-label">Expiration</label>
+              <input style="font-family: 'Rajdhani', sans-serif;" type="text" class="form-control">
           </div>
-        </div>
-        <div style="margin-top: 20px;" style="float: right;">
-          <button mat-button mat-raised-button color="primary" matStepperNext>Next</button>
-        </div>
-      </form>
-    </mat-step>
-    <mat-step [stepControl]="secondFormGroup">
-      <form [formGroup]="secondFormGroup">
-        <ng-template matStepLabel>address</ng-template>
-        <div class="row" style="margin-top: 20px;">
-          <div class="col">
-            <mat-form-field appearance="outline" style="width: 250px;">
-              <mat-label>Zip Code</mat-label>
-              <input matInput style="font-size: 13px;" formControlName="zipCode" maxlength="9" required (input)="validateZipCode($event)" (blur)="searchCep($event)">
-              <mat-error *ngIf="secondFormGroup.get('zipCode')?.hasError('required')">Required field</mat-error>
-            </mat-form-field>
+          <div class="col-12 col-md-4">
+              <label style="font-family: 'Rajdhani', sans-serif;" for="cvv" class="form-label">CVV</label>
+              <input style="font-family: 'Rajdhani', sans-serif;" type="text" class="form-control">
           </div>
-          <div class="col">
-            <mat-form-field appearance="outline" style="width: 250px;">
-              <mat-label>Street</mat-label>
-              <input matInput style="font-size: 13px;" formControlName="street" required>
-              <mat-error *ngIf="secondFormGroup.get('street')?.hasError('required')">Required field</mat-error>
-            </mat-form-field>
-          </div>
-          <div class="col">
-            <mat-form-field appearance="outline" style="width: 250px;">
-              <mat-label>Number</mat-label>
-              <input matInput style="font-size: 13px;" formControlName="number" required maxlength="05">
-              <mat-error *ngIf="secondFormGroup.get('number')?.hasError('required')">Required field</mat-error>
-            </mat-form-field>
-          </div>
-          <div class="col">
-            <mat-form-field appearance="outline" style="width: 250px;">
-              <mat-label>Complement</mat-label>
-              <input matInput style="font-size: 13px;" formControlName="complement" required>
-              <mat-error *ngIf="secondFormGroup.get('complement')?.hasError('required')">Required field</mat-error>
-            </mat-form-field>
-          </div>
-        </div>
-        <div class="row" style="margin-top: 20px;">
-          <div class="col">
-            <mat-form-field appearance="outline" style="width: 250px;">
-              <mat-label>Neighborhood</mat-label>
-              <input matInput style="font-size: 13px;" formControlName="neighborhood" required>
-              <mat-error *ngIf="secondFormGroup.get('neighborhood')?.hasError('required')">Required field</mat-error>
-            </mat-form-field>
-          </div>
-          <div class="col">
-            <mat-form-field appearance="outline" style="width: 250px;">
-              <mat-label>City</mat-label>
-              <input matInput style="font-size: 13px;" formControlName="city" required>
-              <mat-error *ngIf="secondFormGroup.get('city')?.hasError('required')">Required field</mat-error>
-            </mat-form-field>
-          </div>
-          <div class="col">
-            <mat-form-field appearance="outline" style="width: 250px;">
-              <mat-label>State</mat-label>
-              <input matInput style="font-size: 13px;" formControlName="state" required>
-              <mat-error *ngIf="secondFormGroup.get('state')?.hasError('required')">Required field</mat-error>
-            </mat-form-field>
-          </div>
-          <div class="col">
-            <mat-form-field appearance="outline" style="width: 250px;">
-              <mat-label>Country</mat-label>
-              <input matInput style="font-size: 13px;" formControlName="country" required>
-              <mat-error *ngIf="secondFormGroup.get('country')?.hasError('required')">Required field</mat-error>
-            </mat-form-field>
-          </div>
-        </div>
-        <div style="margin-top: 20px;" style="float: right;">
-          <button mat-button mat-raised-button color="primary" style="margin-right: 10px;" matStepperPrevious>Back</button>
-          <button mat-button mat-raised-button color="primary" matStepperNext>Next</button>
         </div>
       </form>
-    </mat-step>
-    <mat-step [stepControl]="thirdFormGroup">
-      <form [formGroup]="thirdFormGroup">
-        <ng-template matStepLabel>payment</ng-template>
-        <div class="row" style="margin-top: 20px;">
-          <div class="col">
-            <mat-form-field appearance="outline" style="width: 250px;">
-              <mat-label>Card Number</mat-label>
-              <input matInput style="font-size: 13px;" formControlName="cardNumber" maxlength="19" placeholder="0000 0000 0000 0000" required (blur)="validateCreditCardNumber($event)">
-              <mat-error *ngIf="thirdFormGroup.get('cardNumber')?.hasError('required')">Required field</mat-error>
-            </mat-form-field>
-          </div>
-          <div class="col">
-            <mat-form-field appearance="outline" style="width: 250px;">
-              <mat-label>Type Card</mat-label>
-              <input matInput style="font-size: 13px;" formControlName="typeCard" required>
-              <mat-error *ngIf="thirdFormGroup.get('typeCard')?.hasError('required')">Required field</mat-error>
-            </mat-form-field>
-          </div>
-          <div class="col">
-            <mat-form-field appearance="outline" style="width: 250px;">
-              <mat-label>Flag</mat-label>
-              <input matInput style="font-size: 13px;" formControlName="flag" required>
-              <mat-error *ngIf="thirdFormGroup.get('flag')?.hasError('required')">Required field</mat-error>
-            </mat-form-field>
-          </div>
-          <div class="col">
-            <mat-form-field appearance="outline" style="width: 250px;">
-              <mat-label>Bank</mat-label>
-              <input matInput style="font-size: 13px;" formControlName="bank" required>
-              <mat-error *ngIf="thirdFormGroup.get('bank')?.hasError('required')">Required field</mat-error>
-            </mat-form-field>
-          </div>
-        </div>
-        <div class="row" style="margin-top: 20px;">
-          <div class="col">
-            <mat-form-field appearance="outline" style="width: 250px;">
-              <mat-label>Country</mat-label>
-              <input matInput style="font-size: 13px;" formControlName="countryBank" maxlength="50" required>
-              <mat-error *ngIf="thirdFormGroup.get('countryBank')?.hasError('required')">Required field</mat-error>
-            </mat-form-field>
-          </div>
-          <div class="col">
-            <mat-form-field appearance="outline" style="width: 250px;">
-              <mat-label>Card Name</mat-label>
-              <input matInput style="font-size: 13px;" formControlName="cardName" maxlength="50" required (input)="formatCharacter($event)">
-              <mat-error *ngIf="thirdFormGroup.get('cardName')?.hasError('required')">Required field</mat-error>
-            </mat-form-field>
-          </div>
-          <div class="col">
-            <mat-form-field appearance="outline" style="width: 250px;">
-              <mat-label>Expiration</mat-label>
-              <input matInput style="font-size: 13px;" formControlName="expiration" maxlength="05" (input)="formatExpiration($event)" required>
-              <mat-error *ngIf="thirdFormGroup.get('expiration')?.hasError('required')">Required field</mat-error>
-            </mat-form-field>
-          </div>
-          <div class="col">
-            <mat-form-field appearance="outline" style="width: 250px;">
-              <mat-label>CVV</mat-label>
-              <input matInput style="font-size: 13px;" formControlName="cvv" maxlength="3" required (input)="validateCvv($event)">
-              <mat-error *ngIf="thirdFormGroup.get('cvv')?.hasError('required')">Required field</mat-error>
-            </mat-form-field>
-          </div>
-        </div>
-        <div style="margin-top: 20px;" style="float: right;">
-          <button mat-button mat-raised-button color="primary" style="margin-right: 10px;" matStepperPrevious>Back</button>
-          <button mat-button mat-raised-button color="primary" (click)="register()">Register</button>
-        </div>
-      </form>
-    </mat-step>
-  </mat-stepper>
-</mat-card>
+    </div>
+    <div class="row justify-content-end" style="padding: 20px;">
+      <div class="col-auto d-flex align-items-center" >
+        <a class="prev mr-3 pointer" style="color: #007bff; margin-right: 20px; font-family: 'Rajdhani', sans-serif;">Previous</a>
+        <a class="next ml-3 pointer" style="color: #007bff; font-family: 'Rajdhani', sans-serif;">Submit</a>
+      </div>
+    </div>
+  </div>
+</div>
+<app-footer></app-footer>
