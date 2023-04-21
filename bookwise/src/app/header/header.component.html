@@ -1,47 +1,44 @@
-<div style="background-color: white;">
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container">
-        <form [formGroup]="myForm">
-            <div class="row">
-                <div class="col" style="display: flex; justify-content: center; align-items: center;">
-                    <span style="font-family: 'Rajdhani', sans-serif; font-size: 30px; color: #3f51b5;">BookWise</span>
-                </div>
-                <div class="col" style="display: flex; justify-content: center; align-items: center;">
-                    <mat-form-field appearance="outline" style="margin-top: 20px; width: 120px;">
-                        <mat-select style="font-family: 'Rajdhani', sans-serif;" formControlName="search" [(value)]="selected">
-                            <mat-option style="font-family: 'Rajdhani', sans-serif;" value="author">Author</mat-option>
-                            <mat-option style="font-family: 'Rajdhani', sans-serif;" value="book">Book</mat-option>
-                            <mat-option style="font-family: 'Rajdhani', sans-serif;" value="category">Category</mat-option>
-                        </mat-select>
-                    </mat-form-field>
-                    <mat-form-field appearance="outline" style="margin-top: 20px; width: 250px;">
-                        <input style="font-family: 'Rajdhani', sans-serif;" matInput placeholder="Pesquisar" style="width: 250px;">
-                        <button mat-icon-button matSuffix (click)="search()">
-                            <mat-icon>search</mat-icon>
-                        </button>
-                    </mat-form-field>
-                </div>
-                <div class="col" style="display: flex; justify-content: center; align-items: center;">
-                    <nav class="navbar navbar-expand navbar-light bg-light">
-                        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                            <ul class="navbar-nav">
-                                <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <i class="bi bi-person icon-custom"></i>
-                                    <span style="font-family: 'Rajdhani', sans-serif; font-size: 15px; color: #3f51b5;">Olá, André!</span>
-                                </a>
-                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <a style="font-family: 'Rajdhani', sans-serif; font-size: 15px; color: #3f51b5;" class="dropdown-item" href="#">Meus pedidos</a>
-                                    <a style="font-family: 'Rajdhani', sans-serif; font-size: 15px; color: #3f51b5;"class="dropdown-item" href="#">Minha conta</a>
-                                </div>
-                                </li>
-                            </ul>
-                        </div>
-                    </nav>
-                </div>                  
-                <div class="col" style="display: flex; justify-content: center; align-items: center;">
-                    <i class="bi bi-cart icon-custom"></i>
-                </div>
-            </div>
-        </form>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent">
+            <span class="navbar-toggler-icon"></span>
+        </button>   
+        <div class="collapse navbar-collapse" id="navbarContent">
+            <ul class="navbar-nav d-flex justify-content-around w-100 align-items-center">
+                <li class="col nav-item">
+                    <a class="navbar-brand" href="#" style="font-family: 'Rajdhani', sans-serif; font-size: 50px; color:#3f51b5">BookWise</a>
+                </li>
+                <li class="col nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="bi bi-person icon-custom"></i>
+                        <span style="font-family: 'Rajdhani', sans-serif; font-size: 15px; color: #3f51b5;">Olá, André!</span>
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a style="font-family: 'Rajdhani', sans-serif; font-size: 15px; color: #3f51b5;" class="dropdown-item" href="#">My Requests</a>
+                        <a style="font-family: 'Rajdhani', sans-serif; font-size: 15px; color: #3f51b5;"class="dropdown-item" href="#">My Account</a>
+                    </div>
+                </li>
+                <li class="col nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="bi bi-cart icon-custom"></i>
+                        <span style="font-family: 'Rajdhani', sans-serif; font-size: 15px; color: #3f51b5;">Shopping Cart</span>
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a style="font-family: 'Rajdhani', sans-serif; font-size: 15px; color: #3f51b5;" class="dropdown-item" href="#">My Cart</a>
+                    </div>
+                </li>
+                <li class="col d-flex nav-item" role="search">
+                    <select class="form-control" style="width: auto; font-family: 'Rajdhani', sans-serif; color: #3f51b5; border: 1px solid #3f51b5;">
+                        <option value="author">Author</option>
+                        <option value="language">Publishing company</option>
+                        <option value="publisher">Language</option>
+                    </select>
+                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" style="width: 150px; font-size: 15px; font-family: 'Rajdhani', sans-serif;">
+                    <button class="btn" type="submit" style="color: #3f51b5; border: 2px solid;">Search</button>
+                </li>
+            </ul>
+        </div>
     </div>
-</div>
+</nav>
+  
