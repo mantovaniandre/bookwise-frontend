@@ -1,172 +1,177 @@
+
 <app-header></app-header>
 <div class="container" id="form-steps" style="margin-top: 100px; margin-bottom: 100px;">
-  <div class="card">
-    <div class="card-header" style="font-family: 'Rajdhani', sans-serif;">Personal Data</div>
-    <div class="card-body">
-      <div class="form-group">
-        <form>
-          <div class="row" style="padding-top: 20px;">
-              <div class="col-12 col-md-4">
-                  <label style="font-family: 'Rajdhani', sans-serif;" for="firstName" class="form-label">First Name</label>
-                  <input style="font-family: 'Rajdhani', sans-serif;" type="text" class="form-control">
-              </div>
-              <div class="col-12 col-md-4">
-                  <label style="font-family: 'Rajdhani', sans-serif;" for="lastName" class="form-label">Last Name</label>
-                  <input style="font-family: 'Rajdhani', sans-serif;" type="text" class="form-control">
-              </div>
-              <div class="col-12 col-md-4">
-                  <label style="font-family: 'Rajdhani', sans-serif;" for="email" class="form-label">Email</label>
-                  <input style="font-family: 'Rajdhani', sans-serif;"type="text" class="form-control">
-              </div>
-          </div>
-          <div class="row" style="padding-top: 20px;">
-              <div class="col-12 col-md-4">
-                  <label style="font-family: 'Rajdhani', sans-serif;" for="password" class="form-label">Password</label>
-                  <input style="font-family: 'Rajdhani', sans-serif;" type="text" class="form-control">
-              </div>
-              <div class="col-12 col-md-4">
-                  <label style="font-family: 'Rajdhani', sans-serif;" for="cpf" class="form-label">CPF</label>
-                  <input style="font-family: 'Rajdhani', sans-serif;" type="text" class="form-control">
-              </div>
-              <div class="col-12 col-md-4">
-                  <label style="font-family: 'Rajdhani', sans-serif;" for="phone" class="form-label">Phone</label>
-                  <input style="font-family: 'Rajdhani', sans-serif;" type="text" class="form-control">
-              </div> 
-          </div>
-          <div class="row" style="padding-top: 20px;">
-              <div class="col-12 col-md-4">
-                  <label style="font-family: 'Rajdhani', sans-serif;" for="birthday" class="form-label">Birthday</label>
-                  <input type="date" class="form-control" id="birthday" name="birthday" style="font-family: 'Rajdhani', sans-serif;">
-              </div>
-              <div class="col-12 col-md-4" style="padding-top: 9px;">
-                  <label style="font-family: 'Rajdhani', sans-serif;" for="gender">User Type</label>
-                  <select style="font-family: 'Rajdhani', sans-serif;" class="form-select" name="usertype">
-                      <option value=""></option>
-                      <option value="Admin">Admin</option>
-                      <option value="Client">Client</option>
-                  </select>
-              </div>
-              <div class="col-12 col-md-4" style="padding-top: 9px;">
-                  <label style="font-family: 'Rajdhani', sans-serif;" for="gender">Gender</label>
-                  <select style="font-family: 'Rajdhani', sans-serif;" class="form-select" id="gender" name="gender">
-                      <option value=""></option>
-                      <option value="Masculine">Masculine</option>
-                      <option value="Feminine">Feminine</option>
-                  </select>
-              </div>   
-          </div>
-        </form>
-      </div>
-      <div class="row justify-content-end" style="padding: 20px;">
-        <div class="col-auto d-flex align-items-center">
-          <a class="next pointer" style="color: #007bff; font-family: 'Rajdhani', sans-serif;">Next</a>
-      </div>
-    </div>
-    </div>
-  </div>
-  <div class="card d-none">
-    <div class="card-header" style="font-family: 'Rajdhani', sans-serif;" >Address</div>
-    <div class="card-body">
-      <div class="form-group">
-        <form>
-          <div class="row" style="padding-top: 20px;">
-              <div class="col-12 col-md-4">
-                  <label style="font-family: 'Rajdhani', sans-serif;" for="zipCode" class="form-label">Zip Code</label>
-                  <input style="font-family: 'Rajdhani', sans-serif;" type="text" class="form-control">
-              </div>
-              <div class="col-12 col-md-4">
-                  <label style="font-family: 'Rajdhani', sans-serif;" for="street" class="form-label">Street</label>
-                  <input style="font-family: 'Rajdhani', sans-serif;" type="text" class="form-control">
-              </div>
-              <div class="col-12 col-md-4">
-                  <label style="font-family: 'Rajdhani', sans-serif;" for="number" class="form-label">Number</label>
-                  <input style="font-family: 'Rajdhani', sans-serif;" type="text" class="form-control">
-              </div>
-          </div>
-          <div class="row" style="padding-top: 20px;">
-              <div class="col-12 col-md-4">
-                  <label style="font-family: 'Rajdhani', sans-serif;" for="complement" class="form-label">Complement</label>
-                  <input style="font-family: 'Rajdhani', sans-serif;" type="text" class="form-control">
-              </div>
-              <div class="col-12 col-md-4">
-                  <label style="font-family: 'Rajdhani', sans-serif;" for="neighborhood" class="form-label">Neighborhood</label>
-                  <input style="font-family: 'Rajdhani', sans-serif;" type="text" class="form-control">
-              </div>
-              <div class="col-12 col-md-4">
-                  <label style="font-family: 'Rajdhani', sans-serif;" for="phone" class="form-label">City</label>
-                  <input style="font-family: 'Rajdhani', sans-serif;" type="text" class="form-control">
-              </div> 
-          </div>
-          <div class="row" style="padding-top: 20px;">
-              <div class="col-12 col-md-4">
-                  <label style="font-family: 'Rajdhani', sans-serif;" for="state" class="form-label">State</label>
-                  <input style="font-family: 'Rajdhani', sans-serif;" type="text" class="form-control">
-              </div>
-              <div class="col-12 col-md-4">
-                  <label style="font-family: 'Rajdhani', sans-serif;" for="country" class="form-label">Country</label>
-                  <input style="font-family: 'Rajdhani', sans-serif;" type="text" class="form-control">
-              </div>
-          </div>
-        </form>
-      </div>
-      <div class="row justify-content-end" style="padding: 20px;">
-        <div class="col-auto d-flex align-items-center">
-          <a class="prev mr-3 pointer" style="color: #007bff; margin-right: 20px; font-family: 'Rajdhani', sans-serif;">Previous</a>
-          <a class="next ml-3 pointer" style="color: #007bff; font-family: 'Rajdhani', sans-serif;">Next</a>
+    <div class="card">
+        <div class="card-header" style="font-family: 'Rajdhani', sans-serif;">Personal Data</div>
+        <div class="card-body">
+            <div class="form-group">
+                <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel"  data-pause="hover">
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <form>
+                                <div class="row" style="padding-top: 20px;">
+                                    <div class="col-12 col-md-4">
+                                        <label style="font-family: 'Rajdhani', sans-serif;" for="firstName" class="form-label">First Name</label>
+                                        <input style="font-family: 'Rajdhani', sans-serif;" type="text" class="form-control">
+                                    </div>
+                                    <div class="col-12 col-md-4">
+                                        <label style="font-family: 'Rajdhani', sans-serif;" for="lastName" class="form-label">Last Name</label>
+                                        <input style="font-family: 'Rajdhani', sans-serif;" type="text" class="form-control">
+                                    </div>
+                                    <div class="col-12 col-md-4">
+                                        <label style="font-family: 'Rajdhani', sans-serif;" for="email" class="form-label">Email</label>
+                                        <input style="font-family: 'Rajdhani', sans-serif;"type="text" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="row" style="padding-top: 20px;">
+                                    <div class="col-12 col-md-4">
+                                        <label style="font-family: 'Rajdhani', sans-serif;" for="password" class="form-label">Password</label>
+                                        <input style="font-family: 'Rajdhani', sans-serif;" type="text" class="form-control">
+                                    </div>
+                                    <div class="col-12 col-md-4">
+                                        <label style="font-family: 'Rajdhani', sans-serif;" for="cpf" class="form-label">CPF</label>
+                                        <input style="font-family: 'Rajdhani', sans-serif;" type="text" class="form-control">
+                                    </div>
+                                    <div class="col-12 col-md-4">
+                                        <label style="font-family: 'Rajdhani', sans-serif;" for="phone" class="form-label">Phone</label>
+                                        <input style="font-family: 'Rajdhani', sans-serif;" type="text" class="form-control">
+                                    </div> 
+                                </div>
+                                <div class="row" style="padding-top: 20px;">
+                                    <div class="col-12 col-md-4">
+                                        <label style="font-family: 'Rajdhani', sans-serif;" for="birthday" class="form-label">Birthday</label>
+                                        <input type="date" class="form-control" id="birthday" name="birthday" style="font-family: 'Rajdhani', sans-serif;">
+                                    </div>
+                                    <div class="col-12 col-md-4" style="padding-top: 9px;">
+                                        <label style="font-family: 'Rajdhani', sans-serif;" for="gender">User Type</label>
+                                        <select style="font-family: 'Rajdhani', sans-serif;" class="form-select" name="usertype">
+                                            <option value=""></option>
+                                            <option value="Admin">Admin</option>
+                                            <option value="Client">Client</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-12 col-md-4" style="padding-top: 9px;">
+                                        <label style="font-family: 'Rajdhani', sans-serif;" for="gender">Gender</label>
+                                        <select style="font-family: 'Rajdhani', sans-serif;" class="form-select" id="gender" name="gender">
+                                            <option value=""></option>
+                                            <option value="Masculine">Masculine</option>
+                                            <option value="Feminine">Feminine</option>
+                                        </select>
+                                    </div>   
+                                </div>
+                            </form>
+                            <div class="row justify-content-end" style="padding: 20px;">
+                                <div class="col-auto">
+                                    <a data-bs-target="#carouselExampleControls" data-bs-slide="next"style="color: #007bff; font-family: 'Rajdhani', sans-serif;">Next</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <form>
+                                <div class="row" style="padding-top: 20px;">
+                                    <div class="col-12 col-md-4">
+                                        <label style="font-family: 'Rajdhani', sans-serif;" for="zipCode" class="form-label">Zip Code</label>
+                                        <input style="font-family: 'Rajdhani', sans-serif;" type="text" class="form-control">
+                                    </div>
+                                    <div class="col-12 col-md-4">
+                                        <label style="font-family: 'Rajdhani', sans-serif;" for="street" class="form-label">Street</label>
+                                        <input style="font-family: 'Rajdhani', sans-serif;" type="text" class="form-control">
+                                    </div>
+                                    <div class="col-12 col-md-4">
+                                        <label style="font-family: 'Rajdhani', sans-serif;" for="number" class="form-label">Number</label>
+                                        <input style="font-family: 'Rajdhani', sans-serif;" type="text" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="row" style="padding-top: 20px;">
+                                    <div class="col-12 col-md-4">
+                                        <label style="font-family: 'Rajdhani', sans-serif;" for="complement" class="form-label">Complement</label>
+                                        <input style="font-family: 'Rajdhani', sans-serif;" type="text" class="form-control">
+                                    </div>
+                                    <div class="col-12 col-md-4">
+                                        <label style="font-family: 'Rajdhani', sans-serif;" for="neighborhood" class="form-label">Neighborhood</label>
+                                        <input style="font-family: 'Rajdhani', sans-serif;" type="text" class="form-control">
+                                    </div>
+                                    <div class="col-12 col-md-4">
+                                        <label style="font-family: 'Rajdhani', sans-serif;" for="phone" class="form-label">City</label>
+                                        <input style="font-family: 'Rajdhani', sans-serif;" type="text" class="form-control">
+                                    </div> 
+                                </div>
+                                <div class="row" style="padding-top: 20px;">
+                                    <div class="col-12 col-md-4">
+                                        <label style="font-family: 'Rajdhani', sans-serif;" for="state" class="form-label">State</label>
+                                        <input style="font-family: 'Rajdhani', sans-serif;" type="text" class="form-control">
+                                    </div>
+                                    <div class="col-12 col-md-4">
+                                        <label style="font-family: 'Rajdhani', sans-serif;" for="country" class="form-label">Country</label>
+                                        <input style="font-family: 'Rajdhani', sans-serif;" type="text" class="form-control"> 
+                                    </div>
+                                </div>
+                            </form>
+                            <div class="row justify-content-end" style="padding: 20px;">
+                                <div class="col-auto">
+                                    <a data-bs-target="#carouselExampleControls" data-bs-slide="prev" style="color: #007bff; font-family: 'Rajdhani', sans-serif;  margin-right:20px;">Previous</a>
+                                    <a data-bs-target="#carouselExampleControls" data-bs-slide="next" style="color: #007bff; font-family: 'Rajdhani', sans-serif;">Next</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <form>
+                                <div class="row" style="padding-top: 20px;">
+                                    <div class="col-12 col-md-4">
+                                        <label style="font-family: 'Rajdhani', sans-serif;" for="cardNumber" class="form-label">Card Number</label>
+                                        <input style="font-family: 'Rajdhani', sans-serif;" type="text" class="form-control">
+                                    </div>
+                                    <div class="col-12 col-md-4">
+                                        <label style="font-family: 'Rajdhani', sans-serif;" for="typeCard" class="form-label">Type Card</label>
+                                        <input style="font-family: 'Rajdhani', sans-serif;" type="text" class="form-control">
+                                    </div>
+                                    <div class="col-12 col-md-4">
+                                        <label style="font-family: 'Rajdhani', sans-serif;" for="flag" class="form-label">Flag</label>
+                                        <input style="font-family: 'Rajdhani', sans-serif;" type="text" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="row" style="padding-top: 20px;">
+                                    <div class="col-12 col-md-4">
+                                        <label style="font-family: 'Rajdhani', sans-serif;" for="bank" class="form-label">Bank</label>
+                                        <input style="font-family: 'Rajdhani', sans-serif;" type="text" class="form-control">
+                                    </div>
+                                    <div class="col-12 col-md-4">
+                                        <label style="font-family: 'Rajdhani', sans-serif;" for="country" class="form-label">Country</label>
+                                        <input style="font-family: 'Rajdhani', sans-serif;" type="text" class="form-control">
+                                    </div>
+                                    <div class="col-12 col-md-4">
+                                        <label style="font-family: 'Rajdhani', sans-serif;" for="cardName" class="form-label">Card Name</label>
+                                        <input style="font-family: 'Rajdhani', sans-serif;" type="text" class="form-control">
+                                    </div> 
+                                </div>
+                                <div class="row" style="padding-top: 20px;">
+                                    <div class="col-12 col-md-4">
+                                        <label style="font-family: 'Rajdhani', sans-serif;" for="expiration" class="form-label">Expiration</label>
+                                        <input style="font-family: 'Rajdhani', sans-serif;" type="text" class="form-control">
+                                    </div>
+                                    <div class="col-12 col-md-4">
+                                        <label style="font-family: 'Rajdhani', sans-serif;" for="cvv" class="form-label">CVV</label>
+                                        <input style="font-family: 'Rajdhani', sans-serif;" type="text" class="form-control">
+                                    </div>
+                                </div>
+                            </form>
+                            <div class="row justify-content-end" style="padding: 20px;">
+                                <div class="col-auto">
+                                    <a data-bs-target="#carouselExampleControls" data-bs-slide="prev" style="color: #007bff; font-family: 'Rajdhani', sans-serif;  margin-right:20px;">Previous</a>
+                                    <a data-bs-target="#carouselExampleControls" data-bs-slide="next" style="color: #007bff; font-family: 'Rajdhani', sans-serif;">Submit</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
     </div>
-  </div>
-  <div class="card d-none">
-    <div class="card-header" style="font-family: 'Rajdhani', sans-serif;">Payment</div>
-    <div class="card-body">
-      <form>
-        <div class="row" style="padding-top: 20px;">
-          <div class="col-12 col-md-4">
-              <label style="font-family: 'Rajdhani', sans-serif;" for="cardNumber" class="form-label">Card Number</label>
-              <input style="font-family: 'Rajdhani', sans-serif;" type="text" class="form-control">
-          </div>
-          <div class="col-12 col-md-4">
-              <label style="font-family: 'Rajdhani', sans-serif;" for="typeCard" class="form-label">Type Card</label>
-              <input style="font-family: 'Rajdhani', sans-serif;" type="text" class="form-control">
-          </div>
-          <div class="col-12 col-md-4">
-              <label style="font-family: 'Rajdhani', sans-serif;" for="flag" class="form-label">Flag</label>
-              <input style="font-family: 'Rajdhani', sans-serif;" type="text" class="form-control">
-          </div>
-        </div>
-        <div class="row" style="padding-top: 20px;">
-          <div class="col-12 col-md-4">
-              <label style="font-family: 'Rajdhani', sans-serif;" for="bank" class="form-label">Bank</label>
-              <input style="font-family: 'Rajdhani', sans-serif;" type="text" class="form-control">
-          </div>
-          <div class="col-12 col-md-4">
-              <label style="font-family: 'Rajdhani', sans-serif;" for="country" class="form-label">Country</label>
-              <input style="font-family: 'Rajdhani', sans-serif;" type="text" class="form-control">
-          </div>
-          <div class="col-12 col-md-4">
-              <label style="font-family: 'Rajdhani', sans-serif;" for="cardName" class="form-label">Card Name</label>
-              <input style="font-family: 'Rajdhani', sans-serif;" type="text" class="form-control">
-          </div> 
-        </div>
-        <div class="row" style="padding-top: 20px;">
-          <div class="col-12 col-md-4">
-              <label style="font-family: 'Rajdhani', sans-serif;" for="expiration" class="form-label">Expiration</label>
-              <input style="font-family: 'Rajdhani', sans-serif;" type="text" class="form-control">
-          </div>
-          <div class="col-12 col-md-4">
-              <label style="font-family: 'Rajdhani', sans-serif;" for="cvv" class="form-label">CVV</label>
-              <input style="font-family: 'Rajdhani', sans-serif;" type="text" class="form-control">
-          </div>
-        </div>
-      </form>
-    </div>
-    <div class="row justify-content-end" style="padding: 20px;">
-      <div class="col-auto d-flex align-items-center" >
-        <a class="prev mr-3 pointer" style="color: #007bff; margin-right: 20px; font-family: 'Rajdhani', sans-serif;">Previous</a>
-        <a class="next ml-3 pointer" style="color: #007bff; font-family: 'Rajdhani', sans-serif;">Submit</a>
-      </div>
-    </div>
-  </div>
 </div>
 <app-footer></app-footer>
+<script>
+    const myCarousel = document.querySelector('#carouselExampleControls');
+    const carousel = new bootstrap.Carousel(myCarousel, {
+    pause: 'hover',
+    });
+</script>

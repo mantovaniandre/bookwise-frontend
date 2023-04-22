@@ -1,7 +1,6 @@
 import { FormBuilder, Validators } from '@angular/forms';
 import { AuthService } from '../utils/service/auth.service';
-import { Component, ChangeDetectorRef } from '@angular/core';
-import Swal from 'sweetalert2';
+import { Component} from '@angular/core';
 import { HttpErrorResponse } from '@angular/common/http';
 import { LoginRequest } from '../utils/request/login.request';
 import { BehaviorSubject, Observable, timer } from 'rxjs';
@@ -51,11 +50,11 @@ export class LoginComponent {
         
         },
         error: (error: HttpErrorResponse) => {
-            Swal.fire({
-              icon: 'error',
-              title: 'Login error!',
-              text: 'wrong email or password',
-          });
+          //   Swal.fire({
+          //     icon: 'error',
+          //     title: 'Login error!',
+          //     text: 'wrong email or password',
+          // });
           this.disabledButton = false;
         }
       });

@@ -11,8 +11,8 @@ import { MyAccountComponent } from 'src/app/my-account/my-account.component';
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: 'register', component: UserRegisterComponent },
-  { path: 'SearchBook', component: SearcBookComponent },
-  { path: 'MyAccount', component: MyAccountComponent },
+  { path: 'searchBook', component: SearcBookComponent },
+  { path: 'myAccount', component: MyAccountComponent },
   { path: 'learnMore', component: LearnMoreComponent },
   { path: 'login', component: LoginComponent },
   { path: 'home', component: HomeComponent},
