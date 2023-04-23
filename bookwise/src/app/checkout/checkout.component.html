@@ -1,73 +1,59 @@
 <app-header></app-header>
-<div class="container" id="form-steps" style="margin-top: 100px;">
-    <div class="card">
-        <div class="card-header" style="font-family: 'Rajdhani', sans-serif;">Personal Data</div>
+<div>
+  <div class="container" id="form-steps" style="margin-top: 100px; margin-bottom: 100px;">
+    <div class="row" style="margin-bottom: 50px;">
+      <div class="col card">
+        <div class="card-header" style="font-family: 'Rajdhani', sans-serif;">Checkout</div>
         <div class="card-body">
-            <div class="form-group">
-                <form>
-                    <div class="row" style="padding-top: 20px;">
-                        <div class="col-12 col-md-4">
-                            <label style="font-family: 'Rajdhani', sans-serif;" for="firstName" class="form-label">First Name</label>
-                            <input style="font-family: 'Rajdhani', sans-serif;" type="text" class="form-control" [disabled]="!isEditing">
-                        </div>
-                        <div class="col-12 col-md-4">
-                            <label style="font-family: 'Rajdhani', sans-serif;" for="lastName" class="form-label">Last Name</label>
-                            <input style="font-family: 'Rajdhani', sans-serif;" type="text" class="form-control" [disabled]="!isEditing">
-                        </div>
-                        <div class="col-12 col-md-4">
-                            <label style="font-family: 'Rajdhani', sans-serif;" for="email" class="form-label">Email</label>
-                            <input style="font-family: 'Rajdhani', sans-serif;"type="text" class="form-control" [disabled]="!isEditing">
-                        </div>
-                    </div>
-                    <div class="row" style="padding-top: 20px;">
-                        <div class="col-12 col-md-4">
-                            <label style="font-family: 'Rajdhani', sans-serif;" for="password" class="form-label">Password</label>
-                            <input style="font-family: 'Rajdhani', sans-serif;" type="text" class="form-control" [disabled]="!isEditing">
-                        </div>
-                        <div class="col-12 col-md-4">
-                            <label style="font-family: 'Rajdhani', sans-serif;" for="cpf" class="form-label">CPF</label>
-                            <input style="font-family: 'Rajdhani', sans-serif;" type="text" class="form-control" [disabled]="!isEditing">
-                        </div>
-                        <div class="col-12 col-md-4">
-                            <label style="font-family: 'Rajdhani', sans-serif;" for="phone" class="form-label">Phone</label>
-                            <input style="font-family: 'Rajdhani', sans-serif;" type="text" class="form-control" [disabled]="!isEditing">
-                        </div> 
-                    </div>
-                    <div class="row" style="padding-top: 20px;">
-                        <div class="col-12 col-md-4">
-                            <label style="font-family: 'Rajdhani', sans-serif;" for="birthday" class="form-label">Birthday</label>
-                            <input type="date" class="form-control" id="birthday" name="birthday" style="font-family: 'Rajdhani', sans-serif;" [disabled]="!isEditing">
-                        </div>
-                        <div class="col-12 col-md-4" style="padding-top: 9px;">
-                            <label style="font-family: 'Rajdhani', sans-serif;" for="gender">User Type</label>
-                            <select style="font-family: 'Rajdhani', sans-serif;" class="form-select" name="usertype" [disabled]="!isEditing">
-                                <option value=""></option>
-                                <option value="Admin">Admin</option>
-                                <option value="Client">Client</option>
-                            </select>
-                        </div>
-                        <div class="col-12 col-md-4" style="padding-top: 9px;">
-                            <label style="font-family: 'Rajdhani', sans-serif;" for="gender">Gender</label>
-                            <select style="font-family: 'Rajdhani', sans-serif;" class="form-select" id="gender" name="gender" [disabled]="!isEditing">
-                                <option value=""></option>
-                                <option value="Masculine">Masculine</option>
-                                <option value="Feminine">Feminine</option>
-                            </select>
-                        </div>   
-                    </div>
-                </form>
+          <div class="col d-flex nav-item mb-3" role="search">
+            <div class="row" style="display: flex; justify-content: center; align-items: center;">
             </div>
-            <div class="row justify-content-end" style="padding: 20px;">
-                <div class="col-auto">
-                <a class="" style="color: #007bff; font-family: 'Rajdhani', sans-serif;">change</a>
+          </div>
+          <div class="card mb-3">
+            <div class="card-header" style="font-family: 'Rajdhani', sans-serif;">Purchases</div>
+            <div class="card-body" style="border-bottom: 1px solid rgb(227, 225, 225);">
+              <div class="row" style="display: flex; justify-content: center; align-items: center;">
+                <div class="col col-sm-3 col-md-3" style="display: flex; justify-content: center; align-items: center;">
+                  <img class="card-img-top" src="https://m.media-amazon.com/images/I/51Xby92J9KL._SX346_BO1,204,203,200_.jpg" alt="Card image cap"> 
+                </div>
+                <div class="col col-sm-3 col-md-3" style="display: flex; justify-content: center; align-items: center; font-family: 'Rajdhani', sans-serif;">
+                  <p>O poder do hábito</p>
+                </div>
+                <div class="col col-sm-3 col-md-3" style="display: flex; justify-content: center; align-items: center; font-family: 'Rajdhani', sans-serif;">
+                  <p>10</p>
+                </div>
+                <div class="col col-sm-3 col-md-3" style="display: flex; justify-content: center; align-items: center; font-family: 'Rajdhani', sans-serif;">
+                  <p>R$50,00</p>
+                </div>
+              </div>
             </div>
+            <div class="card-body" style="border-bottom: 1px solid rgb(217, 217, 217);">
+              <div class="row" style="display: flex; justify-content: center; align-items: center;">
+                <div class="col col-sm-3 col-md-3" style="display: flex; justify-content: center; align-items: center;">
+                  <img class="card-img-top" src="https://m.media-amazon.com/images/I/51Xby92J9KL._SX346_BO1,204,203,200_.jpg" alt="Card image cap"> 
+                </div>
+                <div class="col col-sm-3 col-md-3" style="display: flex; justify-content: center; align-items: center; font-family: 'Rajdhani', sans-serif;">
+                  <p>Nome do livro</p>
+                </div>
+                <div class="col col-sm-3 col-md-3" style="display: flex; justify-content: center; align-items: center; font-family: 'Rajdhani', sans-serif;">
+                  <p>10</p>
+                </div>
+                <div class="col col-sm-3 col-md-3" style="display: flex; justify-content: center; align-items: center; font-family: 'Rajdhani', sans-serif;">
+                  <p>R$50,00</p>
+                </div>
+              </div>
             </div>
-        </div>
-    </div>
-    <div class="card" style="margin-top: 50px;">
-        <div class="card-header" style="font-family: 'Rajdhani', sans-serif;">Address</div>
-        <div class="card-body">
-            <div class="form-group">
+            <div class="card-body" style="border-bottom: 1px solid rgb(217, 217, 217);">
+                <div class="row justify-content-end" style="padding: 20px;">
+                    <div class="col-auto">
+                        <p class="" style="color: #007bff; font-family: 'Rajdhani', sans-serif;">Total: 100,50</p>
+                    </div>
+                </div>
+            </div>
+          </div>
+          <div class="card mb-3">
+            <div class="card-header" style="font-family: 'Rajdhani', sans-serif;">Address</div>
+            <div class="card-body" style="border-bottom: 1px solid rgb(227, 225, 225);">
                 <form>
                     <div class="row" style="padding-top: 20px;">
                         <div class="col-12 col-md-4">
@@ -111,15 +97,14 @@
             </div>
             <div class="row justify-content-end" style="padding: 20px;">
                 <div class="col-auto">
+                    <p class="" style="color: #2dac5f; font-family: 'Rajdhani', sans-serif; margin-right: 50px;">free shipping</p>
                     <a class="" style="color: #007bff; font-family: 'Rajdhani', sans-serif;">change</a>
                 </div>
             </div>
-        </div>
-    </div>
-    <div class="card" style="margin-top: 50px; margin-bottom: 100px;">
-        <div class="card-header" style="font-family: 'Rajdhani', sans-serif;">Payment</div>
-        <div class="card-body">
-            <div class="form-group">
+          </div>
+          <div class="card mb-3">
+            <div class="card-header" style="font-family: 'Rajdhani', sans-serif;">Payment</div>
+            <div class="card-body" style="border-bottom: 1px solid rgb(227, 225, 225);">
                 <form>
                     <div class="row" style="padding-top: 20px;">
                         <div class="col-12 col-md-4">
@@ -166,8 +151,15 @@
                     <a class="" style="color: #007bff; font-family: 'Rajdhani', sans-serif;">change</a>
                 </div>
             </div>
+          </div>
+        </div>
+        <div class="row justify-content-end" style="padding: 20px;">
+            <div class="col-auto">
+                <a class="" style="color: #007bff; font-family: 'Rajdhani', sans-serif;">Confirm</a>
+            </div>
         </div>
     </div>
+    </div>
+  </div>
 </div>
-
 <app-footer></app-footer>
