@@ -9,13 +9,21 @@ import { SearchBookComponent } from 'src/app/search-book/search-book.component';
 import { MyAccountComponent } from 'src/app/my-account/my-account.component';
 import { MyRequestsComponent } from 'src/app/my-requests/my-requests.component';
 import { CartComponent } from 'src/app/cart/cart.component';
+import { CheckoutComponent } from 'src/app/checkout/checkout.component';
+import { EditBookComponent } from 'src/app/edit-book/edit-book.component';
+import { BookRegisterComponent } from 'src/app/book-register/book-register.component';
+import { DashboardComponent } from 'src/app/dashboard/dashboard.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
-  { path: 'register', component: UserRegisterComponent },
+  { path: 'registerUser', component: UserRegisterComponent },
   { path: 'searchBook', component: SearchBookComponent },
   { path: 'myRequests', component: MyRequestsComponent },
   { path: 'cart', component: CartComponent },
+  { path: 'registerBook', component: BookRegisterComponent },
+  { path: 'dashboard', component: DashboardComponent },
+  { path: 'checkout', component: CheckoutComponent },
+  { path: 'editBook', component: EditBookComponent },
   { path: 'myAccount', component: MyAccountComponent },
   { path: 'learnMore', component: LearnMoreComponent },
   { path: 'login', component: LoginComponent },
