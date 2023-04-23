@@ -11,9 +11,10 @@ import { AuthService } from './utils/service/auth.service';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { LearnMoreComponent } from './learn-more/learn-more.component';
-import { SearcBookComponent } from './searc-book/searc-book.component';
+import { SearchBookComponent } from './search-book/search-book.component';
 import { MyAccountComponent } from './my-account/my-account.component';
 import { MyRequestsComponent } from './my-requests/my-requests.component';
+import { CartComponent } from './cart/cart.component';
 
 
 @NgModule({
@@ -25,9 +26,10 @@ import { MyRequestsComponent } from './my-requests/my-requests.component';
     HeaderComponent,
     FooterComponent,
     LearnMoreComponent,
-    SearcBookComponent,
+    SearchBookComponent,
     MyAccountComponent,
-    MyRequestsComponent
+    MyRequestsComponent,
+    CartComponent
   ],
   imports: [
     BrowserModule,
