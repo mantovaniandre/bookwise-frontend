@@ -19,6 +19,7 @@ import { CheckoutComponent } from './checkout/checkout.component';
 import { EditBookComponent } from './edit-book/edit-book.component';
 import { BookRegisterComponent } from './book-register/book-register.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -44,6 +45,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     BrowserAnimationsModule,
     AppRoutingModule,
     HttpClientModule,
+    ReactiveFormsModule
   ],
   providers: [AuthService, {
     provide: Window,
