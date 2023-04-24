@@ -1,27 +1,32 @@
 <app-header></app-header>
 <div class="container my-5">
-    <div class="card mx-auto" style="width: 400px;">
-        <div class="card-header text-center" style="font-family: 'Rajdhani', sans-serif;">
-            <h3 class="card-title">LOGIN</h3>
-        </div>
-      <form>
-        <div class="card-body">
-          <div class="mb-3" style="font-family: 'Rajdhani', sans-serif;">
-            <label for="email" class="form-label">Email</label>
-            <input type="email" class="form-control" id="email" required>
-            <div class="invalid-feedback">Please provide a valid email.</div>
-          </div>
-          <div class="mb-3" style="font-family: 'Rajdhani', sans-serif;">
-            <label for="password" class="form-label">Password</label>
-            <input type="password" class="form-control" id="password" required>
-            <div class="invalid-feedback">Please provide a password.</div>
-          </div>
-        </div>
-        <div class="card-footer d-grid gap-2 text-center" style="font-family: 'Rajdhani', sans-serif;">
-          <button type="submit" class="btn btn-primary" style="color: white; background-color: #3f51b5">Login</button>
-          <span style="color: black;">Don't have an account? <a href="/register" style="color: #0077CC;">Create an account</a></span>
-        </div>
-      </form>
+  <div class="card mx-auto" style="width: 400px;">
+    <div class="card-header text-center" style="font-family: 'Rajdhani', sans-serif;">
+        <h3 class="card-title">LOGIN</h3>
     </div>
+    <form class="card-body" [formGroup]="loginForm" (ngSubmit)="submitForm()">
+      <div class="mb-3 form-group" style="font-family: 'Rajdhani', sans-serif;">
+        <label for="email" class="form-label">Email</label>
+        <input type="email" class="form-control" id="email" name="email" formControlName="email" required>
+        <div *ngIf="loginForm.get('email')?.invalid && (loginForm.get('email')?.dirty || loginForm.get('email')?.touched)" class="invalid-feedback">
+          Por favor, informe um endereço de e-mail válido.
+       </div>       
+      </div>
+      <div class="mb-3 form-group" style="font-family: 'Rajdhani', sans-serif;">
+        <label for="password" class="form-label">Password</label>
+        <input type="password" class="form-control" id="password" name="password" required>
+        <div class="invalid-feedback">
+          Please choose a username.
+        </div>    
+      </div>
+      <div class="d-grid gap-2 text-center" style="font-family: 'Rajdhani', sans-serif;">
+        <button type="submit" class="btn btn-primary" style="color: white; background-color: #3f51b5">Login</button>
+        <span style="color: black;">Don't have an account? <a href="/register" style="color: #0077CC;">Create an account</a></span>
+      </div>
+    </form>
+  </div>
 </div>
 <app-footer></app-footer>
+
+
+
