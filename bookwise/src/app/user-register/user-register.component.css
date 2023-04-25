@@ -6,4 +6,9 @@
 a:hover {
     cursor: pointer;
 }
-  
+
+.carousel-linked-nav,
+.item img {
+  display: block; 
+  margin: 0 auto;
+}

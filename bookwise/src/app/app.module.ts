@@ -19,8 +19,7 @@ import { CheckoutComponent } from './checkout/checkout.component';
 import { EditBookComponent } from './edit-book/edit-book.component';
 import { BookRegisterComponent } from './book-register/book-register.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { ReactiveFormsModule } from '@angular/forms';
-
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -38,14 +37,15 @@ import { ReactiveFormsModule } from '@angular/forms';
     CheckoutComponent,
     EditBookComponent,
     BookRegisterComponent,
-    DashboardComponent
+    DashboardComponent,
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,
     HttpClientModule,
-    ReactiveFormsModule
+    FormsModule,
+    ReactiveFormsModule,
   ],
   providers: [AuthService, {
     provide: Window,
