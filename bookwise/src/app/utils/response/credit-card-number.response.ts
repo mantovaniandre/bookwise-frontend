@@ -1,4 +1,4 @@
-export interface BinResponse {
+export interface CreditCardNumberResponse {
     scheme: string;
     type: string;
     brand: string;

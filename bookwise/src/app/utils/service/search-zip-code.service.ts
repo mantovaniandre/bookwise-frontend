@@ -5,7 +5,7 @@ import { ZipCodeResponse } from '../response/zip-code.response';
 @Injectable({
   providedIn: 'root'
 })
-export class SearchCepService {
+export class SearchZipCodeService {
 
   constructor(private http: HttpClient) { }
 

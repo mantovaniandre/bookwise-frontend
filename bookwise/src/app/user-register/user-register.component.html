@@ -5,160 +5,236 @@
         <div class="card-header" style="font-family: 'Rajdhani', sans-serif;">Personal Data</div>
         <div class="card-body">
             <div class="form-group">
-                <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel"  data-pause="hover">
+                <div id="carouselExampleControls" class="carousel slide">
                     <div class="carousel-inner">
                         <div class="carousel-item active">
-                            <form>
-                                <div class="row" style="padding-top: 20px;">
-                                    <div class="col-12 col-md-4">
-                                        <label style="font-family: 'Rajdhani', sans-serif;" for="firstName" class="form-label">First Name</label>
-                                        <input style="font-family: 'Rajdhani', sans-serif;" type="text" class="form-control">
+                            <form [formGroup]="userForm" (ngSubmit)="register()">
+                                <div class="row mb-3" style="font-family: 'Rajdhani', sans-serif; padding: 10px;">
+                                    <div class="col-12 col-md-4" style="font-family: 'Rajdhani', sans-serif;">
+                                        <label for="firstName" class="form-label">First Name</label>
+                                        <input type="text" class="form-control" formControlName="firstName" (input)="checkFormValidity(); formatLettersOnly($event)">
+                                        <div *ngIf="userForm.get('firstName')?.invalid && (userForm.get('firstName')?.dirty || userForm.get('firstName')?.touched)" class="form-text text-danger">
+                                            <small *ngIf="userForm.get('firstName')?.hasError('required')">First Name is required</small>
+                                        </div>
                                     </div>
-                                    <div class="col-12 col-md-4">
-                                        <label style="font-family: 'Rajdhani', sans-serif;" for="lastName" class="form-label">Last Name</label>
-                                        <input style="font-family: 'Rajdhani', sans-serif;" type="text" class="form-control">
+                                    <div class="col-12 col-md-4" style="font-family: 'Rajdhani', sans-serif;">
+                                        <label for="lastName" class="form-label">Last Name</label>
+                                        <input type="text" class="form-control" formControlName="lastName" (input)="checkFormValidity(); formatLettersOnly($event)">
+                                        <div *ngIf="userForm.get('lastName')?.invalid && (userForm.get('lastName')?.dirty || userForm.get('lastName')?.touched)" class="form-text text-danger">
+                                            <small *ngIf="userForm.get('lastName')?.hasError('required')">Last Name is required</small>
+                                        </div>
                                     </div>
-                                    <div class="col-12 col-md-4">
+                                    <div class="col-12 col-md-4" style="font-family: 'Rajdhani', sans-serif;">
                                         <label style="font-family: 'Rajdhani', sans-serif;" for="email" class="form-label">Email</label>
-                                        <input style="font-family: 'Rajdhani', sans-serif;"type="text" class="form-control">
+                                        <input placeholder="youremail@dominio.com" type="text" class="form-control" formControlName="email" (blur)="checkFormValidity()">
+                                        <div *ngIf="userForm.get('email')?.invalid && (userForm.get('email')?.dirty || userForm.get('email')?.touched)" class="form-text text-danger">
+                                            <small *ngIf="userForm.get('email')?.hasError('required')">Email is required</small>
+                                            <small *ngIf="userForm.get('email')?.hasError('email')">Email is invalid</small>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="row" style="padding-top: 20px;">
+                                <div class="row mb-3" style="font-family: 'Rajdhani', sans-serif; padding: 10px;">
                                     <div class="col-12 col-md-4">
-                                        <label style="font-family: 'Rajdhani', sans-serif;" for="password" class="form-label">Password</label>
-                                        <input style="font-family: 'Rajdhani', sans-serif;" type="text" class="form-control">
+                                        <label for="password" class="form-label">Password</label>
+                                        <input type="password" class="form-control" formControlName="password" (blur)="checkFormValidity()">
+                                        <div *ngIf="userForm.get('password')?.invalid && (userForm.get('password')?.dirty || userForm.get('password')?.touched)" class="form-text text-danger">
+                                            <small *ngIf="userForm.get('password')?.hasError('required')">Password is required</small>
+                                        </div>
                                     </div>
-                                    <div class="col-12 col-md-4">
-                                        <label style="font-family: 'Rajdhani', sans-serif;" for="cpf" class="form-label">CPF</label>
-                                        <input style="font-family: 'Rajdhani', sans-serif;" type="text" class="form-control">
+                                    <div class="col-12 col-md-4" style="font-family: 'Rajdhani', sans-serif;">
+                                        <label for="cpf" class="form-label">CPF</label>
+                                        <input placeholder="000.000.000-00" type="text" class="form-control" formControlName="cpf" (input)="checkFormValidity(); formatCPF($event)" maxlength="14">
+                                        <div *ngIf="userForm.get('cpf')?.invalid && (userForm.get('cpf')?.dirty || userForm.get('cpf')?.touched)" class="form-text text-danger">
+                                            <small *ngIf="userForm.get('cpf')?.hasError('required')">CPF is required</small>
+                                        </div>
                                     </div>
-                                    <div class="col-12 col-md-4">
-                                        <label style="font-family: 'Rajdhani', sans-serif;" for="phone" class="form-label">Phone</label>
-                                        <input style="font-family: 'Rajdhani', sans-serif;" type="text" class="form-control">
+                                    <div class="col-12 col-md-4" style="font-family: 'Rajdhani', sans-serif;">
+                                        <label for="phone" class="form-label">Phone</label>
+                                        <input placeholder="(00) 00000-0000"style="font-family: 'Rajdhani', sans-serif;" type="phone" class="form-control" formControlName="phone" (input)="checkFormValidity(); formatPhoneNumber($event)" maxlength="15">
+                                        <div *ngIf="userForm.get('phone')?.invalid && (userForm.get('phone')?.dirty || userForm.get('phone')?.touched)" class="form-text text-danger">
+                                            <small *ngIf="userForm.get('phone')?.hasError('required')">Phone is required</small>
+                                        </div>
                                     </div> 
                                 </div>
-                                <div class="row" style="padding-top: 20px;">
-                                    <div class="col-12 col-md-4">
+                                <div class="row mb-3" style="font-family: 'Rajdhani', sans-serif; padding: 10px;">
+                                    <div class="col-12 col-md-4" >
                                         <label style="font-family: 'Rajdhani', sans-serif;" for="birthday" class="form-label">Birthday</label>
-                                        <input type="date" class="form-control" id="birthday" name="birthday" style="font-family: 'Rajdhani', sans-serif;">
+                                        <input type="text" class="form-control" id="birthday" name="birthday" style="font-family: 'Rajdhani', sans-serif;" formControlName="birthday" (blur)="checkFormValidity()" (input)="formatDateOfBirth($event)"  maxlength="10">
+                                        <div *ngIf="userForm.get('birthday')?.invalid && (userForm.get('birthday')?.dirty || userForm.get('birthday')?.touched)" class="form-text text-danger">
+                                            <small *ngIf="userForm.get('birthday')?.hasError('required')">Birthday is required</small>
+                                        </div>
                                     </div>
                                     <div class="col-12 col-md-4" style="padding-top: 9px;">
-                                        <label style="font-family: 'Rajdhani', sans-serif;" for="gender">User Type</label>
-                                        <select style="font-family: 'Rajdhani', sans-serif;" class="form-select" name="usertype">
+                                        <label style="font-family: 'Rajdhani', sans-serif;" for="usertype">User Type</label>
+                                        <select style="font-family: 'Rajdhani', sans-serif;" class="form-select" name="usertype" formControlName="usertype" (blur)="checkFormValidity()">
                                             <option value=""></option>
                                             <option value="Admin">Admin</option>
                                             <option value="Client">Client</option>
                                         </select>
+                                        <div *ngIf="userForm.get('usertype')?.invalid && (userForm.get('usertype')?.dirty || userForm.get('usertype')?.touched)" class="form-text text-danger" >
+                                            <small *ngIf="userForm.get('usertype')?.hasError('required')">User Type is required</small>
+                                        </div>
                                     </div>
                                     <div class="col-12 col-md-4" style="padding-top: 9px;">
                                         <label style="font-family: 'Rajdhani', sans-serif;" for="gender">Gender</label>
-                                        <select style="font-family: 'Rajdhani', sans-serif;" class="form-select" id="gender" name="gender">
+                                        <select style="font-family: 'Rajdhani', sans-serif;" class="form-select" id="gender" name="gender" formControlName="gender" (blur)="checkFormValidity()">
                                             <option value=""></option>
                                             <option value="Masculine">Masculine</option>
                                             <option value="Feminine">Feminine</option>
                                         </select>
+                                        <div *ngIf="userForm.get('gender')?.invalid && (userForm.get('gender')?.dirty || userForm.get('gender')?.touched)" class="form-text text-danger">
+                                            <small *ngIf="userForm.get('gender')?.hasError('required')">Gender is required</small>
+                                        </div>
                                     </div>   
                                 </div>
                             </form>
-                            <div class="row justify-content-end" style="padding: 20px;">
+                            <div class="row justify-content-end" style="color: #007bff; font-family: 'Rajdhani', sans-serif; padding: 10px;" >
                                 <div class="col-auto">
-                                    <a data-bs-target="#carouselExampleControls" data-bs-slide="next" style="color: #007bff; font-family: 'Rajdhani', sans-serif;">Next</a>
+                                    <a data-bs-target="#carouselExampleControls" data-bs-slide="next" *ngIf="linkUserNextEnabled">Next</a>
                                 </div>
                             </div>
                         </div>
                         <div class="carousel-item">
-                            <form>
-                                <div class="row" style="padding-top: 20px;">
+                            <form [formGroup]="addressForm" (ngSubmit)="register()">
+                                <div class="row mb-3" style="font-family: 'Rajdhani', sans-serif; padding: 10px;">
                                     <div class="col-12 col-md-4">
-                                        <label style="font-family: 'Rajdhani', sans-serif;" for="zipCode" class="form-label">Zip Code</label>
-                                        <input style="font-family: 'Rajdhani', sans-serif;" type="text" class="form-control">
+                                        <label for="zipCode" class="form-label">Zip Code</label>
+                                        <input placeholder="00000-000" type="text" class="form-control" formControlName="zipCode" (blur)="formatAndSearchZipCode($event); checkFormValidity()"  maxlength="09">
+                                        <div *ngIf="addressForm.get('zipCode')?.invalid && (addressForm.get('zipCode')?.dirty || addressForm.get('zipCode')?.touched)" class="form-text text-danger">
+                                            <small *ngIf="addressForm.get('zipCode')?.hasError('required')">Zip Code is required</small>
+                                        </div>
                                     </div>
                                     <div class="col-12 col-md-4">
-                                        <label style="font-family: 'Rajdhani', sans-serif;" for="street" class="form-label">Street</label>
-                                        <input style="font-family: 'Rajdhani', sans-serif;" type="text" class="form-control">
+                                        <label for="street" class="form-label">Street</label>
+                                        <input type="text" class="form-control" formControlName="street" maxlength="50" (blur)="checkFormValidity()" (input)="formatLettersOnly($event)">
+                                        <div *ngIf="addressForm.get('street')?.invalid && (addressForm.get('street')?.dirty || addressForm.get('street')?.touched)" class="form-text text-danger">
+                                            <small *ngIf="addressForm.get('street')?.hasError('required')">Street is required</small>
+                                        </div>
                                     </div>
                                     <div class="col-12 col-md-4">
-                                        <label style="font-family: 'Rajdhani', sans-serif;" for="number" class="form-label">Number</label>
-                                        <input style="font-family: 'Rajdhani', sans-serif;" type="text" class="form-control">
+                                        <label for="number" class="form-label">Number</label>
+                                        <input type="text" class="form-control" formControlName="number" maxlength="05" (blur)="checkFormValidity()" (input)="formatNumberStreet($event)">
+                                        <div *ngIf="addressForm.get('number')?.invalid && (addressForm.get('number')?.dirty || addressForm.get('number')?.touched)" class="form-text text-danger">
+                                            <small *ngIf="addressForm.get('number')?.hasError('required')">Number is required</small>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="row" style="padding-top: 20px;">
+                                <div class="row mb-3" style="font-family: 'Rajdhani', sans-serif; padding: 10px;">
                                     <div class="col-12 col-md-4">
-                                        <label style="font-family: 'Rajdhani', sans-serif;" for="complement" class="form-label">Complement</label>
-                                        <input style="font-family: 'Rajdhani', sans-serif;" type="text" class="form-control">
+                                        <label for="complement" class="form-label">Complement</label>
+                                        <input type="text" class="form-control" formControlName="complement" maxlength="50" (blur)="checkFormValidity()">
+                                        <div *ngIf="addressForm.get('complement')?.invalid && (addressForm.get('complement')?.dirty || addressForm.get('complement')?.touched)" class="form-text text-danger">
+                                            <small *ngIf="addressForm.get('complement')?.hasError('required')">Complement is required</small>
+                                        </div>
                                     </div>
                                     <div class="col-12 col-md-4">
-                                        <label style="font-family: 'Rajdhani', sans-serif;" for="neighborhood" class="form-label">Neighborhood</label>
-                                        <input style="font-family: 'Rajdhani', sans-serif;" type="text" class="form-control">
+                                        <label for="neighborhood" class="form-label">Neighborhood</label>
+                                        <input type="text" class="form-control" formControlName="neighborhood" maxlength="50" (blur)="checkFormValidity()" (input)="formatLettersOnly($event)">
+                                        <div *ngIf="addressForm.get('neighborhood')?.invalid && (addressForm.get('neighborhood')?.dirty || addressForm.get('neighborhood')?.touched)" class="form-text text-danger">
+                                            <small *ngIf="addressForm.get('neighborhood')?.hasError('required')">Neighborhood is required</small>
+                                        </div>
                                     </div>
                                     <div class="col-12 col-md-4">
-                                        <label style="font-family: 'Rajdhani', sans-serif;" for="phone" class="form-label">City</label>
-                                        <input style="font-family: 'Rajdhani', sans-serif;" type="text" class="form-control">
+                                        <label for="city" class="form-label">City</label>
+                                        <input type="text" class="form-control" formControlName="city" maxlength="50" (blur)="checkFormValidity()" (input)="formatLettersOnly($event)">
+                                        <div *ngIf="addressForm.get('city')?.invalid && (addressForm.get('city')?.dirty || addressForm.get('city')?.touched)" class="form-text text-danger">
+                                            <small *ngIf="addressForm.get('city')?.hasError('required')">City is required</small>
+                                        </div>
                                     </div> 
                                 </div>
-                                <div class="row" style="padding-top: 20px;">
+                                <div class="row mb-3" style="font-family: 'Rajdhani', sans-serif; padding: 10px;">
                                     <div class="col-12 col-md-4">
-                                        <label style="font-family: 'Rajdhani', sans-serif;" for="state" class="form-label">State</label>
-                                        <input style="font-family: 'Rajdhani', sans-serif;" type="text" class="form-control">
+                                        <label for="state" class="form-label">State</label>
+                                        <input type="text" class="form-control" formControlName="state" maxlength="02" (blur)="checkFormValidity()" (input)="formatLettersOnly($event)">
+                                        <div *ngIf="addressForm.get('state')?.invalid && (addressForm.get('state')?.dirty || addressForm.get('state')?.touched)" class="form-text text-danger">
+                                            <small *ngIf="addressForm.get('state')?.hasError('required')">State is required</small>
+                                        </div>
                                     </div>
                                     <div class="col-12 col-md-4">
-                                        <label style="font-family: 'Rajdhani', sans-serif;" for="country" class="form-label">Country</label>
-                                        <input style="font-family: 'Rajdhani', sans-serif;" type="text" class="form-control"> 
+                                        <label for="country" class="form-label">Country</label>
+                                        <input type="text" class="form-control" formControlName="country" maxlength="06" (blur)="checkFormValidity()" (input)="formatLettersOnly($event)"> 
+                                        <div *ngIf="addressForm.get('country')?.invalid && (addressForm.get('country')?.dirty || addressForm.get('country')?.touched)" class="form-text text-danger">
+                                            <small *ngIf="addressForm.get('country')?.hasError('required')">Country is required</small>
+                                        </div>
                                     </div>
                                 </div>
                             </form>
-                            <div class="row justify-content-end" style="padding: 20px;">
+                            <div class="row justify-content-end" style="padding: 20px; font-family: 'Rajdhani', sans-serif">
                                 <div class="col-auto">
-                                    <a data-bs-target="#carouselExampleControls" data-bs-slide="prev" style="color: #007bff; font-family: 'Rajdhani', sans-serif;  margin-right:20px;">Previous</a>
-                                    <a data-bs-target="#carouselExampleControls" data-bs-slide="next" style="color: #007bff; font-family: 'Rajdhani', sans-serif;">Next</a>
+                                    <a data-bs-target="#carouselExampleControls" data-bs-slide="prev" style="color: #007bff; margin-right:20px;">Previous</a>
+                                    <a data-bs-target="#carouselExampleControls" data-bs-slide="next" style="color: #007bff;" *ngIf="linkAddressNextEnabled">Next</a>
                                 </div>
                             </div>
                         </div>
                         <div class="carousel-item">
-                            <form>
-                                <div class="row" style="padding-top: 20px;">
+                            <form [formGroup]="paymentForm" (ngSubmit)="register()">
+                                <div class="row mb-3" style="font-family: 'Rajdhani', sans-serif; padding: 10px;">
                                     <div class="col-12 col-md-4">
-                                        <label style="font-family: 'Rajdhani', sans-serif;" for="cardNumber" class="form-label">Card Number</label>
-                                        <input style="font-family: 'Rajdhani', sans-serif;" type="text" class="form-control">
+                                        <label for="cardNumber" class="form-label">Card Number</label>
+                                        <input type="text" class="form-control" (blur)="formatAndSearchCreditCardNumber($event); checkFormValidity()" formControlName="cardNumber" maxlength="18">
+                                        <div *ngIf="paymentForm.get('cardNumber')?.invalid && (paymentForm.get('cardNumber')?.dirty || paymentForm.get('cardNumber')?.touched)" class="form-text text-danger">
+                                            <small *ngIf="paymentForm.get('cardNumber')?.hasError('required')">Card Number is required</small>
+                                        </div>
                                     </div>
                                     <div class="col-12 col-md-4">
-                                        <label style="font-family: 'Rajdhani', sans-serif;" for="typeCard" class="form-label">Type Card</label>
-                                        <input style="font-family: 'Rajdhani', sans-serif;" type="text" class="form-control">
+                                        <label for="typeCard" class="form-label">Type Card</label>
+                                        <input type="text" class="form-control" (blur)="checkFormValidity()" (input)="formatLettersOnly($event)" formControlName="typeCard">
+                                        <div *ngIf="paymentForm.get('typeCard')?.invalid && (paymentForm.get('typeCard')?.dirty || paymentForm.get('typeCard')?.touched)" class="form-text text-danger">
+                                            <small *ngIf="paymentForm.get('typeCard')?.hasError('required')">Type Card is required</small>
+                                        </div>
                                     </div>
                                     <div class="col-12 col-md-4">
-                                        <label style="font-family: 'Rajdhani', sans-serif;" for="flag" class="form-label">Flag</label>
-                                        <input style="font-family: 'Rajdhani', sans-serif;" type="text" class="form-control">
+                                        <label for="flag" class="form-label">Flag</label>
+                                        <input type="text" class="form-control" (blur)="checkFormValidity()" (input)="formatLettersOnly($event)" formControlName="flag">
+                                        <div *ngIf="paymentForm.get('flag')?.invalid && (paymentForm.get('flag')?.dirty || paymentForm.get('flag')?.touched)" class="form-text text-danger">
+                                            <small *ngIf="paymentForm.get('flag')?.hasError('required')">Flag is required</small>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="row" style="padding-top: 20px;">
+                                <div class="row mb-3" style="font-family: 'Rajdhani', sans-serif; padding: 10px;">
                                     <div class="col-12 col-md-4">
-                                        <label style="font-family: 'Rajdhani', sans-serif;" for="bank" class="form-label">Bank</label>
-                                        <input style="font-family: 'Rajdhani', sans-serif;" type="text" class="form-control">
+                                        <label for="bank" class="form-label">Bank</label>
+                                        <input type="text" class="form-control" (blur)="checkFormValidity()" (input)="formatLettersOnly($event)" formControlName="bank">
+                                        <div *ngIf="paymentForm.get('bank')?.invalid && (paymentForm.get('bank')?.dirty || paymentForm.get('bank')?.touched)" class="form-text text-danger">
+                                            <small *ngIf="paymentForm.get('bank')?.hasError('required')">Bank is required</small>
+                                        </div>
                                     </div>
                                     <div class="col-12 col-md-4">
-                                        <label style="font-family: 'Rajdhani', sans-serif;" for="country" class="form-label">Country</label>
-                                        <input style="font-family: 'Rajdhani', sans-serif;" type="text" class="form-control">
+                                        <label for="country" class="form-label">Country</label>
+                                        <input type="text" class="form-control" (blur)="checkFormValidity()" (input)="formatLettersOnly($event)" formControlName="countryBank">
+                                        <div *ngIf="paymentForm.get('countryBank')?.invalid && (paymentForm.get('countryBank')?.dirty || paymentForm.get('countryBank')?.touched)" class="form-text text-danger">
+                                            <small *ngIf="paymentForm.get('countryBank')?.hasError('required')">Country is required</small>
+                                        </div>
                                     </div>
                                     <div class="col-12 col-md-4">
-                                        <label style="font-family: 'Rajdhani', sans-serif;" for="cardName" class="form-label">Card Name</label>
-                                        <input style="font-family: 'Rajdhani', sans-serif;" type="text" class="form-control">
+                                        <label for="cardName" class="form-label">Card Name</label>
+                                        <input type="text" class="form-control" (blur)="checkFormValidity()" (input)="formatLettersOnly($event)" formControlName="cardName">
+                                        <div *ngIf="paymentForm.get('cardName')?.invalid && (paymentForm.get('cardName')?.dirty || paymentForm.get('cardName')?.touched)" class="form-text text-danger">
+                                            <small *ngIf="paymentForm.get('cardName')?.hasError('required')">Card Name is required</small>
+                                        </div>
                                     </div> 
                                 </div>
-                                <div class="row" style="padding-top: 20px;">
+                                <div class="row mb-3" style="font-family: 'Rajdhani', sans-serif; padding: 10px;">
                                     <div class="col-12 col-md-4">
-                                        <label style="font-family: 'Rajdhani', sans-serif;" for="expiration" class="form-label">Expiration</label>
-                                        <input style="font-family: 'Rajdhani', sans-serif;" type="text" class="form-control">
+                                        <label for="expiration" class="form-label">Expiration</label>
+                                        <input type="text" class="form-control" (blur)="checkFormValidity()" (input)="formatExpiration($event)" formControlName="expiration" maxlength="05">
+                                        <div *ngIf="paymentForm.get('expiration')?.invalid && (paymentForm.get('expiration')?.dirty || paymentForm.get('expiration')?.touched)" class="form-text text-danger">
+                                            <small *ngIf="paymentForm.get('expiration')?.hasError('required')">Expiration is required</small>
+                                        </div>
                                     </div>
                                     <div class="col-12 col-md-4">
-                                        <label style="font-family: 'Rajdhani', sans-serif;" for="cvv" class="form-label">CVV</label>
-                                        <input style="font-family: 'Rajdhani', sans-serif;" type="text" class="form-control">
+                                        <label for="cvv" class="form-label">CVV</label>
+                                        <input type="text" class="form-control" (blur)="checkFormValidity()" (input)="formatCVV($event)" formControlName="cvv" maxlength="03">
+                                        <div *ngIf="paymentForm.get('cvv')?.invalid && (paymentForm.get('cvv')?.dirty || paymentForm.get('cvv')?.touched)" class="form-text text-danger"  >
+                                            <small *ngIf="paymentForm.get('cvv')?.hasError('required')">CVV is required</small>
+                                        </div>
                                     </div>
                                 </div>
                             </form>
-                            <div class="row justify-content-end" style="padding: 20px;">
+                            <div class="row justify-content-end" style="padding: 20px; font-family: 'Rajdhani', sans-serif">
                                 <div class="col-auto">
-                                    <a data-bs-target="#carouselExampleControls" data-bs-slide="prev" style="color: #007bff; font-family: 'Rajdhani', sans-serif;  margin-right:20px;">Previous</a>
-                                    <a data-bs-target="#carouselExampleControls" data-bs-slide="next" style="color: #007bff; font-family: 'Rajdhani', sans-serif;">Submit</a>
+                                    <a data-bs-target="#carouselExampleControls" data-bs-slide="prev" style="color: #007bff; margin-right:20px;">Previous</a>
+                                    <a style="color: #007bff;" *ngIf="linkSubmitEnabled" (click)="register()">Submit</a>
                                 </div>
                             </div>
                         </div>
@@ -170,8 +246,7 @@
 </div>
 <app-footer></app-footer>
 <script>
-    const myCarousel = document.querySelector('#carouselExampleControls');
-    const carousel = new bootstrap.Carousel(myCarousel, {
-    pause: 'hover',
+    $('#carouselExampleControls').carousel({
+        interval: false
     });
 </script>
