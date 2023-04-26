@@ -6,7 +6,7 @@ import { UserRegisterComponent } from './user-register/user-register.component';
 import { LoginComponent } from './login/login.component';
 import { HomeComponent } from './home/home.component';
 import { AppRoutingModule } from './utils/service/app-routing.service';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { AuthService } from './utils/service/auth.service';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
@@ -20,6 +20,7 @@ import { EditBookComponent } from './edit-book/edit-book.component';
 import { BookRegisterComponent } from './book-register/book-register.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { Interceptor } from './utils/interceptors/interceptors';
 
 @NgModule({
   declarations: [
@@ -47,10 +48,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     FormsModule,
     ReactiveFormsModule,
   ],
-  providers: [AuthService, {
-    provide: Window,
-    useValue: window,
-  },],
+  providers: [AuthService, { provide: HTTP_INTERCEPTORS, useClass: Interceptor, multi: true }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

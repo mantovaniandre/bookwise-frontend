@@ -59,7 +59,7 @@
                                 <div class="row mb-3" style="font-family: 'Rajdhani', sans-serif; padding: 10px;">
                                     <div class="col-12 col-md-4" >
                                         <label style="font-family: 'Rajdhani', sans-serif;" for="birthday" class="form-label">Birthday</label>
-                                        <input type="text" class="form-control" id="birthday" name="birthday" style="font-family: 'Rajdhani', sans-serif;" formControlName="birthday" (blur)="checkFormValidity()" (input)="formatDateOfBirth($event)"  maxlength="10">
+                                        <input placeholder="00/00/0000" type="text" class="form-control" id="birthday" name="birthday" style="font-family: 'Rajdhani', sans-serif;" formControlName="birthday" (blur)="checkFormValidity()" (input)="formatDateOfBirth($event)"  maxlength="10">
                                         <div *ngIf="userForm.get('birthday')?.invalid && (userForm.get('birthday')?.dirty || userForm.get('birthday')?.touched)" class="form-text text-danger">
                                             <small *ngIf="userForm.get('birthday')?.hasError('required')">Birthday is required</small>
                                         </div>
@@ -171,7 +171,7 @@
                                 <div class="row mb-3" style="font-family: 'Rajdhani', sans-serif; padding: 10px;">
                                     <div class="col-12 col-md-4">
                                         <label for="cardNumber" class="form-label">Card Number</label>
-                                        <input type="text" class="form-control" (blur)="formatAndSearchCreditCardNumber($event); checkFormValidity()" formControlName="cardNumber" maxlength="18">
+                                        <input placeholder="0000 0000 0000 0000"type="text" class="form-control" (blur)="formatAndSearchCreditCardNumber($event); checkFormValidity()" formControlName="cardNumber" maxlength="18">
                                         <div *ngIf="paymentForm.get('cardNumber')?.invalid && (paymentForm.get('cardNumber')?.dirty || paymentForm.get('cardNumber')?.touched)" class="form-text text-danger">
                                             <small *ngIf="paymentForm.get('cardNumber')?.hasError('required')">Card Number is required</small>
                                         </div>
