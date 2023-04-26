@@ -16,19 +16,18 @@ import { DashboardComponent } from 'src/app/dashboard/dashboard.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
+  { path: 'login', component: LoginComponent },
   { path: 'registerUser', component: UserRegisterComponent },
+  { path: 'home', component: HomeComponent},
+  { path: 'myAccount', component: MyAccountComponent },
   { path: 'searchBook', component: SearchBookComponent },
-  { path: 'myRequests', component: MyRequestsComponent },
+  { path: 'learnMore', component: LearnMoreComponent },
   { path: 'cart', component: CartComponent },
+  { path: 'checkout', component: CheckoutComponent },
+  { path: 'myRequests', component: MyRequestsComponent },
   { path: 'registerBook', component: BookRegisterComponent },
   { path: 'dashboard', component: DashboardComponent },
-  { path: 'checkout', component: CheckoutComponent },
   { path: 'editBook', component: EditBookComponent },
-  { path: 'myAccount', component: MyAccountComponent },
-  { path: 'learnMore', component: LearnMoreComponent },
-  { path: 'login', component: LoginComponent },
-  { path: 'home', component: HomeComponent},
-  { path: '**', redirectTo: '/home' }
 ];
 
 @NgModule({

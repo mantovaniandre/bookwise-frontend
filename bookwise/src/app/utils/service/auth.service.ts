@@ -47,4 +47,9 @@ export class AuthService {
     }, 30000);
   }
 
+  getToken(): string {
+    const token = localStorage.getItem('token') || '';
+    return token;
+  }
+
 }
