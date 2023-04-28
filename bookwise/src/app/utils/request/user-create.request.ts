@@ -1,14 +1,14 @@
 export interface UserCreateRequest {
-    firstName: string;
-    lastName: string;
+    first_name: string;
+    last_name: string;
     email: string;
     password: string;
     cpf: string;
     phone: string;
     birthday: string | null;
-    usertype: string;
+    user_type: string;
     gender: string;
-    zipCode: string;
+    zip_code: string;
     street: string;
     number: string;
     complement: string;
@@ -16,12 +16,12 @@ export interface UserCreateRequest {
     city: string;
     state: string;
     country: string;
-    cardNumber: string;
-    typeCard: string;
+    card_number: string;
+    type_card: string;
     flag: string;
     bank: string;
-    countryBank: string;
-    cardName: string;
+    country_bank: string;
+    card_name: string;
     expiration: string;
     cvv: string;
 }
