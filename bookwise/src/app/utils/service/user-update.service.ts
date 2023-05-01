@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { UserUpdateRequest } from '../request/user-update.request';
 import { UserUpdateResponse } from '../response/user-update.response';
+import { UserProfileResponse } from '../response/user-profile.response';
 
 @Injectable({
   providedIn: 'root'
@@ -17,8 +18,9 @@ export class UserUpdateService {
       .set('Content-Type', 'application/json')
       .set('Accept', 'application/json')
       .set('Authorization', `Bearer ${localStorage.getItem('token')}`);
-
     let userUpdateServiceResponse = this.http.put<UserUpdateResponse>(url, user, { headers });
     return userUpdateServiceResponse
   }
+
+  
 }
