@@ -5,6 +5,7 @@ import { AuthService } from '../utils/service/auth.service';
 import { Router } from '@angular/router';
 import { LoginRequest } from '../utils/request/login.request';
 import { HttpErrorResponse } from '@angular/common/http';
+import Swal from 'sweetalert2';
 
 
 @Component({
@@ -51,11 +52,11 @@ export class LoginComponent {
         
         },
         error: (error: HttpErrorResponse) => {
-          //   Swal.fire({
-          //     icon: 'error',
-          //     title: 'Login error!',
-          //     text: 'wrong email or password',
-          // });
+          Swal.fire({
+            icon: 'error',
+            title: 'Login error!',
+            text: error.error.message,
+          });
           this.disabledButton = false;
         }
       });

@@ -35,19 +35,19 @@ export class UserRegisterComponent {
               private userCreateService: UserCreateService) {}
   
   userForm = this.fb.group({
-    firstName: ['', Validators.required],
-    lastName: ['', Validators.required],
+    first_name: ['', Validators.required],
+    last_name: ['', Validators.required],
     email: ['', [Validators.required, Validators.email]],
     password: ['', Validators.required],
     cpf: ['', Validators.required],
     phone: ['', Validators.required],
     birthday: ['', Validators.required],
-    usertype: ['', Validators.required],
+    user_type: ['', Validators.required],
     gender: ['', Validators.required]
   });
 
   addressForm = this.fb.group({
-    zipCode: ['', Validators.required],
+    zip_code: ['', Validators.required],
     street: ['', Validators.required],
     number: ['', Validators.required],
     complement: ['', Validators.required],
@@ -58,18 +58,18 @@ export class UserRegisterComponent {
   });
 
   paymentForm = this.fb.group({
-    cardNumber: ['', Validators.required],
-    typeCard: ['', Validators.required],
+    card_number: ['', Validators.required],
+    type_card: ['', Validators.required],
     flag: ['', Validators.required],
     bank: ['', Validators.required],
-    countryBank: ['', Validators.required],
-    cardName: ['', Validators.required],
+    country_bank: ['', Validators.required],
+    card_name: ['', Validators.required],
     expiration: ['', Validators.required],
     cvv: ['', Validators.required],
   });
 
   checkFormValidity() {
-    if (this.userForm.valid) {
+    if (this.userForm.valid && this.addressForm.valid && this.paymentForm.valid) {
       this.linkUserNextEnabled = true; 
     } else {
       this.linkUserNextEnabled = false;
@@ -129,12 +129,12 @@ export class UserRegisterComponent {
 
   formatAndSearchCreditCardNumber(event: any){
     let creditCardFormatted = formatCreditCardNumber(event)
-    this.searchCreditCardService.searchCreditCardService(creditCardFormatted).subscribe(creditCard => {
+    this.searchCreditCardService.searchCreditCardService(creditCardFormatted).subscribe(credit_card => {
       this.paymentForm.patchValue({
-        typeCard: creditCard.type,
-        flag: creditCard.scheme,
-        bank: creditCard.bank.name,
-        countryBank: creditCard.country.name,
+        type_card: credit_card.type,
+        flag: credit_card.scheme,
+        bank: credit_card.bank.name,
+        country_bank: credit_card.country.name,
       });
     });
   }
@@ -151,24 +151,24 @@ export class UserRegisterComponent {
       let city = formatRemoveSpecialCharacters(this.addressForm.get('city')?.value || '');
       let state = formatRemoveSpecialCharacters(this.addressForm.get('state')?.value || '');
       let country = formatRemoveSpecialCharacters(this.addressForm.get('country')?.value || '');
-      let typeCard = formatRemoveSpecialCharacters(this.paymentForm.get('typeCard')?.value || '');
+      let type_card = formatRemoveSpecialCharacters(this.paymentForm.get('type_card')?.value || '');
       let flag = formatRemoveSpecialCharacters(this.paymentForm.get('flag')?.value || '');
       let bank = formatRemoveSpecialCharacters(this.paymentForm.get('bank')?.value || '');
-      let countryBank = formatRemoveSpecialCharacters(this.paymentForm.get('countryBank')?.value || '');
-      let zipCode = formatRemoveSpecialCharacters(this.addressForm.get('zipCode')?.value || '');
+      let country_bank = formatRemoveSpecialCharacters(this.paymentForm.get('country_bank')?.value || '');
+      let zip_code = formatRemoveSpecialCharacters(this.addressForm.get('zip_code')?.value || '');
 
 
       let user: UserCreateRequest  = {
-        firstName: this.userForm.get('firstName')?.value?.toUpperCase() || '',
-        lastName: this.userForm.get('lastName')?.value?.toUpperCase() || '',
+        first_name: this.userForm.get('first_name')?.value?.toUpperCase() || '',
+        last_name: this.userForm.get('last_name')?.value?.toUpperCase() || '',
         email: this.userForm.get('email')?.value?.toUpperCase() || '',
         password: this.userForm.get('password')?.value || '',
         cpf: cpf || '',
         phone: '55' + phone || '',
         birthday: birthday,
-        usertype: this.userForm.get('usertype')?.value?.toUpperCase() || '',
+        user_type: this.userForm.get('user_type')?.value?.toUpperCase() || '',
         gender: this.userForm.get('gender')?.value?.toUpperCase() || '',
-        zipCode: zipCode || '',
+        zip_code: zip_code || '',
         street: street.toUpperCase() || '',
         number: this.addressForm.get('number')?.value || '',
         complement: complement.toUpperCase() || '',
@@ -176,12 +176,12 @@ export class UserRegisterComponent {
         city: city.toUpperCase(),
         state: state.toUpperCase() || '',
         country: country.toUpperCase() || '',
-        cardNumber: this.paymentForm.get('cardNumber')?.value || '',
-        typeCard: typeCard.toUpperCase() || '',
+        card_number: this.paymentForm.get('card_number')?.value || '',
+        type_card: type_card.toUpperCase() || '',
         flag: flag.toUpperCase() || '',
         bank: bank.toUpperCase() || '',
-        countryBank: countryBank.toUpperCase() || '',
-        cardName: this.paymentForm.get('cardName')?.value?.toUpperCase() || '',
+        country_bank: country_bank.toUpperCase() || '',
+        card_name: this.paymentForm.get('card_name')?.value?.toUpperCase() || '',
         expiration: this.paymentForm.get('expiration')?.value || '',
         cvv: this.paymentForm.get('cvv')?.value || '',
       }

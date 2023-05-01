@@ -15,6 +15,9 @@ import { UserUpdateRequest } from '../utils/request/user-update.request';
 import { HttpErrorResponse } from '@angular/common/http';
 import Swal from 'sweetalert2';
 import { UserUpdateService } from '../utils/service/user-update.service';
+import { UserProfileService } from '../utils/service/user-profile.service';
+import { capitalize } from '../utils/format/format-capitalize';
+import { AuthService } from '../utils/service/auth.service';
 
 @Component({
   selector: 'app-my-account',
@@ -22,30 +25,85 @@ import { UserUpdateService } from '../utils/service/user-update.service';
   styleUrls: ['./my-account.component.css']
 })
 export class MyAccountComponent {
-  isEditing: boolean = false;
-  linkUserNextEnabled = false;  
-  linkAddressNextEnabled = false;
-  linkSubmitEnabled = false;
+  submitEnabled = false
 
   constructor(private fb: FormBuilder,
     private searchCepService: SearchZipCodeService,
     private searchCreditCardService: SearchCreditCardService,
-    private userUpdateService: UserUpdateService) {}
+    private userUpdateService: UserUpdateService,
+    private userProfileService: UserProfileService,
+    private authService: AuthService) {}
 
+  
+  ngOnInit() {
+    const token = localStorage.getItem('token');
+    if (token) {
+      const userUpdateRequest = { token: token };
+      this.userProfileService.userProfileService(userUpdateRequest).subscribe((user: any) => {
+        const mappingUserType: Record<number, string> = {
+          1: "ADMIN",
+          2: "CLIENT",
+        };
+        const mappingGender: Record<number, string> = {
+          1: "MASCULINE",
+          2: "FEMININE",
+        };
+        const user_type = mappingUserType[user.user['user_type_id']];
+        const gender = mappingGender[user.user['gender_id']];
+        if (user_type) {
+          this.userForm.patchValue({ user_type: user_type });
+        }
+        if (gender) {
+          this.userForm.patchValue({ gender: gender });
+        }
+        this.userForm.patchValue({
+          first_name: capitalize(user.user['first_name']),
+          last_name: capitalize(user.user['last_name']),
+          email: user.user['email'].toLowerCase(),
+          cpf: user.user['cpf'],
+          phone: user.user['phone'],
+          birthday: user.user['birthday']
+        });
+        this.addressForm.patchValue({
+          zip_code: user.user.address['zip_code'],
+          street: capitalize(user.user.address['street']),
+          number: user.user.address['number'],
+          complement: capitalize(user.user.address['complement']),
+          neighborhood: capitalize(user.user.address['neighborhood']),
+          city: capitalize(user.user.address['city']),
+          state: user.user.address['state'],
+          country:capitalize(user.user.address['country']),
+        });
+        this.paymentForm.patchValue({
+          card_number: user.user.credit_card['card_number'],
+          type_card: capitalize(user.user.credit_card['type_card']),
+          flag: capitalize(user.user.credit_card['flag']),
+          bank: capitalize(user.user.credit_card['bank']),
+          country_bank: capitalize(user.user.credit_card['country_bank']),
+          card_name: capitalize(user.user.credit_card['card_name']),
+          expiration: user.user.credit_card['expiration'],
+          cvv: user.user.credit_card['cvv'],
+        });
+      });
+    } else {
+      this.authService.logoutService()
+    }
+  }
+    
 userForm = this.fb.group({
-  firstName: ['', Validators.required],
-  lastName: ['', Validators.required],
+  first_name: ['', Validators.required],
+  last_name: ['', Validators.required],
   email: ['', [Validators.required, Validators.email]],
   password: ['', Validators.required],
   cpf: ['', Validators.required],
   phone: ['', Validators.required],
   birthday: ['', Validators.required],
-  usertype: ['', Validators.required],
-  gender: ['', Validators.required]
+  user_type: ['', Validators.required],
+  gender: ['', Validators.required] 
 });
 
 addressForm = this.fb.group({
-  zipCode: ['', Validators.required],
+  zip_code: ['', Validators.required],
   street: ['', Validators.required],
   number: ['', Validators.required],
   complement: ['', Validators.required],
@@ -56,31 +114,21 @@ addressForm = this.fb.group({
 });
 
 paymentForm = this.fb.group({
-  cardNumber: ['', Validators.required],
-  typeCard: ['', Validators.required],
+  card_number: ['', Validators.required],
+  type_card: ['', Validators.required],
   flag: ['', Validators.required],
   bank: ['', Validators.required],
-  countryBank: ['', Validators.required],
-  cardName: ['', Validators.required],
+  country_bank: ['', Validators.required],
+  card_name: ['', Validators.required],
   expiration: ['', Validators.required],
   cvv: ['', Validators.required],
 });
 
 checkFormValidity() {
-  if (this.userForm.valid) {
-    this.linkUserNextEnabled = true; 
+  if (this.userForm.valid && this.addressForm.valid && this.paymentForm.valid) {
+    this.submitEnabled = true; 
   } else {
-    this.linkUserNextEnabled = false;
-  }
-  if(this.addressForm.valid){
-    this.linkAddressNextEnabled = true
-  }else{
-    this.linkAddressNextEnabled = false
-  }
-  if(this.userForm.valid && this.addressForm.valid && this.paymentForm.valid){
-    this.linkSubmitEnabled = true
-  }else{
-    this.linkSubmitEnabled = false
+    this.submitEnabled = false;
   }
 }
 
@@ -108,6 +156,10 @@ formatCVV(event: any){
   formatCVV(event)
 }
 
+capitalize(str: string){
+  capitalize(str)
+}
+
 formatAndSearchZipCode(event: any){
   let zipCodeFormatted = formatZipCode(event)
   this.searchCepService.searchCepService(zipCodeFormatted).subscribe(address => {
@@ -127,12 +179,12 @@ formatDateOfBirth(event: any){
 
 formatAndSearchCreditCardNumber(event: any){
   let creditCardFormatted = formatCreditCardNumber(event)
-  this.searchCreditCardService.searchCreditCardService(creditCardFormatted).subscribe(creditCard => {
+  this.searchCreditCardService.searchCreditCardService(creditCardFormatted).subscribe(credit_card => {
     this.paymentForm.patchValue({
-    typeCard: creditCard.type,
-    flag: creditCard.scheme,
-    bank: creditCard.bank.name,
-    countryBank: creditCard.country.name,
+    type_card: credit_card.type,
+    flag: credit_card.scheme,
+    bank: credit_card.bank.name,
+    country_bank: credit_card.country.name,
     });
   });
 }
@@ -149,24 +201,23 @@ update(){
     let city = formatRemoveSpecialCharacters(this.addressForm.get('city')?.value || '');
     let state = formatRemoveSpecialCharacters(this.addressForm.get('state')?.value || '');
     let country = formatRemoveSpecialCharacters(this.addressForm.get('country')?.value || '');
-    let typeCard = formatRemoveSpecialCharacters(this.paymentForm.get('typeCard')?.value || '');
+    let type_card = formatRemoveSpecialCharacters(this.paymentForm.get('type_card')?.value || '');
     let flag = formatRemoveSpecialCharacters(this.paymentForm.get('flag')?.value || '');
     let bank = formatRemoveSpecialCharacters(this.paymentForm.get('bank')?.value || '');
-    let countryBank = formatRemoveSpecialCharacters(this.paymentForm.get('countryBank')?.value || '');
-    let zipCode = formatRemoveSpecialCharacters(this.addressForm.get('zipCode')?.value || '');
-
+    let country_bank = formatRemoveSpecialCharacters(this.paymentForm.get('country_bank')?.value || '');
+    let zip_code = formatRemoveSpecialCharacters(this.addressForm.get('zip_code')?.value || '');
 
     let user: UserUpdateRequest  = {
-      firstName: this.userForm.get('firstName')?.value?.toUpperCase() || '',
-      lastName: this.userForm.get('lastName')?.value?.toUpperCase() || '',
+      first_name: this.userForm.get('first_name')?.value?.toUpperCase() || '',
+      last_name: this.userForm.get('last_name')?.value?.toUpperCase() || '',
       email: this.userForm.get('email')?.value?.toUpperCase() || '',
       password: this.userForm.get('password')?.value || '',
       cpf: cpf || '',
-      phone: '55' + phone || '',
+      phone: phone || '',
       birthday: birthday,
-      usertype: this.userForm.get('usertype')?.value?.toUpperCase() || '',
+      user_type: this.userForm.get('user_type')?.value?.toUpperCase() || '',
       gender: this.userForm.get('gender')?.value?.toUpperCase() || '',
-      zipCode: zipCode || '',
+      zip_code: zip_code || '',
       street: street.toUpperCase() || '',
       number: this.addressForm.get('number')?.value || '',
       complement: complement.toUpperCase() || '',
@@ -174,44 +225,39 @@ update(){
       city: city.toUpperCase(),
       state: state.toUpperCase() || '',
       country: country.toUpperCase() || '',
-      cardNumber: this.paymentForm.get('cardNumber')?.value || '',
-      typeCard: typeCard.toUpperCase() || '',
+      card_number: this.paymentForm.get('card_number')?.value || '',
+      type_card: type_card.toUpperCase() || '',
       flag: flag.toUpperCase() || '',
       bank: bank.toUpperCase() || '',
-      countryBank: countryBank.toUpperCase() || '',
-      cardName: this.paymentForm.get('cardName')?.value?.toUpperCase() || '',
+      country_bank: country_bank.toUpperCase() || '',
+      card_name: this.paymentForm.get('card_name')?.value?.toUpperCase() || '',
       expiration: this.paymentForm.get('expiration')?.value || '',
       cvv: this.paymentForm.get('cvv')?.value || '',
     }
-    this.userRegisterService.registerUserService(user).subscribe({
+    this.userUpdateService.userUpdateService(user).subscribe({
       next: (response: any) => {
         Swal.fire({
           icon: 'success',
-          title: 'Successful registration!',
+          title: 'Update Success!',
           text: response.message,
           timer: 3000
       }).then(() => {
         window.location.href = '/login';
+        this.authService.logoutService()
       })
     },
       error: (error: HttpErrorResponse) => {
-        if (error.error.status == 400 && error.error.message == "Email already exists.") {
+        if (error.error.status == 400 && error.error.message == "The data is the same as in the database. No changes were made.") {
           Swal.fire({
-            icon: 'error',
-            title: 'Registry error!',
-            text: 'Email already exists.',
-          });
-        } else if (error.error.message == `CPF ${user.cpf} already exists.`) {
-          Swal.fire({
-            icon: 'error',
-            title: 'Registry error!',
-            text: 'CPF already exists.',
+            icon: 'warning',
+            title: 'Attention',
+            text: error.error.message,
           });
         } else {
           Swal.fire({
             icon: 'error',
-            title: 'Registry error!',
-            text: 'An error occurred while registering the user. Please try again later.',
+            title: 'Update error!',
+            text: error.error.message,
           });
         }
       }
