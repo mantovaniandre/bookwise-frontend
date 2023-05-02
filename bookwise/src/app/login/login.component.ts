@@ -29,6 +29,8 @@ export class LoginComponent {
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(3)]]
     });
+
+    
   }
 
     login(): void {
@@ -42,7 +44,7 @@ export class LoginComponent {
       this.authService.loginService(login).subscribe({
         next: (response: any) => {
           const token = response.token;
-          const expirationTime = new Date().getTime() + 30000;
+          const expirationTime = new Date().getTime() + 1800000;
 
           localStorage.setItem('token', token);
           localStorage.setItem('expiration', expirationTime.toString());

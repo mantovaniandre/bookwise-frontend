@@ -44,7 +44,7 @@ export class AuthService {
     this.logoutTimeoutId = setTimeout(() => {
       this.logoutService();
       this.router.navigate(['/login']);
-    }, 30000);
+    }, 1800000);
   }
 
   getToken(): string {

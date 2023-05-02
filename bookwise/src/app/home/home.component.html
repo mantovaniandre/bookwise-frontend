@@ -1,61 +1,84 @@
-<app-header></app-header>
 
-<div>
-  <div id="carouselExampleIndicators" class="carousel slide carouselslide1" data-bs-ride="carousel">
-      <ol class="carousel-indicators">
-        <li data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active"></li>
-        <li data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"></li>
-        <li data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"></li>
-      </ol>
-      <div class="carousel-inner carouselinner1">
-        <div class="carousel-item active">
-          <img src="https://via.placeholder.com/800x400?text=First+slide" class="d-block w-100" alt="First slide">
-        </div>
-        <div class="carousel-item">
-          <img src="https://via.placeholder.com/800x400?text=Second+slide" class="d-block w-100" alt="Second slide">
-        </div>
-        <div class="carousel-item">
-          <img src="https://via.placeholder.com/800x400?text=Third+slide" class="d-block w-100" alt="Third slide">
-        </div>
-      </div>
-      <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-bs-slide="prev">
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Previous</span>
-      </a>
-      <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-bs-slide="next">
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Next</span>
-      </a>
+<body>
+  <div class="spinner-container" *ngIf="isLoading">
+    <div class="spinner"></div>
   </div>
-
-  <div style="padding: 20px; box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3);">
-    <div class="row">
-      <div class="col-6 col-sm-3" style="display: flex; justify-content: center; align-items: center;">
-        <i style="margin-right: 10px;"class="bi bi-truck icon-custom"></i>
-        <span style="font-size: 20px; color: #3f51b5; font-family: 'Rajdhani', sans-serif;">Frete Grátis</span>
-      </div>
+  <div class="home-content" *ngIf="!isLoading">
+    <app-header></app-header>
+    <div id="carouselExampleIndicators" class="carousel slide carouselslide1" data-bs-ride="carousel">
+        <ol class="carousel-indicators">
+          <li data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active"></li>
+          <li data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"></li>
+          <li data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"></li>
+        </ol>
+        <div class="carousel-inner carouselinner1">
+          <div class="carousel-item active">
+            <img src="https://via.placeholder.com/800x400?text=First+slide" class="d-block w-100" alt="First slide">
+          </div>
+          <div class="carousel-item">
+            <img src="https://via.placeholder.com/800x400?text=Second+slide" class="d-block w-100" alt="Second slide">
+          </div>
+          <div class="carousel-item">
+            <img src="https://via.placeholder.com/800x400?text=Third+slide" class="d-block w-100" alt="Third slide">
+          </div>
+        </div>
+        <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </a>
+    </div>
+    <div style="padding: 20px; box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3);">
+      <div class="row">
         <div class="col-6 col-sm-3" style="display: flex; justify-content: center; align-items: center;">
-          <i style="margin-right: 10px;"class="bi bi-gift icon-custom"></i>
-          <span style="font-size: 20px; color: #3f51b5; font-family: 'Rajdhani', sans-serif;">Vale Presente</span>
-      </div>
+          <i style="margin-right: 10px;"class="bi bi-truck icon-custom"></i>
+          <span style="font-size: 20px; color: #3f51b5; font-family: 'Rajdhani', sans-serif;">Frete Grátis</span>
+        </div>
+          <div class="col-6 col-sm-3" style="display: flex; justify-content: center; align-items: center;">
+            <i style="margin-right: 10px;"class="bi bi-gift icon-custom"></i>
+            <span style="font-size: 20px; color: #3f51b5; font-family: 'Rajdhani', sans-serif;">Vale Presente</span>
+        </div>
+          <div class="col-6 col-sm-3" style="display: flex; justify-content: center; align-items: center;">
+            <i style="margin-right: 10px;"class="bi bi-lock  icon-custom"></i>
+            <span style="font-size: 20px; color: #3f51b5; font-family: 'Rajdhani', sans-serif;">Compra Segura</span>
+        </div>
         <div class="col-6 col-sm-3" style="display: flex; justify-content: center; align-items: center;">
-          <i style="margin-right: 10px;"class="bi bi-lock  icon-custom"></i>
-          <span style="font-size: 20px; color: #3f51b5; font-family: 'Rajdhani', sans-serif;">Compra Segura</span>
-      </div>
-      <div class="col-6 col-sm-3" style="display: flex; justify-content: center; align-items: center;">
-        <i style="margin-right: 10px;"class="bi bi-credit-card icon-custom"></i>
-        <span style="font-size: 20px; color: #3f51b5; font-family: 'Rajdhani', sans-serif;">Até 3x sem juros</span>
+          <i style="margin-right: 10px;"class="bi bi-credit-card icon-custom"></i>
+          <span style="font-size: 20px; color: #3f51b5; font-family: 'Rajdhani', sans-serif;">Até 3x sem juros</span>
+        </div>
       </div>
     </div>
-  </div>
-
-  <div class="container" id="form-steps" style="margin-top: 100px; margin-bottom: 100px;">
-    <div class="row" style="margin-bottom: 50px;">
-      <div class="col card">
-        <div class="card-header" style="font-family: 'Rajdhani', sans-serif;">Romance</div>
-        <div class="card-body">
-          <div class="row">
-            <div class="col-6 col-md-3 mb-3" style="display: flex; justify-content: center; align-items: center;">
+    <div class="container" id="form-steps" style="margin-top: 100px; margin-bottom: 100px;">
+      <div class="row" style="margin-bottom: 50px;">
+        <div class="col card">
+          <div class="card-header" style="font-family: 'Rajdhani', sans-serif;">Romance</div>
+          <div class="card-body">
+            <div class="row">
+              <div class="col-6 col-md-3 mb-3" style="display: flex; justify-content: center; align-items: center;">
+                  <div class="card" style="display: flex; justify-content: center; align-items: center; width: 200px; height: auto;">
+                    <div style="display: flex; justify-content: center; align-items: center; margin: 10px;">
+                      <img class="card-img-top" src="https://m.media-amazon.com/images/I/51Xby92J9KL._SX346_BO1,204,203,200_.jpg" alt="Card image cap">
+                    </div>
+                    <div>
+                      <div style="display: flex; justify-content: center; align-items: center; margin: 10px;"> 
+                        <p class="card-title" style="font-family: 'Rajdhani', sans-serif;">Book</p>
+                      </div>
+                      <div style="display: flex; justify-content: center; align-items: center; margin: 10px;">
+                        <p class="card-text" style="font-family: 'Rajdhani', sans-serif;">Book</p>
+                      </div>
+                      <div style="display: flex; justify-content: center; align-items: center; margin: 10px;">
+                        <p class="card-text" style="font-family: 'Rajdhani', sans-serif;">Book</p>
+                      </div>
+                      <div style="display: flex; justify-content: center; align-items: center; margin: 10px;">
+                        <button class="btn" type="submit" style="background-color: #3f51b5; border: 2px solid #3f51b5; color: white; font-family: 'Rajdhani', sans-serif;">Shopping Cart</button>
+                      </div>
+                    </div>
+                  </div>
+              </div>
+              <div class="col-6 col-md-3 mb-3" style="display: flex; justify-content: center; align-items: center;">
                 <div class="card" style="display: flex; justify-content: center; align-items: center; width: 200px; height: auto;">
                   <div style="display: flex; justify-content: center; align-items: center; margin: 10px;">
                     <img class="card-img-top" src="https://m.media-amazon.com/images/I/51Xby92J9KL._SX346_BO1,204,203,200_.jpg" alt="Card image cap">
@@ -75,96 +98,8 @@
                     </div>
                   </div>
                 </div>
-            </div>
-            <div class="col-6 col-md-3 mb-3" style="display: flex; justify-content: center; align-items: center;">
-              <div class="card" style="display: flex; justify-content: center; align-items: center; width: 200px; height: auto;">
-                <div style="display: flex; justify-content: center; align-items: center; margin: 10px;">
-                  <img class="card-img-top" src="https://m.media-amazon.com/images/I/51Xby92J9KL._SX346_BO1,204,203,200_.jpg" alt="Card image cap">
-                </div>
-                <div>
-                  <div style="display: flex; justify-content: center; align-items: center; margin: 10px;"> 
-                    <p class="card-title" style="font-family: 'Rajdhani', sans-serif;">Book</p>
-                  </div>
-                  <div style="display: flex; justify-content: center; align-items: center; margin: 10px;">
-                    <p class="card-text" style="font-family: 'Rajdhani', sans-serif;">Book</p>
-                  </div>
-                  <div style="display: flex; justify-content: center; align-items: center; margin: 10px;">
-                    <p class="card-text" style="font-family: 'Rajdhani', sans-serif;">Book</p>
-                  </div>
-                  <div style="display: flex; justify-content: center; align-items: center; margin: 10px;">
-                    <button class="btn" type="submit" style="background-color: #3f51b5; border: 2px solid #3f51b5; color: white; font-family: 'Rajdhani', sans-serif;">Shopping Cart</button>
-                  </div>
-                </div>
               </div>
-            </div>
-            <div class="col-6 col-md-3 mb-3" style="display: flex; justify-content: center; align-items: center;">
-              <div class="card" style="display: flex; justify-content: center; align-items: center; width: 200px; height: auto;">
-                <div style="display: flex; justify-content: center; align-items: center; margin: 10px;">
-                  <img class="card-img-top" src="https://m.media-amazon.com/images/I/51Xby92J9KL._SX346_BO1,204,203,200_.jpg" alt="Card image cap">
-                </div>
-                <div>
-                  <div style="display: flex; justify-content: center; align-items: center; margin: 10px;"> 
-                    <p class="card-title" style="font-family: 'Rajdhani', sans-serif;">Book</p>
-                  </div>
-                  <div style="display: flex; justify-content: center; align-items: center; margin: 10px;">
-                    <p class="card-text" style="font-family: 'Rajdhani', sans-serif;">Book</p>
-                  </div>
-                  <div style="display: flex; justify-content: center; align-items: center; margin: 10px;">
-                    <p class="card-text" style="font-family: 'Rajdhani', sans-serif;">Book</p>
-                  </div>
-                  <div style="display: flex; justify-content: center; align-items: center; margin: 10px;">
-                    <button class="btn" type="submit" style="background-color: #3f51b5; border: 2px solid #3f51b5; color: white; font-family: 'Rajdhani', sans-serif;">Shopping Cart</button>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-6 col-md-3 mb-3" style="display: flex; justify-content: center; align-items: center;">
-              <div class="card" style="display: flex; justify-content: center; align-items: center; width: 200px; height: auto;">
-                <div style="display: flex; justify-content: center; align-items: center; margin: 10px;">
-                  <img class="card-img-top" src="https://m.media-amazon.com/images/I/51Xby92J9KL._SX346_BO1,204,203,200_.jpg" alt="Card image cap">
-                </div>
-                <div>
-                  <div style="display: flex; justify-content: center; align-items: center; margin: 10px;"> 
-                    <p class="card-title" style="font-family: 'Rajdhani', sans-serif;">Book</p>
-                  </div>
-                  <div style="display: flex; justify-content: center; align-items: center; margin: 10px;">
-                    <p class="card-text" style="font-family: 'Rajdhani', sans-serif;">Book</p>
-                  </div>
-                  <div style="display: flex; justify-content: center; align-items: center; margin: 10px;">
-                    <p class="card-text" style="font-family: 'Rajdhani', sans-serif;">Book</p>
-                  </div>
-                  <div style="display: flex; justify-content: center; align-items: center; margin: 10px;">
-                    <button class="btn" type="submit" style="background-color: #3f51b5; border: 2px solid #3f51b5; color: white; font-family: 'Rajdhani', sans-serif;">Shopping Cart</button>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <nav aria-label="Page navigation example" style="font-family: 'Rajdhani', sans-serif;" >
-          <ul class="pagination justify-content-end">
-            <li class="page-item disabled">
-              <a class="page-link">Previous</a>
-            </li>
-            <li class="page-item"><a class="page-link" href="">1</a></li>
-            <li class="page-item"><a class="page-link" href="">2</a></li>
-            <li class="page-item"><a class="page-link" href="">3</a></li>
-            <li class="page-item">
-              <a class="page-link" href="#">Next</a>
-            </li>
-          </ul>
-        </nav>
-      </div>
-    </div>
-  </div>
-
-  <div class="container" id="form-steps" style="margin-top: 100px; margin-bottom: 100px;">
-    <div class="row" style="margin-bottom: 50px;">
-      <div class="col card">
-        <div class="card-header" style="font-family: 'Rajdhani', sans-serif;">Romance</div>
-        <div class="card-body">
-          <div class="row">
-            <div class="col-6 col-md-3 mb-3" style="display: flex; justify-content: center; align-items: center;">
+              <div class="col-6 col-md-3 mb-3" style="display: flex; justify-content: center; align-items: center;">
                 <div class="card" style="display: flex; justify-content: center; align-items: center; width: 200px; height: auto;">
                   <div style="display: flex; justify-content: center; align-items: center; margin: 10px;">
                     <img class="card-img-top" src="https://m.media-amazon.com/images/I/51Xby92J9KL._SX346_BO1,204,203,200_.jpg" alt="Card image cap">
@@ -184,90 +119,157 @@
                     </div>
                   </div>
                 </div>
-            </div>
-            <div class="col-6 col-md-3 mb-3" style="display: flex; justify-content: center; align-items: center;">
-              <div class="card" style="display: flex; justify-content: center; align-items: center; width: 200px; height: auto;">
-                <div style="display: flex; justify-content: center; align-items: center; margin: 10px;">
-                  <img class="card-img-top" src="https://m.media-amazon.com/images/I/51Xby92J9KL._SX346_BO1,204,203,200_.jpg" alt="Card image cap">
-                </div>
-                <div>
-                  <div style="display: flex; justify-content: center; align-items: center; margin: 10px;"> 
-                    <p class="card-title" style="font-family: 'Rajdhani', sans-serif;">Book</p>
-                  </div>
-                  <div style="display: flex; justify-content: center; align-items: center; margin: 10px;">
-                    <p class="card-text" style="font-family: 'Rajdhani', sans-serif;">Book</p>
-                  </div>
-                  <div style="display: flex; justify-content: center; align-items: center; margin: 10px;">
-                    <p class="card-text" style="font-family: 'Rajdhani', sans-serif;">Book</p>
-                  </div>
-                  <div style="display: flex; justify-content: center; align-items: center; margin: 10px;">
-                    <button class="btn" type="submit" style="background-color: #3f51b5; border: 2px solid #3f51b5; color: white; font-family: 'Rajdhani', sans-serif;">Shopping Cart</button>
-                  </div>
-                </div>
               </div>
-            </div>
-            <div class="col-6 col-md-3 mb-3" style="display: flex; justify-content: center; align-items: center;">
-              <div class="card" style="display: flex; justify-content: center; align-items: center; width: 200px; height: auto;">
-                <div style="display: flex; justify-content: center; align-items: center; margin: 10px;">
-                  <img class="card-img-top" src="https://m.media-amazon.com/images/I/51Xby92J9KL._SX346_BO1,204,203,200_.jpg" alt="Card image cap">
-                </div>
-                <div>
-                  <div style="display: flex; justify-content: center; align-items: center; margin: 10px;"> 
-                    <p class="card-title" style="font-family: 'Rajdhani', sans-serif;">Book</p>
-                  </div>
+              <div class="col-6 col-md-3 mb-3" style="display: flex; justify-content: center; align-items: center;">
+                <div class="card" style="display: flex; justify-content: center; align-items: center; width: 200px; height: auto;">
                   <div style="display: flex; justify-content: center; align-items: center; margin: 10px;">
-                    <p class="card-text" style="font-family: 'Rajdhani', sans-serif;">Book</p>
+                    <img class="card-img-top" src="https://m.media-amazon.com/images/I/51Xby92J9KL._SX346_BO1,204,203,200_.jpg" alt="Card image cap">
                   </div>
-                  <div style="display: flex; justify-content: center; align-items: center; margin: 10px;">
-                    <p class="card-text" style="font-family: 'Rajdhani', sans-serif;">Book</p>
-                  </div>
-                  <div style="display: flex; justify-content: center; align-items: center; margin: 10px;">
-                    <button class="btn" type="submit" style="background-color: #3f51b5; border: 2px solid #3f51b5; color: white; font-family: 'Rajdhani', sans-serif;">Shopping Cart</button>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-6 col-md-3 mb-3" style="display: flex; justify-content: center; align-items: center;">
-              <div class="card" style="display: flex; justify-content: center; align-items: center; width: 200px; height: auto;">
-                <div style="display: flex; justify-content: center; align-items: center; margin: 10px;">
-                  <img class="card-img-top" src="https://m.media-amazon.com/images/I/51Xby92J9KL._SX346_BO1,204,203,200_.jpg" alt="Card image cap">
-                </div>
-                <div>
-                  <div style="display: flex; justify-content: center; align-items: center; margin: 10px;"> 
-                    <p class="card-title" style="font-family: 'Rajdhani', sans-serif;">Book</p>
-                  </div>
-                  <div style="display: flex; justify-content: center; align-items: center; margin: 10px;">
-                    <p class="card-text" style="font-family: 'Rajdhani', sans-serif;">Book</p>
-                  </div>
-                  <div style="display: flex; justify-content: center; align-items: center; margin: 10px;">
-                    <p class="card-text" style="font-family: 'Rajdhani', sans-serif;">Book</p>
-                  </div>
-                  <div style="display: flex; justify-content: center; align-items: center; margin: 10px;">
-                    <button class="btn" type="submit" style="background-color: #3f51b5; border: 2px solid #3f51b5; color: white; font-family: 'Rajdhani', sans-serif;">Shopping Cart</button>
+                  <div>
+                    <div style="display: flex; justify-content: center; align-items: center; margin: 10px;"> 
+                      <p class="card-title" style="font-family: 'Rajdhani', sans-serif;">Book</p>
+                    </div>
+                    <div style="display: flex; justify-content: center; align-items: center; margin: 10px;">
+                      <p class="card-text" style="font-family: 'Rajdhani', sans-serif;">Book</p>
+                    </div>
+                    <div style="display: flex; justify-content: center; align-items: center; margin: 10px;">
+                      <p class="card-text" style="font-family: 'Rajdhani', sans-serif;">Book</p>
+                    </div>
+                    <div style="display: flex; justify-content: center; align-items: center; margin: 10px;">
+                      <button class="btn" type="submit" style="background-color: #3f51b5; border: 2px solid #3f51b5; color: white; font-family: 'Rajdhani', sans-serif;">Shopping Cart</button>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
+          <nav aria-label="Page navigation example" style="font-family: 'Rajdhani', sans-serif;" >
+            <ul class="pagination justify-content-end">
+              <li class="page-item disabled">
+                <a class="page-link">Previous</a>
+              </li>
+              <li class="page-item"><a class="page-link" href="">1</a></li>
+              <li class="page-item"><a class="page-link" href="">2</a></li>
+              <li class="page-item"><a class="page-link" href="">3</a></li>
+              <li class="page-item">
+                <a class="page-link" href="#">Next</a>
+              </li>
+            </ul>
+          </nav>
         </div>
-        <nav aria-label="Page navigation example" style="font-family: 'Rajdhani', sans-serif;" >
-          <ul class="pagination justify-content-end">
-            <li class="page-item disabled">
-              <a class="page-link">Previous</a>
-            </li>
-            <li class="page-item"><a class="page-link" href="">1</a></li>
-            <li class="page-item"><a class="page-link" href="">2</a></li>
-            <li class="page-item"><a class="page-link" href="">3</a></li>
-            <li class="page-item">
-              <a class="page-link" href="#">Next</a>
-            </li>
-          </ul>
-        </nav>
       </div>
     </div>
+    <div class="container" id="form-steps" style="margin-top: 100px; margin-bottom: 100px;">
+      <div class="row" style="margin-bottom: 50px;">
+        <div class="col card">
+          <div class="card-header" style="font-family: 'Rajdhani', sans-serif;">Romance</div>
+          <div class="card-body">
+            <div class="row">
+              <div class="col-6 col-md-3 mb-3" style="display: flex; justify-content: center; align-items: center;">
+                  <div class="card" style="display: flex; justify-content: center; align-items: center; width: 200px; height: auto;">
+                    <div style="display: flex; justify-content: center; align-items: center; margin: 10px;">
+                      <img class="card-img-top" src="https://m.media-amazon.com/images/I/51Xby92J9KL._SX346_BO1,204,203,200_.jpg" alt="Card image cap">
+                    </div>
+                    <div>
+                      <div style="display: flex; justify-content: center; align-items: center; margin: 10px;"> 
+                        <p class="card-title" style="font-family: 'Rajdhani', sans-serif;">Book</p>
+                      </div>
+                      <div style="display: flex; justify-content: center; align-items: center; margin: 10px;">
+                        <p class="card-text" style="font-family: 'Rajdhani', sans-serif;">Book</p>
+                      </div>
+                      <div style="display: flex; justify-content: center; align-items: center; margin: 10px;">
+                        <p class="card-text" style="font-family: 'Rajdhani', sans-serif;">Book</p>
+                      </div>
+                      <div style="display: flex; justify-content: center; align-items: center; margin: 10px;">
+                        <button class="btn" type="submit" style="background-color: #3f51b5; border: 2px solid #3f51b5; color: white; font-family: 'Rajdhani', sans-serif;">Shopping Cart</button>
+                      </div>
+                    </div>
+                  </div>
+              </div>
+              <div class="col-6 col-md-3 mb-3" style="display: flex; justify-content: center; align-items: center;">
+                <div class="card" style="display: flex; justify-content: center; align-items: center; width: 200px; height: auto;">
+                  <div style="display: flex; justify-content: center; align-items: center; margin: 10px;">
+                    <img class="card-img-top" src="https://m.media-amazon.com/images/I/51Xby92J9KL._SX346_BO1,204,203,200_.jpg" alt="Card image cap">
+                  </div>
+                  <div>
+                    <div style="display: flex; justify-content: center; align-items: center; margin: 10px;"> 
+                      <p class="card-title" style="font-family: 'Rajdhani', sans-serif;">Book</p>
+                    </div>
+                    <div style="display: flex; justify-content: center; align-items: center; margin: 10px;">
+                      <p class="card-text" style="font-family: 'Rajdhani', sans-serif;">Book</p>
+                    </div>
+                    <div style="display: flex; justify-content: center; align-items: center; margin: 10px;">
+                      <p class="card-text" style="font-family: 'Rajdhani', sans-serif;">Book</p>
+                    </div>
+                    <div style="display: flex; justify-content: center; align-items: center; margin: 10px;">
+                      <button class="btn" type="submit" style="background-color: #3f51b5; border: 2px solid #3f51b5; color: white; font-family: 'Rajdhani', sans-serif;">Shopping Cart</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-6 col-md-3 mb-3" style="display: flex; justify-content: center; align-items: center;">
+                <div class="card" style="display: flex; justify-content: center; align-items: center; width: 200px; height: auto;">
+                  <div style="display: flex; justify-content: center; align-items: center; margin: 10px;">
+                    <img class="card-img-top" src="https://m.media-amazon.com/images/I/51Xby92J9KL._SX346_BO1,204,203,200_.jpg" alt="Card image cap">
+                  </div>
+                  <div>
+                    <div style="display: flex; justify-content: center; align-items: center; margin: 10px;"> 
+                      <p class="card-title" style="font-family: 'Rajdhani', sans-serif;">Book</p>
+                    </div>
+                    <div style="display: flex; justify-content: center; align-items: center; margin: 10px;">
+                      <p class="card-text" style="font-family: 'Rajdhani', sans-serif;">Book</p>
+                    </div>
+                    <div style="display: flex; justify-content: center; align-items: center; margin: 10px;">
+                      <p class="card-text" style="font-family: 'Rajdhani', sans-serif;">Book</p>
+                    </div>
+                    <div style="display: flex; justify-content: center; align-items: center; margin: 10px;">
+                      <button class="btn" type="submit" style="background-color: #3f51b5; border: 2px solid #3f51b5; color: white; font-family: 'Rajdhani', sans-serif;">Shopping Cart</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-6 col-md-3 mb-3" style="display: flex; justify-content: center; align-items: center;">
+                <div class="card" style="display: flex; justify-content: center; align-items: center; width: 200px; height: auto;">
+                  <div style="display: flex; justify-content: center; align-items: center; margin: 10px;">
+                    <img class="card-img-top" src="https://m.media-amazon.com/images/I/51Xby92J9KL._SX346_BO1,204,203,200_.jpg" alt="Card image cap">
+                  </div>
+                  <div>
+                    <div style="display: flex; justify-content: center; align-items: center; margin: 10px;"> 
+                      <p class="card-title" style="font-family: 'Rajdhani', sans-serif;">Book</p>
+                    </div>
+                    <div style="display: flex; justify-content: center; align-items: center; margin: 10px;">
+                      <p class="card-text" style="font-family: 'Rajdhani', sans-serif;">Book</p>
+                    </div>
+                    <div style="display: flex; justify-content: center; align-items: center; margin: 10px;">
+                      <p class="card-text" style="font-family: 'Rajdhani', sans-serif;">Book</p>
+                    </div>
+                    <div style="display: flex; justify-content: center; align-items: center; margin: 10px;">
+                      <button class="btn" type="submit" style="background-color: #3f51b5; border: 2px solid #3f51b5; color: white; font-family: 'Rajdhani', sans-serif;">Shopping Cart</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <nav aria-label="Page navigation example" style="font-family: 'Rajdhani', sans-serif;" >
+            <ul class="pagination justify-content-end">
+              <li class="page-item disabled">
+                <a class="page-link">Previous</a>
+              </li>
+              <li class="page-item"><a class="page-link" href="">1</a></li>
+              <li class="page-item"><a class="page-link" href="">2</a></li>
+              <li class="page-item"><a class="page-link" href="">3</a></li>
+              <li class="page-item">
+                <a class="page-link" href="#">Next</a>
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+    </div>
+    <app-footer></app-footer>
   </div>
-</div>
+</body>
 
-<app-footer></app-footer>
 
 

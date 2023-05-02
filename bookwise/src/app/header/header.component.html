@@ -1,44 +1,52 @@
-
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <div class="container">
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent">
-            <span class="navbar-toggler-icon"></span>
-        </button>   
-        <div class="collapse navbar-collapse" id="navbarContent">
-            <ul class="navbar-nav d-flex justify-content-around w-100 align-items-center">
-                <li class="col nav-item mb-3">
-                    <a class="navbar-brand" href="#" style="font-family: 'Rajdhani', sans-serif; font-size: 50px; color:#3f51b5">BookWise</a>
-                </li>
-                <li class="col nav-item dropdown mb-3">
-                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        <i class="bi bi-person icon-custom"></i>
-                        <span style="font-family: 'Rajdhani', sans-serif; font-size: 15px; color: #3f51b5;">Olá, André!</span>
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a style="font-family: 'Rajdhani', sans-serif; font-size: 15px; color: #3f51b5;" class="dropdown-item" href="#">My Requests</a>
-                        <a style="font-family: 'Rajdhani', sans-serif; font-size: 15px; color: #3f51b5;"class="dropdown-item" href="#">My Account</a>
-                    </div>
-                </li>
-                <li class="col nav-item dropdown mb-3">
-                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        <i class="bi bi-cart icon-custom"></i>
-                        <span style="font-family: 'Rajdhani', sans-serif; font-size: 15px; color: #3f51b5;">Shopping Cart</span>
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a style="font-family: 'Rajdhani', sans-serif; font-size: 15px; color: #3f51b5;" class="dropdown-item" href="#">My Cart</a>
-                    </div>
-                </li>
-                <li class="col d-flex nav-item mb-3" role="search">
-                    <select class="form-control" style="width: auto; font-family: 'Rajdhani', sans-serif; color: #3f51b5; border: 1px solid #3f51b5;">
-                        <option value="author">Author</option>
-                        <option value="language">Publishing company</option>
-                        <option value="publisher">Language</option>
-                    </select>
-                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" style="width: 150px; font-size: 15px; font-family: 'Rajdhani', sans-serif;">
-                    <button class="btn" type="submit" style="color: #3f51b5; border: 1px solid; font-family: 'Rajdhani', sans-serif;">Search</button>
-                </li>
-            </ul>
-        </div>
+<body>
+    <div *ngIf="isLoading" class="spinner-border" role="status">
+        <span class="visually-hidden">Loading...</span>
     </div>
-</nav>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent">
+                <span class="navbar-toggler-icon"></span>
+            </button>   
+            <div class="collapse navbar-collapse" id="navbarContent">
+                <ul class="navbar-nav d-flex justify-content-around w-100 align-items-center">
+                    <li class="col nav-item mb-3">
+                        <a class="navbar-brand" href="/home" style="font-family: 'Rajdhani', sans-serif; font-size: 50px; color:#3f51b5">BookWise</a>
+                    </li>
+                    <li class="col nav-item dropdown mb-3" *ngIf="!isLoginPage">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="bi bi-person icon-custom"></i>
+                            <span style="font-family: 'Rajdhani', sans-serif; font-size: 15px; color: #3f51b5;">Olá, André!</span>
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a style="font-family: 'Rajdhani', sans-serif; font-size: 15px; color: #3f51b5;" class="dropdown-item" *ngIf="clientAccess" href="#">My Requests</a>
+                            <a style="font-family: 'Rajdhani', sans-serif; font-size: 15px; color: #3f51b5;" class="dropdown-item" *ngIf="clientAccess" href="#">My Account</a>
+                            <a style="font-family: 'Rajdhani', sans-serif; font-size: 15px; color: #3f51b5;" class="dropdown-item" *ngIf="adminAccess" href="#">Edit Book</a>
+                            <a style="font-family: 'Rajdhani', sans-serif; font-size: 15px; color: #3f51b5;" class="dropdown-item" *ngIf="adminAccess" href="#">Dashboard</a>
+                            <a style="font-family: 'Rajdhani', sans-serif; font-size: 15px; color: #3f51b5;" class="dropdown-item" *ngIf="adminAccess" href="#">Book Register</a>
+                        </div>
+                    </li>
+                    <li class="col nav-item dropdown mb-3" *ngIf="clientAccess">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="bi bi-cart icon-custom"></i>
+                            <span style="font-family: 'Rajdhani', sans-serif; font-size: 15px; color: #3f51b5;">Shopping Cart</span>
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown" >
+                            <a style="font-family: 'Rajdhani', sans-serif; font-size: 15px; color: #3f51b5;" class="dropdown-item" href="#">My Cart</a>
+                            <a style="font-family: 'Rajdhani', sans-serif; font-size: 15px; color: #3f51b5;" class="dropdown-item" href="#">Checkout</a>
+                        </div>
+                    </li>
+                    <li class="col d-flex nav-item mb-3" role="search" *ngIf="!isLoginPage">
+                        <select class="form-control" style="width: auto; font-family: 'Rajdhani', sans-serif; color: #3f51b5; border: 1px solid #3f51b5;">
+                            <option value="author">Author</option>
+                            <option value="language">Publishing company</option>
+                            <option value="publisher">Language</option>
+                        </select>
+                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" style="width: 150px; font-size: 15px; font-family: 'Rajdhani', sans-serif;">
+                        <button class="btn" type="submit" style="color: #3f51b5; border: 1px solid; font-family: 'Rajdhani', sans-serif;">Search</button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</body>
   
