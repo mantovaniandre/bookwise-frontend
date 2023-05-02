@@ -2,7 +2,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { formatCPF } from '../utils/format/format-cpf';
-import { formatPhoneNumber } from '../utils/format/format-phone';
+import { formatPhoneNumber, formatRemoveSpaceInProhoneNumber } from '../utils/format/format-phone';
 import { formatZipCode } from '../utils/format/format-zip-code';
 import { SearchZipCodeService } from '../utils/service/search-zip-code.service';
 import { formatNumberStreet } from '../utils/format/format-number-street';
@@ -27,8 +27,17 @@ export class UserRegisterComponent {
   linkUserNextEnabled = false;  
   linkAddressNextEnabled = false;
   linkSubmitEnabled = false;
+  isLoading = true;
   
-
+  ngOnInit() {
+    setTimeout(() => {
+      this.isLoading = false;
+      const container = document.querySelector('.container');
+      if (container) {
+        container.classList.add('show');
+      }
+    }, 1000);
+  } 
   constructor(private fb: FormBuilder,
               private searchCepService: SearchZipCodeService,
               private searchCreditCardService: SearchCreditCardService,
@@ -69,7 +78,7 @@ export class UserRegisterComponent {
   });
 
   checkFormValidity() {
-    if (this.userForm.valid && this.addressForm.valid && this.paymentForm.valid) {
+    if (this.userForm.valid) {
       this.linkUserNextEnabled = true; 
     } else {
       this.linkUserNextEnabled = false;
@@ -143,7 +152,7 @@ export class UserRegisterComponent {
     if(this.userForm.valid && this.addressForm.valid && this.paymentForm.valid){
 
       let cpf = formatRemoveSpecialCharacters(this.userForm.get('cpf')?.value || '');
-      let phone = formatRemoveSpecialCharacters(this.userForm.get('phone')?.value || '');
+      let phone = formatRemoveSpaceInProhoneNumber(this.userForm.get('phone')?.value || '');
       let birthday = this.userForm.get('birthday')?.value || '';
       let street = formatRemoveSpecialCharacters(this.addressForm.get('street')?.value || '');
       let complement = formatRemoveSpecialCharacters(this.addressForm.get('complement')?.value || '');
@@ -164,7 +173,7 @@ export class UserRegisterComponent {
         email: this.userForm.get('email')?.value?.toUpperCase() || '',
         password: this.userForm.get('password')?.value || '',
         cpf: cpf || '',
-        phone: '55' + phone || '',
+        phone: phone || '',
         birthday: birthday,
         user_type: this.userForm.get('user_type')?.value?.toUpperCase() || '',
         gender: this.userForm.get('gender')?.value?.toUpperCase() || '',
@@ -197,30 +206,14 @@ export class UserRegisterComponent {
         })
       },
         error: (error: HttpErrorResponse) => {
-          if (error.error.status == 400 && error.error.message == "Email already exists.") {
-            Swal.fire({
-              icon: 'error',
-              title: 'Registry error!',
-              text: 'Email already exists.',
-            });
-          } else if (error.error.message == `CPF ${user.cpf} already exists.`) {
-            Swal.fire({
-              icon: 'error',
-              title: 'Registry error!',
-              text: 'CPF already exists.',
-            });
-          } else {
-            Swal.fire({
-              icon: 'error',
-              title: 'Registry error!',
-              text: 'An error occurred while registering the user. Please try again later.',
-            });
-          }
+          Swal.fire({
+            icon: 'error',
+            title: 'Registry error!',
+            text: error.error.message,
+          });
         }
       });
     }
   }
-
 }
-
 

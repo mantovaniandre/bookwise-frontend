@@ -7,7 +7,7 @@ import { formatCVV } from '../utils/format/format-cvv';
 import { formatExpiration } from '../utils/format/format-expiration';
 import { formatLettersOnly } from '../utils/format/format-letters-only';
 import { formatNumberStreet } from '../utils/format/format-number-street';
-import { formatPhoneNumber } from '../utils/format/format-phone';
+import { formatPhoneNumber, formatRemoveSpaceInProhoneNumber } from '../utils/format/format-phone';
 import { formatCPF } from '../utils/format/format-cpf';
 import { formatCreditCardNumber } from '../utils/format/format-credit-card-number';
 import { formatRemoveSpecialCharacters } from '../utils/format/format-remove-special-characters';
@@ -18,6 +18,7 @@ import { UserUpdateService } from '../utils/service/user-update.service';
 import { UserProfileService } from '../utils/service/user-profile.service';
 import { capitalize } from '../utils/format/format-capitalize';
 import { AuthService } from '../utils/service/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-my-account',
@@ -26,6 +27,9 @@ import { AuthService } from '../utils/service/auth.service';
 })
 export class MyAccountComponent {
   submitEnabled = false
+  isLoading = true;
+  
+  
 
   constructor(private fb: FormBuilder,
     private searchCepService: SearchZipCodeService,
@@ -36,6 +40,13 @@ export class MyAccountComponent {
 
   
   ngOnInit() {
+    setTimeout(() => {
+      this.isLoading = false;
+      const container = document.querySelector('.container');
+      if (container) {
+        container.classList.add('show');
+      }
+    }, 1000);
     const token = localStorage.getItem('token');
     if (token) {
       const userUpdateRequest = { token: token };
@@ -193,7 +204,7 @@ update(){
   if(this.userForm.valid && this.addressForm.valid && this.paymentForm.valid){
 
     let cpf = formatRemoveSpecialCharacters(this.userForm.get('cpf')?.value || '');
-    let phone = formatRemoveSpecialCharacters(this.userForm.get('phone')?.value || '');
+    let phone = formatRemoveSpaceInProhoneNumber(this.userForm.get('phone')?.value || '');
     let birthday = this.userForm.get('birthday')?.value || '';
     let street = formatRemoveSpecialCharacters(this.addressForm.get('street')?.value || '');
     let complement = formatRemoveSpecialCharacters(this.addressForm.get('complement')?.value || '');
