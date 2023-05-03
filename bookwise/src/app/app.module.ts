@@ -21,6 +21,7 @@ import { BookRegisterComponent } from './book-register/book-register.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Interceptor } from './utils/interceptors/interceptors';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 @NgModule({
   declarations: [
@@ -47,6 +48,7 @@ import { Interceptor } from './utils/interceptors/interceptors';
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
+    NgxPaginationModule
   ],
   providers: [AuthService, { provide: HTTP_INTERCEPTORS, useClass: Interceptor, multi: true }],
   bootstrap: [AppComponent]
