@@ -14,6 +14,7 @@ import Swal from 'sweetalert2';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
+  isLoading = true;
   loginForm!: FormGroup;
   private tokenSubject = new BehaviorSubject<string>('');
 	token$: Observable<string> = this.tokenSubject.asObservable();
@@ -25,6 +26,14 @@ export class LoginComponent {
 
 
   ngOnInit(): void {
+    setTimeout(() => {
+      this.isLoading = false;
+      const container = document.querySelector('.container');
+      if (container) {
+        container.classList.add('show');
+      }
+    }, 1000);
+    
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(3)]]

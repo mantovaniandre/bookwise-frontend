@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormControl} from '@angular/forms';
 import { UserProfileService } from '../utils/service/user-profile.service';
 import { Router } from '@angular/router';
+import { AuthService } from '../utils/service/auth.service';
 
 @Component({
   selector: 'app-header',
@@ -17,7 +18,8 @@ export class HeaderComponent {
 
   constructor(private fb: FormBuilder,
               private userProfileService: UserProfileService,
-              private router: Router) { }
+              private router: Router,
+              private authService: AuthService) { }
   
   search(){
   }
@@ -47,5 +49,9 @@ export class HeaderComponent {
   myForm = this.fb.group({
     search: new FormControl('author')
   });
+
+  logoutService(){
+    this.authService.logoutService()
+  }
 
 }

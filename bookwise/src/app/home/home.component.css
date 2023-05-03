@@ -68,4 +68,11 @@
 @keyframes spin {
     to { transform: rotate(360deg); }
 }
+
+.ellipsis {
+    white-space: nowrap;
+    overflow: hidden; 
+    text-overflow: ellipsis;
+    font-weight: 900;
+}
   

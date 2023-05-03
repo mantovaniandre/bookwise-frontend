@@ -7,32 +7,33 @@
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent">
                 <span class="navbar-toggler-icon"></span>
             </button>   
-            <div class="collapse navbar-collapse" id="navbarContent">
+            <div class="collapse navbar-collapse" id="navbarContent" >
                 <ul class="navbar-nav d-flex justify-content-around w-100 align-items-center">
                     <li class="col nav-item mb-3">
                         <a class="navbar-brand" href="/home" style="font-family: 'Rajdhani', sans-serif; font-size: 50px; color:#3f51b5">BookWise</a>
                     </li>
-                    <li class="col nav-item dropdown mb-3" *ngIf="!isLoginPage">
+                    <li class="col nav-item dropdown mb-3" style="font-family: 'Rajdhani', sans-serif; font-size: 15px; color: #3f51b5;" *ngIf="!isLoginPage">
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             <i class="bi bi-person icon-custom"></i>
                             <span style="font-family: 'Rajdhani', sans-serif; font-size: 15px; color: #3f51b5;">Olá, André!</span>
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a style="font-family: 'Rajdhani', sans-serif; font-size: 15px; color: #3f51b5;" class="dropdown-item" *ngIf="clientAccess" href="#">My Requests</a>
-                            <a style="font-family: 'Rajdhani', sans-serif; font-size: 15px; color: #3f51b5;" class="dropdown-item" *ngIf="clientAccess" href="#">My Account</a>
-                            <a style="font-family: 'Rajdhani', sans-serif; font-size: 15px; color: #3f51b5;" class="dropdown-item" *ngIf="adminAccess" href="#">Edit Book</a>
-                            <a style="font-family: 'Rajdhani', sans-serif; font-size: 15px; color: #3f51b5;" class="dropdown-item" *ngIf="adminAccess" href="#">Dashboard</a>
-                            <a style="font-family: 'Rajdhani', sans-serif; font-size: 15px; color: #3f51b5;" class="dropdown-item" *ngIf="adminAccess" href="#">Book Register</a>
+                            <a class="dropdown-item" *ngIf="clientAccess" href="/myRequests">My Requests</a>
+                            <a class="dropdown-item" *ngIf="clientAccess" href="/myAccount">My Account</a>
+                            <a class="dropdown-item" *ngIf="adminAccess" href="/editBook">Edit Book</a>
+                            <a class="dropdown-item" *ngIf="adminAccess" href="/dashboard">Dashboard</a>
+                            <a class="dropdown-item" *ngIf="adminAccess" href="/registerBook">Register Book</a>
+                            <a class="dropdown-item" (click)="logoutService()">Log out</a>
                         </div>
                     </li>
-                    <li class="col nav-item dropdown mb-3" *ngIf="clientAccess">
+                    <li class="col nav-item dropdown mb-3" *ngIf="!isLoginPage">
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             <i class="bi bi-cart icon-custom"></i>
                             <span style="font-family: 'Rajdhani', sans-serif; font-size: 15px; color: #3f51b5;">Shopping Cart</span>
                         </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdown" >
-                            <a style="font-family: 'Rajdhani', sans-serif; font-size: 15px; color: #3f51b5;" class="dropdown-item" href="#">My Cart</a>
-                            <a style="font-family: 'Rajdhani', sans-serif; font-size: 15px; color: #3f51b5;" class="dropdown-item" href="#">Checkout</a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a style="font-family: 'Rajdhani', sans-serif; font-size: 15px; color: #3f51b5;" class="dropdown-item" href="/cart">My Cart</a>
+                            <a style="font-family: 'Rajdhani', sans-serif; font-size: 15px; color: #3f51b5;" class="dropdown-item" href="/checkout">Checkout</a>
                         </div>
                     </li>
                     <li class="col d-flex nav-item mb-3" role="search" *ngIf="!isLoginPage">
