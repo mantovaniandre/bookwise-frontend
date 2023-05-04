@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { UserRegisterComponent } from './user-register/user-register.component';
+import { CreateUserComponent } from './create-user/create-user.component';
 import { LoginComponent } from './login/login.component';
 import { HomeComponent } from './home/home.component';
 import { AppRoutingModule } from './utils/service/app-routing.service';
@@ -17,7 +17,7 @@ import { MyRequestsComponent } from './my-requests/my-requests.component';
 import { CartComponent } from './cart/cart.component';
 import { CheckoutComponent } from './checkout/checkout.component';
 import { UpdateBookComponent } from './update-book/update-book.component';
-import { BookRegisterComponent } from './book-register/book-register.component';
+import { CreateBookComponent } from './create-book/create-book.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Interceptor } from './utils/interceptors/interceptors';
@@ -26,7 +26,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
 @NgModule({
   declarations: [
     AppComponent,
-    UserRegisterComponent,
+    CreateUserComponent,
     LoginComponent,
     HomeComponent,
     HeaderComponent,
@@ -38,7 +38,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
     CartComponent,
     CheckoutComponent,
     UpdateBookComponent,
-    BookRegisterComponent,
+    CreateBookComponent,
     DashboardComponent,
   ],
   imports: [

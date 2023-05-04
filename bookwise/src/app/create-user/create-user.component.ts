@@ -10,20 +10,20 @@ import { formatExpiration } from '../utils/format/format-expiration';
 import { formatCVV } from '../utils/format/format-cvv';
 import { formatCreditCardNumber } from '../utils/format/format-credit-card-number';
 import { SearchCreditCardService } from '../utils/service/search-credit-card.service';
-import { UserCreateRequest } from '../utils/request/user-create.request';
 import { formatRemoveSpecialCharacters } from '../utils/format/format-remove-special-characters';
-import { UserCreateService } from '../utils/service/user-register.service';
 import Swal from 'sweetalert2';
 import { formatDateOfBirth } from '../utils/format/format-date-of-birthdate';
 import { formatOnlyNumber } from '../utils/format/format-only-number';
+import { UserService } from '../utils/service/user.service';
+import { CreateUserRequest } from '../utils/request/user.request';
 
 
 @Component({
-  selector: 'app-user-register',
-  templateUrl: './user-register.component.html',
-  styleUrls: ['./user-register.component.css']
+  selector: 'app-create-user',
+  templateUrl: './create-user.component.html',
+  styleUrls: ['./create-user.component.css']
 })
-export class UserRegisterComponent {
+export class CreateUserComponent {
   linkUserNextEnabled = false;  
   linkAddressNextEnabled = false;
   linkSubmitEnabled = false;
@@ -41,7 +41,7 @@ export class UserRegisterComponent {
   constructor(private fb: FormBuilder,
               private searchCepService: SearchZipCodeService,
               private searchCreditCardService: SearchCreditCardService,
-              private userCreateService: UserCreateService) {}
+              private userService: UserService) {}
   
   userForm = this.fb.group({
     first_name: ['', Validators.required],
@@ -166,8 +166,7 @@ export class UserRegisterComponent {
       let country_bank = formatRemoveSpecialCharacters(this.paymentForm.get('country_bank')?.value || '');
       let zip_code = formatRemoveSpecialCharacters(this.addressForm.get('zip_code')?.value || '');
 
-
-      let user: UserCreateRequest  = {
+      let user: CreateUserRequest  = {
         first_name: this.userForm.get('first_name')?.value?.toUpperCase() || '',
         last_name: this.userForm.get('last_name')?.value?.toUpperCase() || '',
         email: this.userForm.get('email')?.value?.toUpperCase() || '',
@@ -194,7 +193,7 @@ export class UserRegisterComponent {
         expiration: this.paymentForm.get('expiration')?.value || '',
         cvv: this.paymentForm.get('cvv')?.value || '',
       }
-      this.userCreateService.userCreateService(user).subscribe({
+      this.userService.createUserService(user).subscribe({
         next: (response: any) => {
           Swal.fire({
             icon: 'success',

@@ -10,14 +10,13 @@ import { formatPhoneNumber, formatRemoveSpaceInProhoneNumber } from '../utils/fo
 import { formatCPF } from '../utils/format/format-cpf';
 import { formatCreditCardNumber } from '../utils/format/format-credit-card-number';
 import { formatRemoveSpecialCharacters } from '../utils/format/format-remove-special-characters';
-import { UserUpdateRequest } from '../utils/request/user-update.request';
 import { HttpErrorResponse } from '@angular/common/http';
 import Swal from 'sweetalert2';
-import { UserUpdateService } from '../utils/service/user-update.service';
-import { UserProfileService } from '../utils/service/user-profile.service';
 import { capitalize } from '../utils/format/format-capitalize';
 import { AuthService } from '../utils/service/auth.service';
 import { formatOnlyNumber } from '../utils/format/format-only-number';
+import { UserService } from '../utils/service/user.service';
+import { UpdateUserRequest } from '../utils/request/user.request';
 
 @Component({
   selector: 'app-my-account',
@@ -29,11 +28,10 @@ export class MyAccountComponent {
   isLoading = true;
   
   constructor(private fb: FormBuilder,
-    private searchCepService: SearchZipCodeService,
-    private searchCreditCardService: SearchCreditCardService,
-    private userUpdateService: UserUpdateService,
-    private userProfileService: UserProfileService,
-    private authService: AuthService) {}
+              private searchCepService: SearchZipCodeService,
+              private searchCreditCardService: SearchCreditCardService,
+              private userService: UserService,
+              private authService: AuthService) {}
 
   
   ngOnInit() {
@@ -46,8 +44,8 @@ export class MyAccountComponent {
     }, 1000);
     const token = localStorage.getItem('token');
     if (token) {
-      const userUpdateRequest = { token: token };
-      this.userProfileService.userProfileService(userUpdateRequest).subscribe((user: any) => {
+      const UpdateUserRequest = { token: token };
+      this.userService.profileUserService(UpdateUserRequest).subscribe((user: any) => {
         const mappingUserType: Record<number, string> = {
           1: "ADMIN",
           2: "CLIENT",
@@ -198,7 +196,7 @@ updateUser(){
     let country_bank = formatRemoveSpecialCharacters(this.userForm.get('country_bank')?.value || '');
     let zip_code = formatRemoveSpecialCharacters(this.userForm.get('zip_code')?.value || '');
 
-    let user: UserUpdateRequest  = {
+    let user: UpdateUserRequest  = {
       first_name: this.userForm.get('first_name')?.value?.toUpperCase() || '',
       last_name: this.userForm.get('last_name')?.value?.toUpperCase() || '',
       email: this.userForm.get('email')?.value?.toUpperCase() || '',
@@ -225,7 +223,7 @@ updateUser(){
       expiration: this.userForm.get('expiration')?.value || '',
       cvv: this.userForm.get('cvv')?.value || '',
     }
-      this.userUpdateService.userUpdateService(user).subscribe({
+      this.userService.updateUserService(user).subscribe({
         next: (response: any) => {
           Swal.fire({
             icon: 'success',

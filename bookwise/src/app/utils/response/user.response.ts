@@ -1,4 +1,10 @@
-export interface UserProfileResponse {
+export interface CreateUserResponse {
+    message: string;
+    status: string;
+    content_type: string;
+}
+
+export interface ProfileUserResponse {
     first_name: string;
     last_name: string;
     email: string;
@@ -24,4 +30,10 @@ export interface UserProfileResponse {
     card_name: string;
     expiration: string;
     cvv: string;
+}
+
+export interface UpdateUserResponse {
+    message: string;
+    status: string;
+    content_type: string;
 }

@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { BooksService } from '../utils/service/book-service';
 import { ActivatedRoute } from '@angular/router';
-import { GetBookByIdResponse } from '../utils/response/get-book-by-id.response';
-import { GetBookByIdRequest } from '../utils/request/get-books-by-id.request';
 import { capitalize } from '../utils/format/format-capitalize';
+import { GetBookByIdResponse } from '../utils/response/book.response';
+import { GetBookByIdRequest } from '../utils/request/book.request';
 
 @Component({
   selector: 'app-learn-more',

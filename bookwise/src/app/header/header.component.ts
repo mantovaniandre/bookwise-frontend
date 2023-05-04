@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormControl} from '@angular/forms';
-import { UserProfileService } from '../utils/service/user-profile.service';
+import { UserService } from '../utils/service/user.service';
 import { Router } from '@angular/router';
 import { AuthService } from '../utils/service/auth.service';
 
@@ -17,7 +17,7 @@ export class HeaderComponent {
   isLoginPage!: boolean;
 
   constructor(private fb: FormBuilder,
-              private userProfileService: UserProfileService,
+              private userService: UserService,
               private router: Router,
               private authService: AuthService) { }
   
@@ -27,8 +27,8 @@ export class HeaderComponent {
   ngOnInit() {
     const token = localStorage.getItem('token');
     if (token) {
-      const userUpdateRequest = { token: token };
-      this.userProfileService.userProfileService(userUpdateRequest).subscribe((user: any) => {
+      const UpdateUserRequest = { token: token };
+      this.userService.profileUserService(UpdateUserRequest).subscribe((user: any) => {
         const mappingUserType: Record<number, string> = {
           1: "ADMIN",
           2: "CLIENT",
