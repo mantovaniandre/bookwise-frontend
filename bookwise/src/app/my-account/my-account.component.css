@@ -31,3 +31,8 @@ a:hover {
 @keyframes spin {
     to { transform: rotate(360deg); }
 }
+
+.btn:hover{
+    background-color: #3f51b5 !important;
+    color: white !important;
+}

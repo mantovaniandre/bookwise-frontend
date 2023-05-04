@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { BooksService } from '../utils/service/book-service';
 import { ActivatedRoute } from '@angular/router';
-import { GetBookByIdResponse } from '../utils/response/get-books-by-id.response';
+import { GetBookByIdResponse } from '../utils/response/get-book-by-id.response';
 import { GetBookByIdRequest } from '../utils/request/get-books-by-id.request';
 import { capitalize } from '../utils/format/format-capitalize';
 

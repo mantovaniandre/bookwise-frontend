@@ -1,0 +1,158 @@
+<body>
+    <div class="spinner-container" *ngIf="isLoading">
+        <div class="spinner"></div>
+    </div>
+    <div class="home-content" *ngIf="!isLoading">
+        <app-header></app-header>
+        <div>
+        <div class="container" id="form-steps" style="margin-top: 100px; margin-bottom: 100px;">
+            <div class="row" style="margin-bottom: 50px;">
+                <div class="col-12 col-md-12 card">
+                    <div class="card-header" >Details</div>
+                    <div class="card-body">
+                        <div class="card-body" style="display: flex; justify-content: center; align-items: center;">
+                            <div class="form-group">
+                                <div style="display: flex; justify-content: center; align-items: center;">
+                                    <img class="card-img-top" src={{book.url_img}} alt="Card image cap" formControlName="url_img">
+                                </div>
+                            </div>
+                        </div>
+                        <form [formGroup]="bookForm" (ngupdate)="updateBook()" style="font-family: 'Rajdhani', sans-serif;">
+                            <div class="row" style="padding-top: 20px;">
+                                <div class="col-12 col-md-4">
+                                    <label for="title" class="form-label">Title</label>
+                                    <input type="text" class="form-control" formControlName="title" (input)="formatLettersOnly($event)">
+                                    <div *ngIf="bookForm.get('title')?.invalid && (bookForm.get('title')?.dirty || bookForm.get('title')?.touched)" class="form-text text-danger">
+                                    <small *ngIf="bookForm.get('title')?.hasError('required')">Title is required</small>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-4">
+                                    <label for="category" class="form-label">Category</label>
+                                    <input type="text" class="form-control" formControlName="category" (input)="formatLettersOnly($event)">
+                                    <div *ngIf="bookForm.get('category')?.invalid && (bookForm.get('category')?.dirty || bookForm.get('category')?.touched)" class="form-text text-danger">
+                                        <small *ngIf="bookForm.get('category')?.hasError('required')">Category is required</small>
+                                    </div>
+                                </div> 
+                                <div class="col-12 col-md-4">
+                                    <label for="url_img" class="form-label">URL</label>
+                                    <input type="text" class="form-control" formControlName="url_img">
+                                    <div *ngIf="bookForm.get('url_img')?.invalid && (bookForm.get('url_img')?.dirty || bookForm.get('url_img')?.touched)" class="form-text text-danger">
+                                        <small *ngIf="bookForm.get('url_img')?.hasError('required')">URL Image is required</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row" style="padding-top: 20px;">
+                                <div class="col-12 col-md-4">
+                                    <label for="price" class="form-label">Price</label>
+                                    <input type="text" class="form-control" formControlName="price" (input)="formatOnlyNumber($event)">
+                                    <div *ngIf="bookForm.get('price')?.invalid && (bookForm.get('price')?.dirty || bookForm.get('price')?.touched)" class="form-text text-danger">
+                                        <small *ngIf="bookForm.get('price')?.hasError('required')">Price is required</small>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-4">
+                                    <label for="author" class="form-label">Author</label>
+                                    <input type="text" class="form-control" formControlName="author" (input)="formatLettersOnly($event)">
+                                    <div *ngIf="bookForm.get('author')?.invalid && (bookForm.get('author')?.dirty || bookForm.get('author')?.touched)" class="form-text text-danger">
+                                        <small *ngIf="bookForm.get('author')?.hasError('required')">Author is required</small>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-4">
+                                    <label for="year" class="form-label">Year</label>
+                                    <input type="text" class="form-control" formControlName="year" (input)="formatOnlyNumber($event)">
+                                    <div *ngIf="bookForm.get('year')?.invalid && (bookForm.get('year')?.dirty || bookForm.get('year')?.touched)" class="form-text text-danger">
+                                        <small *ngIf="bookForm.get('year')?.hasError('required')">Year is required</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row" style="padding-top: 20px;">
+                                <div class="col-12 col-md-4">
+                                    <label for="isbn" class="form-label">ISBN</label>
+                                    <input type="text" class="form-control" formControlName="isbn" (input)="formatOnlyNumber($event)"> 
+                                    <div *ngIf="bookForm.get('isbn')?.invalid && (bookForm.get('isbn')?.dirty || bookForm.get('isbn')?.touched)" class="form-text text-danger">
+                                        <small *ngIf="bookForm.get('isbn')?.hasError('required')">ISBN is required</small>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-4">
+                                    <label for="edition" class="form-label">Edition</label>
+                                    <input type="text" class="form-control" formControlName="edition">
+                                    <div *ngIf="bookForm.get('edition')?.invalid && (bookForm.get('edition')?.dirty || bookForm.get('edition')?.touched)" class="form-text text-danger">
+                                        <small *ngIf="bookForm.get('edition')?.hasError('required')">Edition is required</small>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-4">
+                                    <label for="origin" class="form-label">Origin</label>
+                                    <input type="text" class="form-control" formControlName="origin" (input)="formatLettersOnly($event)">
+                                    <div *ngIf="bookForm.get('origin')?.invalid && (bookForm.get('origin')?.dirty || bookForm.get('origin')?.touched)" class="form-text text-danger">
+                                        <small *ngIf="bookForm.get('origin')?.hasError('required')">Origin is required</small>
+                                    </div>
+                                </div> 
+                            </div>
+                            <div class="row" style="padding-top: 20px;">
+                                <div class="col-12 col-md-4">
+                                    <label for="book_format" class="form-label">Book Format</label>
+                                    <input type="text" class="form-control" formControlName="book_format" (input)="formatLettersOnly($event)">
+                                    <div *ngIf="bookForm.get('book_format')?.invalid && (bookForm.get('book_format')?.dirty || bookForm.get('book_format')?.touched)" class="form-text text-danger">
+                                        <small *ngIf="bookForm.get('book_format')?.hasError('required')">Book Format is required</small>
+                                    </div>
+                                </div> 
+                                <div class="col-12 col-md-4">
+                                    <label for="binding" class="form-label">Binding</label>
+                                    <input type="text" class="form-control" formControlName="binding" (input)="formatLettersOnly($event)">
+                                    <div *ngIf="bookForm.get('binding')?.invalid && (bookForm.get('binding')?.dirty || bookForm.get('binding')?.touched)" class="form-text text-danger">
+                                        <small *ngIf="bookForm.get('binding')?.hasError('required')">Binding is required</small>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-4">
+                                    <label for="language" class="form-label">Language</label>
+                                    <input type="text" class="form-control" formControlName="language" (input)="formatLettersOnly($event)">
+                                    <div *ngIf="bookForm.get('language')?.invalid && (bookForm.get('language')?.dirty || bookForm.get('language')?.touched)" class="form-text text-danger">
+                                        <small *ngIf="bookForm.get('language')?.hasError('required')">Language is required</small>
+                                    </div>
+                                </div> 
+                            </div>
+                            <div class="row" style="padding-top: 20px;">
+                                <div class="col-12 col-md-4">
+                                    <label for="country" class="form-label">Country</label>
+                                    <input type="text" class="form-control" formControlName="country" (input)="formatLettersOnly($event)">
+                                    <div *ngIf="bookForm.get('country')?.invalid && (bookForm.get('country')?.dirty || bookForm.get('country')?.touched)" class="form-text text-danger">
+                                        <small *ngIf="bookForm.get('country')?.hasError('required')">country is required</small>
+                                    </div>
+                                </div> 
+                                <div class="col-12 col-md-4">
+                                    <label for="pages" class="form-label">Pages</label>
+                                    <input type="text" class="form-control" formControlName="pages" (input)="formatOnlyNumber($event)">
+                                    <div *ngIf="bookForm.get('pages')?.invalid && (bookForm.get('pages')?.dirty || bookForm.get('pages')?.touched)" class="form-text text-danger">
+                                        <small *ngIf="bookForm.get('pages')?.hasError('required')">Pages is required</small>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-4">
+                                    <label for="stock" class="form-label">Stock</label>
+                                    <input type="text" class="form-control" formControlName="stock" (input)="formatOnlyNumber($event)">
+                                    <div *ngIf="bookForm.get('stock')?.invalid && (bookForm.get('stock')?.dirty || bookForm.get('stock')?.touched)" class="form-text text-danger">
+                                        <small *ngIf="bookForm.get('stock')?.hasError('required')">Stock is required</small>
+                                    </div>
+                                </div> 
+                            </div>
+                            <div class="row" style="padding-top: 20px;">
+                                
+                                <div class="col-12 col-md-12 mb-2 mt-2">
+                                    <label for="description" class="form-label">Description</label>
+                                    <textarea class="form-control" rows="3" formControlName="description"></textarea>
+                                    <div *ngIf="bookForm.get('description')?.invalid && (bookForm.get('description')?.dirty || bookForm.get('description')?.touched)" class="form-text text-danger" >
+                                        <small *ngIf="bookForm.get('description')?.hasError('required')">Description is required</small>
+                                    </div>
+                                </div> 
+                            </div>
+                        </form>
+                        <div class="row justify-content-end" style="padding: 20px; font-family: 'Rajdhani', sans-serif;">
+                            <div class="col-auto">
+                                <button class="btn" [disabled]="!bookForm.valid" style="color: #007bff; font-family: 'Rajdhani', sans-serif; border: 1px solid #007bff;" (click)="updateBook()">update</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <app-footer></app-footer>
+    </div>
+</div>

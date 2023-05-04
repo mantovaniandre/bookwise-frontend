@@ -5,7 +5,6 @@ import { formatCPF } from '../utils/format/format-cpf';
 import { formatPhoneNumber, formatRemoveSpaceInProhoneNumber } from '../utils/format/format-phone';
 import { formatZipCode } from '../utils/format/format-zip-code';
 import { SearchZipCodeService } from '../utils/service/search-zip-code.service';
-import { formatNumberStreet } from '../utils/format/format-number-street';
 import { formatLettersOnly } from '../utils/format/format-letters-only';
 import { formatExpiration } from '../utils/format/format-expiration';
 import { formatCVV } from '../utils/format/format-cvv';
@@ -16,6 +15,7 @@ import { formatRemoveSpecialCharacters } from '../utils/format/format-remove-spe
 import { UserCreateService } from '../utils/service/user-register.service';
 import Swal from 'sweetalert2';
 import { formatDateOfBirth } from '../utils/format/format-date-of-birthdate';
+import { formatOnlyNumber } from '../utils/format/format-only-number';
 
 
 @Component({
@@ -103,8 +103,8 @@ export class UserRegisterComponent {
     formatPhoneNumber(event)
   }
 
-  formatNumberStreet(event: any){
-    formatNumberStreet(event)
+  formatOnlyNumber(event: any){
+    formatOnlyNumber(event)
   }
 
   formatLettersOnly(event: any){

@@ -118,7 +118,7 @@
                                             </div>
                                             <div class="col-12 col-md-4">
                                                 <label for="number" class="form-label">Number</label>
-                                                <input type="text" class="form-control" formControlName="number" maxlength="06" (blur)="checkFormValidity()" (input)="formatNumberStreet($event)">
+                                                <input type="text" class="form-control" formControlName="number" maxlength="06" (blur)="checkFormValidity()" (input)="formatOnlyNumber($event)">
                                                 <div *ngIf="addressForm.get('number')?.invalid && (addressForm.get('number')?.dirty || addressForm.get('number')?.touched)" class="form-text text-danger">
                                                     <small *ngIf="addressForm.get('number')?.hasError('required')">Number is required</small>
                                                 </div>

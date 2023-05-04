@@ -6,7 +6,6 @@ import { formatZipCode } from '../utils/format/format-zip-code';
 import { formatCVV } from '../utils/format/format-cvv';
 import { formatExpiration } from '../utils/format/format-expiration';
 import { formatLettersOnly } from '../utils/format/format-letters-only';
-import { formatNumberStreet } from '../utils/format/format-number-street';
 import { formatPhoneNumber, formatRemoveSpaceInProhoneNumber } from '../utils/format/format-phone';
 import { formatCPF } from '../utils/format/format-cpf';
 import { formatCreditCardNumber } from '../utils/format/format-credit-card-number';
@@ -18,7 +17,7 @@ import { UserUpdateService } from '../utils/service/user-update.service';
 import { UserProfileService } from '../utils/service/user-profile.service';
 import { capitalize } from '../utils/format/format-capitalize';
 import { AuthService } from '../utils/service/auth.service';
-import { Router } from '@angular/router';
+import { formatOnlyNumber } from '../utils/format/format-only-number';
 
 @Component({
   selector: 'app-my-account',
@@ -29,8 +28,6 @@ export class MyAccountComponent {
   submitEnabled = false
   isLoading = true;
   
-  
-
   constructor(private fb: FormBuilder,
     private searchCepService: SearchZipCodeService,
     private searchCreditCardService: SearchCreditCardService,
@@ -73,9 +70,7 @@ export class MyAccountComponent {
           email: user.user['email'].toLowerCase(),
           cpf: user.user['cpf'],
           phone: user.user['phone'],
-          birthday: user.user['birthday']
-        });
-        this.addressForm.patchValue({
+          birthday: user.user['birthday'],
           zip_code: user.user.address['zip_code'],
           street: capitalize(user.user.address['street']),
           number: user.user.address['number'],
@@ -84,8 +79,6 @@ export class MyAccountComponent {
           city: capitalize(user.user.address['city']),
           state: user.user.address['state'],
           country:capitalize(user.user.address['country']),
-        });
-        this.paymentForm.patchValue({
           card_number: user.user.credit_card['card_number'],
           type_card: capitalize(user.user.credit_card['type_card']),
           flag: capitalize(user.user.credit_card['flag']),
@@ -99,6 +92,7 @@ export class MyAccountComponent {
     } else {
       this.authService.logoutService()
     }
+    this.userForm.markAllAsTouched();
   }
     
 userForm = this.fb.group({
@@ -110,10 +104,7 @@ userForm = this.fb.group({
   phone: ['', Validators.required],
   birthday: ['', Validators.required],
   user_type: ['', Validators.required],
-  gender: ['', Validators.required] 
-});
-
-addressForm = this.fb.group({
+  gender: ['', Validators.required],
   zip_code: ['', Validators.required],
   street: ['', Validators.required],
   number: ['', Validators.required],
@@ -121,10 +112,7 @@ addressForm = this.fb.group({
   neighborhood: ['', Validators.required],
   city: ['', Validators.required],
   state: ['', Validators.required],
-  country: ['', Validators.required]
-});
-
-paymentForm = this.fb.group({
+  country: ['', Validators.required],
   card_number: ['', Validators.required],
   type_card: ['', Validators.required],
   flag: ['', Validators.required],
@@ -135,14 +123,6 @@ paymentForm = this.fb.group({
   cvv: ['', Validators.required],
 });
 
-checkFormValidity() {
-  if (this.userForm.valid && this.addressForm.valid && this.paymentForm.valid) {
-    this.submitEnabled = true; 
-  } else {
-    this.submitEnabled = false;
-  }
-}
-
 formatCPF(event: any){
   formatCPF(event)
 }
@@ -151,8 +131,8 @@ formatPhoneNumber(event: any){
   formatPhoneNumber(event)
 }
 
-formatNumberStreet(event: any){
-  formatNumberStreet(event)
+formatOnlyNumber(event: any){
+  formatOnlyNumber(event)
 }
 
 formatLettersOnly(event: any){
@@ -174,7 +154,7 @@ capitalize(str: string){
 formatAndSearchZipCode(event: any){
   let zipCodeFormatted = formatZipCode(event)
   this.searchCepService.searchCepService(zipCodeFormatted).subscribe(address => {
-    this.addressForm.patchValue({
+    this.userForm.patchValue({
     street: address.logradouro,
     neighborhood: address.bairro,
     city: address.cidade,
@@ -191,7 +171,7 @@ formatDateOfBirth(event: any){
 formatAndSearchCreditCardNumber(event: any){
   let creditCardFormatted = formatCreditCardNumber(event)
   this.searchCreditCardService.searchCreditCardService(creditCardFormatted).subscribe(credit_card => {
-    this.paymentForm.patchValue({
+    this.userForm.patchValue({
     type_card: credit_card.type,
     flag: credit_card.scheme,
     bank: credit_card.bank.name,
@@ -200,23 +180,23 @@ formatAndSearchCreditCardNumber(event: any){
   });
 }
 
-update(){
-  if(this.userForm.valid && this.addressForm.valid && this.paymentForm.valid){
+updateUser(){
+    if(this.userForm.valid){
 
     let cpf = formatRemoveSpecialCharacters(this.userForm.get('cpf')?.value || '');
     let phone = formatRemoveSpaceInProhoneNumber(this.userForm.get('phone')?.value || '');
     let birthday = this.userForm.get('birthday')?.value || '';
-    let street = formatRemoveSpecialCharacters(this.addressForm.get('street')?.value || '');
-    let complement = formatRemoveSpecialCharacters(this.addressForm.get('complement')?.value || '');
-    let neighborhood = formatRemoveSpecialCharacters(this.addressForm.get('neighborhood')?.value || '');
-    let city = formatRemoveSpecialCharacters(this.addressForm.get('city')?.value || '');
-    let state = formatRemoveSpecialCharacters(this.addressForm.get('state')?.value || '');
-    let country = formatRemoveSpecialCharacters(this.addressForm.get('country')?.value || '');
-    let type_card = formatRemoveSpecialCharacters(this.paymentForm.get('type_card')?.value || '');
-    let flag = formatRemoveSpecialCharacters(this.paymentForm.get('flag')?.value || '');
-    let bank = formatRemoveSpecialCharacters(this.paymentForm.get('bank')?.value || '');
-    let country_bank = formatRemoveSpecialCharacters(this.paymentForm.get('country_bank')?.value || '');
-    let zip_code = formatRemoveSpecialCharacters(this.addressForm.get('zip_code')?.value || '');
+    let street = formatRemoveSpecialCharacters(this.userForm.get('street')?.value || '');
+    let complement = formatRemoveSpecialCharacters(this.userForm.get('complement')?.value || '');
+    let neighborhood = formatRemoveSpecialCharacters(this.userForm.get('neighborhood')?.value || '');
+    let city = formatRemoveSpecialCharacters(this.userForm.get('city')?.value || '');
+    let state = formatRemoveSpecialCharacters(this.userForm.get('state')?.value || '');
+    let country = formatRemoveSpecialCharacters(this.userForm.get('country')?.value || '');
+    let type_card = formatRemoveSpecialCharacters(this.userForm.get('type_card')?.value || '');
+    let flag = formatRemoveSpecialCharacters(this.userForm.get('flag')?.value || '');
+    let bank = formatRemoveSpecialCharacters(this.userForm.get('bank')?.value || '');
+    let country_bank = formatRemoveSpecialCharacters(this.userForm.get('country_bank')?.value || '');
+    let zip_code = formatRemoveSpecialCharacters(this.userForm.get('zip_code')?.value || '');
 
     let user: UserUpdateRequest  = {
       first_name: this.userForm.get('first_name')?.value?.toUpperCase() || '',
@@ -230,50 +210,41 @@ update(){
       gender: this.userForm.get('gender')?.value?.toUpperCase() || '',
       zip_code: zip_code || '',
       street: street.toUpperCase() || '',
-      number: this.addressForm.get('number')?.value || '',
+      number: this.userForm.get('number')?.value || '',
       complement: complement.toUpperCase() || '',
       neighborhood: neighborhood.toUpperCase() || '',
       city: city.toUpperCase(),
       state: state.toUpperCase() || '',
       country: country.toUpperCase() || '',
-      card_number: this.paymentForm.get('card_number')?.value || '',
+      card_number: this.userForm.get('card_number')?.value || '',
       type_card: type_card.toUpperCase() || '',
       flag: flag.toUpperCase() || '',
       bank: bank.toUpperCase() || '',
       country_bank: country_bank.toUpperCase() || '',
-      card_name: this.paymentForm.get('card_name')?.value?.toUpperCase() || '',
-      expiration: this.paymentForm.get('expiration')?.value || '',
-      cvv: this.paymentForm.get('cvv')?.value || '',
+      card_name: this.userForm.get('card_name')?.value?.toUpperCase() || '',
+      expiration: this.userForm.get('expiration')?.value || '',
+      cvv: this.userForm.get('cvv')?.value || '',
     }
-    this.userUpdateService.userUpdateService(user).subscribe({
-      next: (response: any) => {
-        Swal.fire({
-          icon: 'success',
-          title: 'Update Success!',
-          text: response.message,
-          timer: 3000
-      }).then(() => {
-        window.location.href = '/login';
-        this.authService.logoutService()
-      })
-    },
-      error: (error: HttpErrorResponse) => {
-        if (error.error.status == 400 && error.error.message == "The data is the same as in the database. No changes were made.") {
+      this.userUpdateService.userUpdateService(user).subscribe({
+        next: (response: any) => {
           Swal.fire({
-            icon: 'warning',
+            icon: 'success',
+            title: 'Update Success!',
+            text: response.message,
+            timer: 3000
+        }).then(() => {
+          window.location.href = '/login';
+          this.authService.logoutService()
+        })
+      },
+        error: (error: HttpErrorResponse) => {
+          Swal.fire({
+            icon: 'error',
             title: 'Attention',
             text: error.error.message,
           });
-        } else {
-          Swal.fire({
-            icon: 'error',
-            title: 'Update error!',
-            text: error.error.message,
-          });
         }
-      }
-    });
+      });
+    }
   }
-}
-
 }

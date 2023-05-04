@@ -10,7 +10,7 @@ import { MyAccountComponent } from 'src/app/my-account/my-account.component';
 import { MyRequestsComponent } from 'src/app/my-requests/my-requests.component';
 import { CartComponent } from 'src/app/cart/cart.component';
 import { CheckoutComponent } from 'src/app/checkout/checkout.component';
-import { EditBookComponent } from 'src/app/edit-book/edit-book.component';
+import { UpdateBookComponent } from 'src/app/update-book/update-book.component';
 import { BookRegisterComponent } from 'src/app/book-register/book-register.component';
 import { DashboardComponent } from 'src/app/dashboard/dashboard.component';
 
@@ -27,7 +27,7 @@ const routes: Routes = [
   { path: 'myRequests', component: MyRequestsComponent },
   { path: 'registerBook', component: BookRegisterComponent },
   { path: 'dashboard', component: DashboardComponent },
-  { path: 'editBook', component: EditBookComponent },
+  { path: 'updateBook/:id', component: UpdateBookComponent },
 ];
 
 @NgModule({

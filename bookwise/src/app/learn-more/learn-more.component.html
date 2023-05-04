@@ -14,7 +14,7 @@
                                 <img class="card-img-top" src={{book.url_img}} alt="Card image cap">
                             </div>
                             <div style="display: flex; justify-content: center; align-items: center; margin-top: 50px;">
-                                <button class="btn" type="submit" style="background-color: #3f51b5; border: 2px solid #3f51b5; color: white; font-family: 'Rajdhani', sans-serif;">Shopping Cart</button>
+                                <button class="btn" type="submit" style="color: #007bff; font-family: 'Rajdhani', sans-serif; border: 1px solid #007bff;">Shopping Cart</button>
                             </div>
                         </div>
                     </div>
@@ -126,6 +126,14 @@
                                 <p style="font-family: 'Rajdhani', sans-serif;">{{book.stock}}</p>
                             </div>
                         </div>
+                        <div class="row">
+                            <div class="col-4 col-sm-4 col-md-4" style="height: 30px; border-right: 5px solid white; border-bottom: 5px solid white; background-color: rgb(234, 234, 234);">
+                                <p style="font-family: 'Rajdhani', sans-serif;">Category</p>
+                            </div>
+                            <div class="col-8 col-sm-8 col-md-8" style="height: 30px;  border-bottom: 5px solid white; background-color: rgb(234, 234, 234);">
+                                <p style="font-family: 'Rajdhani', sans-serif;">{{book.category}}</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -157,7 +165,7 @@
                             <textarea class="form-control" id="ratingWrite" rows="3"></textarea>
                         </div>
                         <div style="display: flex; justify-content: center; align-items: center; margin-top: 50px;">
-                            <button class="btn" type="submit" style="background-color: #3f51b5; border: 2px solid #3f51b5; color: white; font-family: 'Rajdhani', sans-serif;">Comment</button>
+                            <button class="btn" type="submit" style="color: #007bff; font-family: 'Rajdhani', sans-serif; border: 1px solid #007bff;">Comment</button>
                         </div>
                     </div>
                 </div>
@@ -190,7 +198,6 @@
             </div>
         </div>
         <app-footer></app-footer>
-
     </div>
 </body>
 
