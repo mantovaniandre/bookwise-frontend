@@ -58,23 +58,23 @@
           <div class="card-body">
             <div class="row">
               <div class="col-6 col-md-3 mb-3" style="display: flex; justify-content: center; align-items: center;" *ngFor="let book of filteredBooks[category] | paginate: { itemsPerPage: 4, currentPage: currentPage[category], id: category + '-paginator' }">
-                  <div class="card" style=" width: 200px; height: auto;">
-                    <div style="display: flex; justify-content: center; align-items: center; margin: 10px;">
-                      <img class="card-img-top" src={{book.url_img}} alt="Card image cap">
+                <div class="card" style=" width: 200px; height: auto;">
+                  <div style="display: flex; justify-content: center; align-items: center; margin: 10px;">
+                    <img class="card-img-top" src={{book.url_img}} alt="Card image cap">
+                  </div>
+                  <div>
+                    <div style="display: flex; justify-content: center; align-items: center; margin: 10px;"> 
+                      <p class="ellipsis">{{book.title}}</p>
                     </div>
-                    <div>
-                      <div style="display: flex; justify-content: center; align-items: center; margin: 10px;"> 
-                        <p class="ellipsis">{{book.title}}</p>
-                      </div>
-                      <div style="display: flex; justify-content: center; align-items: center; margin: 10px;">
-                        <p class="card-text" style="font-size: 20px; font-weight: 900;">{{book.price}}</p>
-                      </div>
-                      <div style="display: flex; justify-content: center; align-items: center; margin: 10px;">
-                        <button class="btn" type="submit" style="background-color: #3f51b5; border: 2px solid #3f51b5; color: white;" *ngIf="clientAccess" routerLink="/learnMore/{{book.id}}">Learn More</button>
-                        <button class="btn" type="submit" style="background-color: #3f51b5; border: 2px solid #3f51b5; color: white;" *ngIf="adminAccess" routerLink="/editBook/{{book.id}}">Edit Book</button>
-                      </div>
+                    <div style="display: flex; justify-content: center; align-items: center; margin: 10px;">
+                      <p class="card-text" style="font-size: 20px; font-weight: 900;">{{book.price}}</p>
+                    </div>
+                    <div style="display: flex; justify-content: center; align-items: center; margin: 10px;">
+                      <button class="btn" type="submit" style="color: #007bff; font-family: 'Rajdhani', sans-serif; border: 1px solid #007bff;" *ngIf="clientAccess" routerLink="/learnMore/{{book.id}}">Learn More</button>
+                      <button class="btn" type="submit" style="color: #007bff; font-family: 'Rajdhani', sans-serif; border: 1px solid #007bff;" *ngIf="adminAccess" routerLink="/updateBook/{{book.id}}">Update Book</button>
                     </div>
                   </div>
+                </div>
               </div>
             </div>
           </div>

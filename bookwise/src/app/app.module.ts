@@ -16,7 +16,7 @@ import { MyAccountComponent } from './my-account/my-account.component';
 import { MyRequestsComponent } from './my-requests/my-requests.component';
 import { CartComponent } from './cart/cart.component';
 import { CheckoutComponent } from './checkout/checkout.component';
-import { EditBookComponent } from './edit-book/edit-book.component';
+import { UpdateBookComponent } from './update-book/update-book.component';
 import { BookRegisterComponent } from './book-register/book-register.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -37,7 +37,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
     MyRequestsComponent,
     CartComponent,
     CheckoutComponent,
-    EditBookComponent,
+    UpdateBookComponent,
     BookRegisterComponent,
     DashboardComponent,
   ],

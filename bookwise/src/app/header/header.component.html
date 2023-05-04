@@ -18,20 +18,19 @@
                             <span style="font-family: 'Rajdhani', sans-serif; font-size: 15px; color: #3f51b5;">Olá, André!</span>
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="/myAccount">My Account</a>
                             <a class="dropdown-item" *ngIf="clientAccess" href="/myRequests">My Requests</a>
-                            <a class="dropdown-item" *ngIf="clientAccess" href="/myAccount">My Account</a>
-                            <a class="dropdown-item" *ngIf="adminAccess" href="/editBook">Edit Book</a>
                             <a class="dropdown-item" *ngIf="adminAccess" href="/dashboard">Dashboard</a>
                             <a class="dropdown-item" *ngIf="adminAccess" href="/registerBook">Register Book</a>
                             <a class="dropdown-item" (click)="logoutService()">Log out</a>
                         </div>
                     </li>
-                    <li class="col nav-item dropdown mb-3" *ngIf="!isLoginPage">
+                    <li class="col nav-item dropdown mb-3" *ngIf="!isLoginPage && clientAccess">
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             <i class="bi bi-cart icon-custom"></i>
                             <span style="font-family: 'Rajdhani', sans-serif; font-size: 15px; color: #3f51b5;">Shopping Cart</span>
                         </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown" >
                             <a style="font-family: 'Rajdhani', sans-serif; font-size: 15px; color: #3f51b5;" class="dropdown-item" href="/cart">My Cart</a>
                             <a style="font-family: 'Rajdhani', sans-serif; font-size: 15px; color: #3f51b5;" class="dropdown-item" href="/checkout">Checkout</a>
                         </div>

@@ -1,4 +1,4 @@
-export interface GetAllBooksResponse {
+export interface GetBookByIdResponse {
     id: string;
     title: string;
     author: string;

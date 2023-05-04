@@ -27,9 +27,10 @@
 }
 
 .btn:hover{
-    background-color: white !important;
-    color: #3f51b5 !important;
+    background-color: #3f51b5 !important;
+    color: white !important;
 }
+
 
 .home-container {
     position: relative;
