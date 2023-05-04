@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { BooksService } from '../utils/service/book-service';
-import { GetAllBooksResponse } from '../utils/response/get-all-books.response';
-import { UserProfileService } from '../utils/service/user-profile.service';
+import { UserService } from '../utils/service/user.service';
+import { GetAllBooksResponse } from '../utils/response/book.response';
 
 
 @Component({
@@ -21,7 +21,7 @@ import { UserProfileService } from '../utils/service/user-profile.service';
     clientAccess = false;
 
     constructor(private booksService: BooksService,
-                private userProfileService: UserProfileService){}
+                private userService: UserService){}
 
     ngOnInit() {
       this.getBooks();
@@ -36,8 +36,8 @@ import { UserProfileService } from '../utils/service/user-profile.service';
 
       const token = localStorage.getItem('token');
       if (token) {
-        const userUpdateRequest = { token: token };
-        this.userProfileService.userProfileService(userUpdateRequest).subscribe((user: any) => {
+        const UpdateUserRequest = { token: token };
+        this.userService.profileUserService(UpdateUserRequest).subscribe((user: any) => {
           const mappingUserType: Record<number, string> = {
             1: "ADMIN",
             2: "CLIENT",

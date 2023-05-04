@@ -1,18 +1,14 @@
 import { Component } from '@angular/core';
 import { BooksService } from '../utils/service/book-service';
 import { ActivatedRoute } from '@angular/router';
-import { GetBookByIdRequest } from '../utils/request/get-books-by-id.request';
-import { GetBookByIdResponse } from '../utils/response/get-book-by-id.response';
 import { capitalize } from '../utils/format/format-capitalize';
 import { FormBuilder, Validators } from '@angular/forms';
 import { formatLettersOnly } from '../utils/format/format-letters-only';
 import { formatOnlyNumber } from '../utils/format/format-only-number';
-import { formatRemoveSpecialCharacters } from '../utils/format/format-remove-special-characters';
-import { formatRemoveSpaceInProhoneNumber } from '../utils/format/format-phone';
-import { UpdateBooksByIdRequest } from '../utils/request/update-book-by-id.request';
 import Swal from 'sweetalert2';
-import { AuthService } from '../utils/service/auth.service';
 import { HttpErrorResponse } from '@angular/common/http';
+import { GetBookByIdResponse } from '../utils/response/book.response';
+import { GetBookByIdRequest, UpdateBooksByIdRequest } from '../utils/request/book.request';
 
 @Component({
   selector: 'app-update-book',

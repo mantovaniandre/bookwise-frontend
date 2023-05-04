@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from '../../login/login.component';
-import { UserRegisterComponent } from '../../user-register/user-register.component';
+import { CreateUserComponent } from '../../create-user/create-user.component';
 import { HomeComponent } from '../../home/home.component';
 import { AuthGuard } from '../guard/auth.guard';
 import { LearnMoreComponent } from 'src/app/learn-more/learn-more.component';
@@ -11,23 +11,23 @@ import { MyRequestsComponent } from 'src/app/my-requests/my-requests.component';
 import { CartComponent } from 'src/app/cart/cart.component';
 import { CheckoutComponent } from 'src/app/checkout/checkout.component';
 import { UpdateBookComponent } from 'src/app/update-book/update-book.component';
-import { BookRegisterComponent } from 'src/app/book-register/book-register.component';
+import { CreateBookComponent } from 'src/app/create-book/create-book.component';
 import { DashboardComponent } from 'src/app/dashboard/dashboard.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
-  { path: 'registerUser', component: UserRegisterComponent },
+  { path: 'createrUser', component: CreateUserComponent },
   { path: 'home', component: HomeComponent, canActivate: [AuthGuard]},
   { path: 'myAccount', component: MyAccountComponent, canActivate: [AuthGuard] },
-  { path: 'searchBook', component: SearchBookComponent },
-  { path: 'learnMore/:id', component: LearnMoreComponent },
-  { path: 'cart', component: CartComponent },
-  { path: 'checkout', component: CheckoutComponent },
-  { path: 'myRequests', component: MyRequestsComponent },
-  { path: 'registerBook', component: BookRegisterComponent },
-  { path: 'dashboard', component: DashboardComponent },
-  { path: 'updateBook/:id', component: UpdateBookComponent },
+  { path: 'searchBook', component: SearchBookComponent, canActivate: [AuthGuard] },
+  { path: 'learnMore/:id', component: LearnMoreComponent, canActivate: [AuthGuard] },
+  { path: 'cart', component: CartComponent, canActivate: [AuthGuard] },
+  { path: 'checkout', component: CheckoutComponent, canActivate: [AuthGuard] },
+  { path: 'myRequests', component: MyRequestsComponent, canActivate: [AuthGuard] },
+  { path: 'createBook', component: CreateBookComponent, canActivate: [AuthGuard] },
+  { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
+  { path: 'updateBook/:id', component: UpdateBookComponent, canActivate: [AuthGuard] },
 ];
 
 @NgModule({
