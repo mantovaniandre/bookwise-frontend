@@ -9,7 +9,7 @@
             <div class="row" style="margin-bottom: 50px;">
                 <div class="col-12 col-md-12 card">
                     <div class="card-header" >Details</div>
-                    <div class="card-body">
+                    <div class="card-body" >
                         <div class="card-body" style="display: flex; justify-content: center; align-items: center;">
                             <div class="form-group">
                                 <div style="display: flex; justify-content: center; align-items: center;">
@@ -148,7 +148,29 @@
                             <div class="col-auto">
                                 <button class="btn" [disabled]="!bookForm.valid" style="color: #007bff; font-family: 'Rajdhani', sans-serif; border: 1px solid #007bff;" (click)="updateBook()">update</button>
                             </div>
+                            <div class="col-auto">
+                                <button class="btn" [disabled]="!bookForm.valid" style="color: #007bff; font-family: 'Rajdhani', sans-serif; border: 1px solid #007bff;" data-toggle="modal" data-target="#confirmModal">delete</button>
+                            </div>
                         </div>
+                        <div class="modal" tabindex="-1" role="dialog" id="confirmModal">
+                            <div class="modal-dialog" role="document">
+                              <div class="modal-content">
+                                <div class="modal-header">
+                                  <h5 class="modal-title">Confirmar exclusão</h5>
+                                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                  </button>
+                                </div>
+                                <div class="modal-body">
+                                  Tem certeza que deseja excluir o livro {{ book.title }}?
+                                </div>
+                                <div class="modal-footer">
+                                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                                  <button type="button" class="btn btn-danger" >Delete</button>
+                                </div>
+                              </div>
+                            </div>
+                        </div>                          
                     </div>
                 </div>
             </div>

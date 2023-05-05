@@ -1,57 +1,58 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { BooksService } from '../utils/service/book-service';
 import { UserService } from '../utils/service/user.service';
 import { GetAllBooksResponse } from '../utils/response/book.response';
-
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
-  export class HomeComponent{
-    isLoading = true;
-    directionLinks = true;
-    books: GetAllBooksResponse[] = [];
-    filteredBooks: { [category: string]: GetAllBooksResponse[] } = {};
-    categories: string[] = [];
-    currentPage: { [category: string]: number } = {};
-    pageSize = 4;
-    adminAccess = false;
-    clientAccess = false;
+export class HomeComponent implements OnInit {
+  isLoading = true;
+  directionLinks = true;
+  books: GetAllBooksResponse[] = [];
+  filteredBooks: { [category: string]: GetAllBooksResponse[] } = {};
+  categories: string[] = [];
+  currentPage: { [category: string]: number } = {};
+  pageSize = 4;
+  adminAccess = false;
+  clientAccess = false;
 
-    constructor(private booksService: BooksService,
-                private userService: UserService){}
+  constructor(
+    private booksService: BooksService,
+    private userService: UserService
+  ) {}
 
-    ngOnInit() {
-      this.getBooks();
+  ngOnInit() {
+    this.getBooks();
 
-      setTimeout(() => {
-        this.isLoading = false;
-        const container = document.querySelector('.container');
-        if (container) {
-          container.classList.add('show');
-        }
-      }, 1000);
-
-      const token = localStorage.getItem('token');
-      if (token) {
-        const UpdateUserRequest = { token: token };
-        this.userService.profileUserService(UpdateUserRequest).subscribe((user: any) => {
-          const mappingUserType: Record<number, string> = {
-            1: "ADMIN",
-            2: "CLIENT",
-          };
-          const user_type = mappingUserType[user.user['user_type_id']];
-          if (user_type == 'ADMIN'){
-            this.adminAccess = true;
-          }
-          if (user_type == 'CLIENT'){
-            this.clientAccess = true;
-          }
-        });
+    setTimeout(() => {
+      this.isLoading = false;
+      const container = document.querySelector('.container');
+      if (container) {
+        container.classList.add('show');
       }
+    }, 1000);
+
+    const token = localStorage.getItem('token');
+    if (token) {
+      const UpdateUserRequest = { token: token };
+      this.userService.profileUserService(UpdateUserRequest).subscribe((user: any) => {
+        const mappingUserType: Record<number, string> = {
+          1: "ADMIN",
+          2: "CLIENT",
+        };
+        const user_type = mappingUserType[user.user['user_type_id']];
+        if (user_type == 'ADMIN'){
+          this.adminAccess = true;
+        }
+        if (user_type == 'CLIENT'){
+          this.clientAccess = true;
+        }
+      });
     }
+  }
 
   getBooks(): void {
     this.booksService.getAllBooksService().subscribe(
@@ -73,6 +74,7 @@ import { GetAllBooksResponse } from '../utils/response/book.response';
     this.currentPage[category] = event;
   }
 
-  
-
+  trackByFn(index: number, item: GetAllBooksResponse) {
+    return item.id;
+  }
 }
