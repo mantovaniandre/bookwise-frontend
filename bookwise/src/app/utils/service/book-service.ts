@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { CreateBookResponse, GetAllBooksResponse, GetBookByIdResponse, UpdateBookByIdResponse } from '../response/book.response';
-import { CreateBookRequest, GetBookByIdRequest, UpdateBooksByIdRequest } from '../request/book.request';
+import { CreateBookResponse, DeleteBookByIdResponse, GetAllBooksResponse, GetBookByIdResponse, UpdateBookByIdResponse } from '../response/book.response';
+import { CreateBookRequest, DeleteBookByIdRequest, GetBookByIdRequest, UpdateBooksByIdRequest } from '../request/book.request';
 
 
 @Injectable({
@@ -16,6 +16,11 @@ export class BooksService {
     let url = 'http://localhost:5000/getAllBooks';
     let getAllBooksResponse = this.http.get<GetAllBooksResponse>(url);
     return getAllBooksResponse
+  }
+
+  updateBookList(): Observable<any> {
+    const url = 'http://localhost:5000/getAllBooks';
+    return this.http.get<GetAllBooksResponse>(url);
   }
 
   getBookByIdService(id: GetBookByIdRequest): Observable<any> {
@@ -42,6 +47,16 @@ export class BooksService {
       .set('Authorization', `Bearer ${localStorage.getItem('token')}`);
       let updateBookByIdResponse = this.http.put<UpdateBookByIdResponse>(url, book, { headers });
     return updateBookByIdResponse
+  }
+
+  deleteBookByIdService(id: DeleteBookByIdRequest): Observable<any> {
+    let url = `http://localhost:5000/deleteBookById/${id.id}`;
+    const headers = new HttpHeaders()
+      .set('Content-Type', 'application/json')
+      .set('Accept', 'application/json')
+      .set('Authorization', `Bearer ${localStorage.getItem('token')}`);
+      let deleteBookByIdService = this.http.delete<DeleteBookByIdResponse>(url, { headers });
+    return deleteBookByIdService
   }
   
 }
