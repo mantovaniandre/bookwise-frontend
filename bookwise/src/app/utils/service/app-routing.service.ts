@@ -17,7 +17,7 @@ import { DashboardComponent } from 'src/app/dashboard/dashboard.component';
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
-  { path: 'createrUser', component: CreateUserComponent },
+  { path: 'createUser', component: CreateUserComponent },
   { path: 'home', component: HomeComponent, canActivate: [AuthGuard]},
   { path: 'myAccount', component: MyAccountComponent, canActivate: [AuthGuard] },
   { path: 'searchBook', component: SearchBookComponent, canActivate: [AuthGuard] },

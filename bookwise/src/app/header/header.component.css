@@ -1,28 +1,28 @@
 .icon-custom {
-    font-size: 1.3rem;
-    padding-right: 15px;
-    color: #3f51b5;
+  font-size: 1.3rem;
+  padding-right: 15px;
+  color: #3f51b5;
 }
 
 .nav-item input[type="search"],
 .nav-item button[type="submit"] {
-  border-color: #3f51b5;
+border-color: #3f51b5;
 }
 
 .nav-item input[type="search"]::placeholder {
-  color: #3f51b5;
+color: #3f51b5;
 }
 
 .btn:hover{
-    background-color: #3f51b5 !important;
-    color: white !important;
+  background-color: #3f51b5 !important;
+  color: white !important;
 }
 
 a:hover {
-  cursor: pointer;
+cursor: pointer;
 }
 
 a:active{
-  background-color: rgb(229, 231, 229);
-  border-color: green;
+background-color: rgb(229, 231, 229);
+border-color: green;
 }

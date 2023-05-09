@@ -1,40 +1,39 @@
 <body>
-    <div class="spinner-container" *ngIf="isLoading">
-      <div class="spinner"></div>
-    </div>
-    <div class="home-content" *ngIf="!isLoading">
-    <app-header></app-header>
-    <div class="container my-5">
-      <div class="card mx-auto" style="width: 400px;">
-        <div class="card-header text-center" style="font-family: 'Rajdhani', sans-serif;">
-            <h3 class="card-title">LOGIN</h3>
-        </div>
-        <form class="card-body" [formGroup]="loginForm" (ngSubmit)="login()"> 
-          <div class="form-group" style="font-family: 'Rajdhani', sans-serif; padding: 10px;">
-            <label for="email">Email</label>
-            <input type="email" class="form-control" id="email" formControlName="email">
-            <small *ngIf="loginForm.get('email')?.invalid && (loginForm.get('email')?.dirty || loginForm.get('email')?.touched)" class="form-text text-danger">
-                <small *ngIf="loginForm.get('email')?.hasError('required')">Email é obrigatório</small>
-                <small *ngIf="loginForm.get('email')?.hasError('email')">Email inválido</small>
-            </small>
-          </div>
-          <div class="form-group" style="font-family: 'Rajdhani', sans-serif; padding: 10px;">
-            <label for="password">Senha</label>
-            <input type="password" class="form-control" id="password" formControlName="password">
-            <small *ngIf="loginForm.get('password')?.invalid && (loginForm.get('password')?.dirty || loginForm.get('password')?.touched)" class="form-text text-danger">
-                <small *ngIf="loginForm.get('password')?.hasError('required')">Senha é obrigatório</small>
-              </small>
-          </div>
-          <div class="d-grid gap-2 text-center" style="font-family: 'Rajdhani', sans-serif; padding: 10px;">
-            <button type="submit" class="btn btn-primary" style="color: white; background-color: #3f51b5" [disabled]="loginForm.invalid">Login</button>
-            <span style="color: black;">Don't have an account? <a href="/register" style="color: #0077CC;">Create an account</a></span>
-          </div>
-        </form>
-      </div>
-    </div>
-    <app-footer></app-footer>
+  <div class="spinner-container" *ngIf="isLoading">
+    <div class="spinner"></div>
   </div>
+  <div class="home-content" *ngIf="!isLoading">
+  <app-header></app-header>
+  <div class="container my-5">
+    <div class="card mx-auto" style="width: 400px;">
+      <div class="card-header text-center" style="font-family: 'Rajdhani', sans-serif;">
+          <h3 class="card-title">LOGIN</h3>
+      </div>
+      <form class="card-body" [formGroup]="loginForm" (ngSubmit)="login()"> 
+        <div class="form-group" style="font-family: 'Rajdhani', sans-serif; padding: 10px;">
+          <label for="email">Email</label>
+          <input type="email" class="form-control" id="email" formControlName="email">
+          <small *ngIf="loginForm.get('email')?.invalid && (loginForm.get('email')?.dirty || loginForm.get('email')?.touched)" class="form-text text-danger">
+              <small *ngIf="loginForm.get('email')?.hasError('required')">Email é obrigatório</small>
+              <small *ngIf="loginForm.get('email')?.hasError('email')">Email inválido</small>
+          </small>
+        </div>
+        <div class="form-group" style="font-family: 'Rajdhani', sans-serif; padding: 10px;">
+          <label for="password">Senha</label>
+          <input type="password" class="form-control" id="password" formControlName="password">
+          <small *ngIf="loginForm.get('password')?.invalid && (loginForm.get('password')?.dirty || loginForm.get('password')?.touched)" class="form-text text-danger">
+              <small *ngIf="loginForm.get('password')?.hasError('required')">Senha é obrigatório</small>
+            </small>
+        </div>
+        <div class="d-grid gap-2 text-center" style="font-family: 'Rajdhani', sans-serif; padding: 10px;">
+          <button type="submit" class="btn btn-primary" style="color: white; background-color: #3f51b5" [disabled]="loginForm.invalid">Login</button>
+          <span style="color: black;">Don't have an account? <a href="/createUser" style="color: #0077CC;">Create an account</a></span>
+        </div>
+      </form>
+    </div>
+  </div>
+  <app-footer></app-footer>
+</div>
 </body>
-
 
 

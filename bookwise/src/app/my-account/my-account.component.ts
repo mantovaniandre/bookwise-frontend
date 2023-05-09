@@ -17,6 +17,7 @@ import { AuthService } from '../utils/service/auth.service';
 import { formatOnlyNumber } from '../utils/format/format-only-number';
 import { UserService } from '../utils/service/user.service';
 import { UpdateUserRequest } from '../utils/request/user.request';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-my-account',
@@ -31,9 +32,9 @@ export class MyAccountComponent {
               private searchCepService: SearchZipCodeService,
               private searchCreditCardService: SearchCreditCardService,
               private userService: UserService,
-              private authService: AuthService) {}
+              private authService: AuthService,
+              private router: Router) {}
 
-  
   ngOnInit() {
     setTimeout(() => {
       this.isLoading = false;
@@ -244,5 +245,32 @@ updateUser(){
         }
       });
     }
+  }
+
+  deleteUser(){
+    this.userService.deleteUserService().subscribe({
+      next: (response: any) => {
+        Swal.fire({
+          icon: 'success',
+          title: 'Delete Success!',
+          text: response.message,
+          timer: 3000
+        }).then(() => {
+          this.authService.logoutService();
+          this.router.navigate(['/login']).then(() => {
+            window.location.reload();
+          });
+        });
+    },
+      error: (error: HttpErrorResponse) => {
+        Swal.fire({
+          icon: 'error',
+          title: 'Attention',
+          text: error.error.message,
+        }).then(() => {
+          location.reload();
+        })
+      }
+    });
   }
 }

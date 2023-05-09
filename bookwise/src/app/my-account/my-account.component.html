@@ -1,247 +1,262 @@
-<body>
-    <div class="spinner-container" *ngIf="isLoading">
-        <div class="spinner"></div>
-    </div>
-    <div class="home-content" *ngIf="!isLoading">
-        <app-header></app-header>
-        <div class="container" id="form-steps" style="margin-top: 100px; margin-bottom: 100px;">
-            <div class="card" style="padding: 30px;" style="font-family: 'Rajdhani', sans-serif; padding: 50px;">
-                <form [formGroup]="userForm" (ngupdate)="updateUser()">
-                    <div class="card">
-                        <div class="card-header">Personal Data</div>
-                        <div class="card-body">
-                            <div class="form-group">
-                                <div class="row mb-3" style="font-family: 'Rajdhani', sans-serif; padding: 10px;">
-                                    <div class="col-12 col-md-4">
-                                        <label for="first_name" class="form-label">First Name</label>
-                                        <input type="text" class="form-control" formControlName="first_name" (input)="formatLettersOnly($event)" maxlength="25">
-                                        <div *ngIf="userForm.get('first_name')?.invalid && (userForm.get('first_name')?.dirty || userForm.get('first_name')?.touched)" class="form-text text-danger">
-                                            <small *ngIf="userForm.get('first_name')?.hasError('required')">First Name is required</small>
-                                        </div>
-                                    </div>
-                                    <div class="col-12 col-md-4">
-                                        <label for="last_name" class="form-label">Last Name</label>
-                                        <input type="text" class="form-control" formControlName="last_name" (input)="formatLettersOnly($event)" maxlength="20">
-                                        <div *ngIf="userForm.get('last_name')?.invalid && (userForm.get('last_name')?.dirty || userForm.get('last_name')?.touched)" class="form-text text-danger">
-                                            <small *ngIf="userForm.get('last_name')?.hasError('required')">Last Name is required</small>
-                                        </div>
-                                    </div>
-                                    <div class="col-12 col-md-4">
-                                        <label style="font-family: 'Rajdhani', sans-serif;" for="email" class="form-label">Email</label>
-                                        <input placeholder="youremail@dominio.com" type="text" class="form-control" formControlName="email" maxlength="50">
-                                        <div *ngIf="userForm.get('email')?.invalid && (userForm.get('email')?.dirty || userForm.get('email')?.touched)" class="form-text text-danger">
-                                            <small *ngIf="userForm.get('email')?.hasError('required')">Email is required</small>
-                                            <small *ngIf="userForm.get('email')?.hasError('email')">Email is invalid</small>
-                                        </div>
-                                    </div>
+<app-header></app-header>
+<div class="container" id="form-steps" style="margin-top: 100px; margin-bottom: 100px;">
+    <div class="card" style="padding: 30px;" style="font-family: 'Rajdhani', sans-serif; padding: 50px;">
+        <form [formGroup]="userForm" (ngupdate)="updateUser()">
+            <div class="card">
+                <div class="card-header">Personal Data</div>
+                <div class="card-body">
+                    <div class="form-group">
+                        <div class="row mb-3" style="font-family: 'Rajdhani', sans-serif; padding: 10px;">
+                            <div class="col-12 col-md-4">
+                                <label for="first_name" class="form-label">First Name</label>
+                                <input type="text" class="form-control" formControlName="first_name" (input)="formatLettersOnly($event)" maxlength="25">
+                                <div *ngIf="userForm.get('first_name')?.invalid && (userForm.get('first_name')?.dirty || userForm.get('first_name')?.touched)" class="form-text text-danger">
+                                    <small *ngIf="userForm.get('first_name')?.hasError('required')">First Name is required</small>
                                 </div>
-                                <div class="row mb-3" style="font-family: 'Rajdhani', sans-serif; padding: 10px;">
-                                    <div class="col-12 col-md-4">
-                                        <label for="password" class="form-label">Password</label>
-                                        <input type="password" class="form-control" formControlName="password" maxlength="255">
-                                        <div *ngIf="userForm.get('password')?.invalid && (userForm.get('password')?.dirty || userForm.get('password')?.touched)" class="form-text text-danger">
-                                            <small *ngIf="userForm.get('password')?.hasError('required')">Password is required</small>
-                                        </div>
-                                    </div>
-                                    <div class="col-12 col-md-4">
-                                        <label for="cpf" class="form-label">CPF</label>
-                                        <input placeholder="000.000.000-00" type="text" class="form-control" formControlName="cpf" (input)="formatCPF($event)" maxlength="14">
-                                        <div *ngIf="userForm.get('cpf')?.invalid && (userForm.get('cpf')?.dirty || userForm.get('cpf')?.touched)" class="form-text text-danger">
-                                            <small *ngIf="userForm.get('cpf')?.hasError('required')">CPF is required</small>
-                                        </div>
-                                    </div>
-                                    <div class="col-12 col-md-4">
-                                        <label for="phone" class="form-label">Phone</label>
-                                        <input placeholder="(00) 00000-0000" type="phone" class="form-control" formControlName="phone" (input)="formatPhoneNumber($event)" maxlength="15">
-                                        <div *ngIf="userForm.get('phone')?.invalid && (userForm.get('phone')?.dirty || userForm.get('phone')?.touched)" class="form-text text-danger">
-                                            <small *ngIf="userForm.get('phone')?.hasError('required')">Phone is required</small>
-                                        </div>
-                                    </div> 
+                            </div>
+                            <div class="col-12 col-md-4">
+                                <label for="last_name" class="form-label">Last Name</label>
+                                <input type="text" class="form-control" formControlName="last_name" (input)="formatLettersOnly($event)" maxlength="20">
+                                <div *ngIf="userForm.get('last_name')?.invalid && (userForm.get('last_name')?.dirty || userForm.get('last_name')?.touched)" class="form-text text-danger">
+                                    <small *ngIf="userForm.get('last_name')?.hasError('required')">Last Name is required</small>
                                 </div>
-                                <div class="row mb-3" style="font-family: 'Rajdhani', sans-serif; padding: 10px;">
-                                    <div class="col-12 col-md-4" >
-                                        <label for="birthday" class="form-label">Birthday</label>
-                                        <input placeholder="00/00/0000" type="text" class="form-control" id="birthday" name="birthday" style="font-family: 'Rajdhani', sans-serif;" formControlName="birthday"  (input)="formatDateOfBirth($event)"  maxlength="10">
-                                        <div *ngIf="userForm.get('birthday')?.invalid && (userForm.get('birthday')?.dirty || userForm.get('birthday')?.touched)" class="form-text text-danger">
-                                            <small *ngIf="userForm.get('birthday')?.hasError('required')">Birthday is required</small>
-                                        </div>
-                                    </div>
-                                    <div class="col-12 col-md-4" style="padding-top: 9px;">
-                                        <label for="user_type">User Type</label>
-                                        <select class="form-select" name="user_type" formControlName="user_type"  maxlength="10">
-                                            <option value=""></option>
-                                            <option value="ADMIN">Admin</option>
-                                            <option value="CLIENT">Client</option>
-                                        </select>
-                                        <div *ngIf="userForm.get('user_type')?.invalid && (userForm.get('user_type')?.dirty || userForm.get('user_type')?.touched)" class="form-text text-danger" >
-                                            <small *ngIf="userForm.get('user_type')?.hasError('required')">User Type is required</small>
-                                        </div>
-                                    </div>
-                                    <div class="col-12 col-md-4" style="padding-top: 9px;">
-                                        <label for="gender">Gender</label>
-                                        <select class="form-select" id="gender" name="gender" formControlName="gender"  maxlength="10">
-                                            <option value=""></option>
-                                            <option value="MASCULINE">Masculine</option>
-                                            <option value="FEMININE">Feminine</option>
-                                        </select>
-                                        <div *ngIf="userForm.get('gender')?.invalid && (userForm.get('gender')?.dirty || userForm.get('gender')?.touched)" class="form-text text-danger">
-                                            <small *ngIf="userForm.get('gender')?.hasError('required')">Gender is required</small>
-                                        </div>
-                                    </div>   
+                            </div>
+                            <div class="col-12 col-md-4">
+                                <label style="font-family: 'Rajdhani', sans-serif;" for="email" class="form-label">Email</label>
+                                <input placeholder="youremail@dominio.com" type="text" class="form-control" formControlName="email" maxlength="50">
+                                <div *ngIf="userForm.get('email')?.invalid && (userForm.get('email')?.dirty || userForm.get('email')?.touched)" class="form-text text-danger">
+                                    <small *ngIf="userForm.get('email')?.hasError('required')">Email is required</small>
+                                    <small *ngIf="userForm.get('email')?.hasError('email')">Email is invalid</small>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="card" style="margin-top: 50px;" >
-                        <div class="card-header" style="font-family: 'Rajdhani', sans-serif;">Address</div>
-                        <div class="card-body">
-                            <div class="form-group" style="font-family: 'Rajdhani', sans-serif;">
-                                <form [formGroup]="userForm" (ngupdate)="updateUser()">
-                                    <div class="row mb-3" style="padding: 10px;">
-                                        <div class="col-12 col-md-4">
-                                            <label for="zip_code" class="form-label">Zip Code</label>
-                                            <input placeholder="00000-000" type="text" class="form-control" formControlName="zip_code" (blur)="formatAndSearchZipCode($event)"  maxlength="09">
-                                            <div *ngIf="userForm.get('zip_code')?.invalid && (userForm.get('zip_code')?.dirty || userForm.get('zip_code')?.touched)" class="form-text text-danger">
-                                                <small *ngIf="userForm.get('zip_code')?.hasError('required')">Zip Code is required</small>
-                                            </div>
-                                        </div>
-                                        <div class="col-12 col-md-4">
-                                            <label for="street" class="form-label">Street</label>
-                                            <input type="text" class="form-control" formControlName="street" maxlength="100"  (input)="formatLettersOnly($event)">
-                                            <div *ngIf="userForm.get('street')?.invalid && (userForm.get('street')?.dirty || userForm.get('street')?.touched)" class="form-text text-danger">
-                                                <small *ngIf="userForm.get('street')?.hasError('required')">Street is required</small>
-                                            </div>
-                                        </div>
-                                        <div class="col-12 col-md-4">
-                                            <label for="number" class="form-label">Number</label>
-                                            <input type="text" class="form-control" formControlName="number" maxlength="06"  (input)="formatOnlyNumber($event)">
-                                            <div *ngIf="userForm.get('number')?.invalid && (userForm.get('number')?.dirty || userForm.get('number')?.touched)" class="form-text text-danger">
-                                                <small *ngIf="userForm.get('number')?.hasError('required')">Number is required</small>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row mb-3" style="font-family: 'Rajdhani', sans-serif; padding: 10px;">
-                                        <div class="col-12 col-md-4">
-                                            <label for="complement" class="form-label">Complement</label>
-                                            <input type="text" class="form-control" formControlName="complement" maxlength="50"  maxlength="50">
-                                            <div *ngIf="userForm.get('complement')?.invalid && (userForm.get('complement')?.dirty || userForm.get('complement')?.touched)" class="form-text text-danger">
-                                                <small *ngIf="userForm.get('complement')?.hasError('required')">Complement is required</small>
-                                            </div>
-                                        </div>
-                                        <div class="col-12 col-md-4">
-                                            <label for="neighborhood" class="form-label">Neighborhood</label>
-                                            <input type="text" class="form-control" formControlName="neighborhood" maxlength="50"  (input)="formatLettersOnly($event)">
-                                            <div *ngIf="userForm.get('neighborhood')?.invalid && (userForm.get('neighborhood')?.dirty || userForm.get('neighborhood')?.touched)" class="form-text text-danger">
-                                                <small *ngIf="userForm.get('neighborhood')?.hasError('required')">Neighborhood is required</small>
-                                            </div>
-                                        </div>
-                                        <div class="col-12 col-md-4">
-                                            <label for="city" class="form-label">City</label>
-                                            <input type="text" class="form-control" formControlName="city" maxlength="50"  (input)="formatLettersOnly($event)">
-                                            <div *ngIf="userForm.get('city')?.invalid && (userForm.get('city')?.dirty || userForm.get('city')?.touched)" class="form-text text-danger">
-                                                <small *ngIf="userForm.get('city')?.hasError('required')">City is required</small>
-                                            </div>
-                                        </div> 
-                                    </div>
-                                    <div class="row mb-3" style="font-family: 'Rajdhani', sans-serif; padding: 10px;">
-                                        <div class="col-12 col-md-4">
-                                            <label for="state" class="form-label">State</label>
-                                            <input type="text" class="form-control" formControlName="state" maxlength="02"  (input)="formatLettersOnly($event)">
-                                            <div *ngIf="userForm.get('state')?.invalid && (userForm.get('state')?.dirty || userForm.get('state')?.touched)" class="form-text text-danger">
-                                                <small *ngIf="userForm.get('state')?.hasError('required')">State is required</small>
-                                            </div>
-                                        </div>
-                                        <div class="col-12 col-md-4">
-                                            <label for="country" class="form-label">Country</label>
-                                            <input type="text" class="form-control" formControlName="country" maxlength="06"  (input)="formatLettersOnly($event)"> 
-                                            <div *ngIf="userForm.get('country')?.invalid && (userForm.get('country')?.dirty || userForm.get('country')?.touched)" class="form-text text-danger">
-                                                <small *ngIf="userForm.get('country')?.hasError('required')">Country is required</small>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </form>
+                        <div class="row mb-3" style="font-family: 'Rajdhani', sans-serif; padding: 10px;">
+                            <div class="col-12 col-md-4">
+                                <label for="password" class="form-label">Password</label>
+                                <input type="password" class="form-control" formControlName="password" maxlength="255">
+                                <div *ngIf="userForm.get('password')?.invalid && (userForm.get('password')?.dirty || userForm.get('password')?.touched)" class="form-text text-danger">
+                                    <small *ngIf="userForm.get('password')?.hasError('required')">Password is required</small>
+                                </div>
                             </div>
-                        </div>
-                    </div>
-                    <div class="card" style="margin-top: 50px;">
-                        <div class="card-header" style="font-family: 'Rajdhani', sans-serif;">Payment</div>
-                        <div class="card-body">
-                            <div class="form-group">
-                                <form [formGroup]="userForm" (ngupdate)="updateUser()">
-                                    <div class="row mb-3" style="font-family: 'Rajdhani', sans-serif; padding: 10px;">
-                                        <div class="col-12 col-md-4">
-                                            <label for="card_number" class="form-label">Card Number</label>
-                                            <input placeholder="0000 0000 0000 0000"type="text" class="form-control" (blur)="formatAndSearchCreditCardNumber($event)" formControlName="card_number" maxlength="19">
-                                            <div *ngIf="userForm.get('card_number')?.invalid && (userForm.get('card_number')?.dirty || userForm.get('card_number')?.touched)" class="form-text text-danger">
-                                                <small *ngIf="userForm.get('card_number')?.hasError('required')">Card Number is required</small>
-                                            </div>
-                                        </div>
-                                        <div class="col-12 col-md-4">
-                                            <label for="type_card" class="form-label">Type Card</label>
-                                            <input type="text" class="form-control"  (input)="formatLettersOnly($event)" formControlName="type_card" maxlength="10">
-                                            <div *ngIf="userForm.get('type_card')?.invalid && (userForm.get('type_card')?.dirty || userForm.get('type_card')?.touched)" class="form-text text-danger">
-                                                <small *ngIf="userForm.get('type_card')?.hasError('required')">Type Card is required</small>
-                                            </div>
-                                        </div>
-                                        <div class="col-12 col-md-4">
-                                            <label for="flag" class="form-label">Flag</label>
-                                            <input type="text" class="form-control"  (input)="formatLettersOnly($event)" formControlName="flag" maxlength="20">
-                                            <div *ngIf="userForm.get('flag')?.invalid && (userForm.get('flag')?.dirty || userForm.get('flag')?.touched)" class="form-text text-danger">
-                                                <small *ngIf="userForm.get('flag')?.hasError('required')">Flag is required</small>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row mb-3" style="font-family: 'Rajdhani', sans-serif; padding: 10px;">
-                                        <div class="col-12 col-md-4">
-                                            <label for="bank" class="form-label">Bank</label>
-                                            <input type="text" class="form-control"  (input)="formatLettersOnly($event)" formControlName="bank" maxlength="50">
-                                            <div *ngIf="userForm.get('bank')?.invalid && (userForm.get('bank')?.dirty || userForm.get('bank')?.touched)" class="form-text text-danger">
-                                                <small *ngIf="userForm.get('bank')?.hasError('required')">Bank is required</small>
-                                            </div>
-                                        </div>
-                                        <div class="col-12 col-md-4">
-                                            <label for="country" class="form-label">Country</label>
-                                            <input type="text" class="form-control" (input)="formatLettersOnly($event)" formControlName="country_bank" maxlength="20">
-                                            <div *ngIf="userForm.get('country_bank')?.invalid && (userForm.get('country_bank')?.dirty || userForm.get('country_bank')?.touched)" class="form-text text-danger">
-                                                <small *ngIf="userForm.get('country_bank')?.hasError('required')">Country is required</small>
-                                            </div>
-                                        </div>
-                                        <div class="col-12 col-md-4">
-                                            <label for="card_name" class="form-label">Card Name</label>
-                                            <input type="text" class="form-control" (input)="formatLettersOnly($event)" formControlName="card_name" maxlength="30">
-                                            <div *ngIf="userForm.get('card_name')?.invalid && (userForm.get('card_name')?.dirty || userForm.get('card_name')?.touched)" class="form-text text-danger">
-                                                <small *ngIf="userForm.get('card_name')?.hasError('required')">Card Name is required</small>
-                                            </div>
-                                        </div> 
-                                    </div>
-                                    <div class="row mb-3" style="font-family: 'Rajdhani', sans-serif; padding: 10px;">
-                                        <div class="col-12 col-md-4">
-                                            <label for="expiration" class="form-label">Expiration</label>
-                                            <input type="text" class="form-control"  (input)="formatExpiration($event)" formControlName="expiration" maxlength="07">
-                                            <div *ngIf="userForm.get('expiration')?.invalid && (userForm.get('expiration')?.dirty || userForm.get('expiration')?.touched)" class="form-text text-danger">
-                                                <small *ngIf="userForm.get('expiration')?.hasError('required')">Expiration is required</small>
-                                            </div>
-                                        </div>
-                                        <div class="col-12 col-md-4">
-                                            <label for="cvv" class="form-label">CVV</label>
-                                            <input type="text" class="form-control"  (input)="formatCVV($event)" formControlName="cvv" maxlength="03">
-                                            <div *ngIf="userForm.get('cvv')?.invalid && (userForm.get('cvv')?.dirty || userForm.get('cvv')?.touched)" class="form-text text-danger"  >
-                                                <small *ngIf="userForm.get('cvv')?.hasError('required')">CVV is required</small>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </form>
+                            <div class="col-12 col-md-4">
+                                <label for="cpf" class="form-label">CPF</label>
+                                <input placeholder="000.000.000-00" type="text" class="form-control" formControlName="cpf" (input)="formatCPF($event)" maxlength="14">
+                                <div *ngIf="userForm.get('cpf')?.invalid && (userForm.get('cpf')?.dirty || userForm.get('cpf')?.touched)" class="form-text text-danger">
+                                    <small *ngIf="userForm.get('cpf')?.hasError('required')">CPF is required</small>
+                                </div>
                             </div>
+                            <div class="col-12 col-md-4">
+                                <label for="phone" class="form-label">Phone</label>
+                                <input placeholder="(00) 00000-0000" type="phone" class="form-control" formControlName="phone" (input)="formatPhoneNumber($event)" maxlength="15">
+                                <div *ngIf="userForm.get('phone')?.invalid && (userForm.get('phone')?.dirty || userForm.get('phone')?.touched)" class="form-text text-danger">
+                                    <small *ngIf="userForm.get('phone')?.hasError('required')">Phone is required</small>
+                                </div>
+                            </div> 
                         </div>
-                    </div>
-                </form>
-                <div class="row justify-content-end" style="padding: 20px; font-family: 'Rajdhani', sans-serif;">
-                    <div class="col-auto">
-                        <button class="btn" [disabled]="!userForm.valid" style="color: #007bff; font-family: 'Rajdhani', sans-serif; border: 1px solid #007bff;" (click)="updateUser()">change</button>
+                        <div class="row mb-3" style="font-family: 'Rajdhani', sans-serif; padding: 10px;">
+                            <div class="col-12 col-md-4" >
+                                <label for="birthday" class="form-label">Birthday</label>
+                                <input placeholder="00/00/0000" type="text" class="form-control" id="birthday" name="birthday" style="font-family: 'Rajdhani', sans-serif;" formControlName="birthday"  (input)="formatDateOfBirth($event)"  maxlength="10">
+                                <div *ngIf="userForm.get('birthday')?.invalid && (userForm.get('birthday')?.dirty || userForm.get('birthday')?.touched)" class="form-text text-danger">
+                                    <small *ngIf="userForm.get('birthday')?.hasError('required')">Birthday is required</small>
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-4" style="padding-top: 9px;">
+                                <label for="user_type">User Type</label>
+                                <select class="form-select" name="user_type" formControlName="user_type"  maxlength="10">
+                                    <option value=""></option>
+                                    <option value="ADMIN">Admin</option>
+                                    <option value="CLIENT">Client</option>
+                                </select>
+                                <div *ngIf="userForm.get('user_type')?.invalid && (userForm.get('user_type')?.dirty || userForm.get('user_type')?.touched)" class="form-text text-danger" >
+                                    <small *ngIf="userForm.get('user_type')?.hasError('required')">User Type is required</small>
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-4" style="padding-top: 9px;">
+                                <label for="gender">Gender</label>
+                                <select class="form-select" id="gender" name="gender" formControlName="gender"  maxlength="10">
+                                    <option value=""></option>
+                                    <option value="MASCULINE">Masculine</option>
+                                    <option value="FEMININE">Feminine</option>
+                                </select>
+                                <div *ngIf="userForm.get('gender')?.invalid && (userForm.get('gender')?.dirty || userForm.get('gender')?.touched)" class="form-text text-danger">
+                                    <small *ngIf="userForm.get('gender')?.hasError('required')">Gender is required</small>
+                                </div>
+                            </div>   
+                        </div>
                     </div>
                 </div>
             </div>
+            <div class="card" style="margin-top: 50px;" >
+                <div class="card-header" style="font-family: 'Rajdhani', sans-serif;">Address</div>
+                <div class="card-body">
+                    <div class="form-group" style="font-family: 'Rajdhani', sans-serif;">
+                        <form [formGroup]="userForm" (ngupdate)="updateUser()">
+                            <div class="row mb-3" style="padding: 10px;">
+                                <div class="col-12 col-md-4">
+                                    <label for="zip_code" class="form-label">Zip Code</label>
+                                    <input placeholder="00000-000" type="text" class="form-control" formControlName="zip_code" (blur)="formatAndSearchZipCode($event)"  maxlength="09">
+                                    <div *ngIf="userForm.get('zip_code')?.invalid && (userForm.get('zip_code')?.dirty || userForm.get('zip_code')?.touched)" class="form-text text-danger">
+                                        <small *ngIf="userForm.get('zip_code')?.hasError('required')">Zip Code is required</small>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-4">
+                                    <label for="street" class="form-label">Street</label>
+                                    <input type="text" class="form-control" formControlName="street" maxlength="100"  (input)="formatLettersOnly($event)">
+                                    <div *ngIf="userForm.get('street')?.invalid && (userForm.get('street')?.dirty || userForm.get('street')?.touched)" class="form-text text-danger">
+                                        <small *ngIf="userForm.get('street')?.hasError('required')">Street is required</small>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-4">
+                                    <label for="number" class="form-label">Number</label>
+                                    <input type="text" class="form-control" formControlName="number" maxlength="06"  (input)="formatOnlyNumber($event)">
+                                    <div *ngIf="userForm.get('number')?.invalid && (userForm.get('number')?.dirty || userForm.get('number')?.touched)" class="form-text text-danger">
+                                        <small *ngIf="userForm.get('number')?.hasError('required')">Number is required</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mb-3" style="font-family: 'Rajdhani', sans-serif; padding: 10px;">
+                                <div class="col-12 col-md-4">
+                                    <label for="complement" class="form-label">Complement</label>
+                                    <input type="text" class="form-control" formControlName="complement" maxlength="50"  maxlength="50">
+                                    <div *ngIf="userForm.get('complement')?.invalid && (userForm.get('complement')?.dirty || userForm.get('complement')?.touched)" class="form-text text-danger">
+                                        <small *ngIf="userForm.get('complement')?.hasError('required')">Complement is required</small>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-4">
+                                    <label for="neighborhood" class="form-label">Neighborhood</label>
+                                    <input type="text" class="form-control" formControlName="neighborhood" maxlength="50"  (input)="formatLettersOnly($event)">
+                                    <div *ngIf="userForm.get('neighborhood')?.invalid && (userForm.get('neighborhood')?.dirty || userForm.get('neighborhood')?.touched)" class="form-text text-danger">
+                                        <small *ngIf="userForm.get('neighborhood')?.hasError('required')">Neighborhood is required</small>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-4">
+                                    <label for="city" class="form-label">City</label>
+                                    <input type="text" class="form-control" formControlName="city" maxlength="50"  (input)="formatLettersOnly($event)">
+                                    <div *ngIf="userForm.get('city')?.invalid && (userForm.get('city')?.dirty || userForm.get('city')?.touched)" class="form-text text-danger">
+                                        <small *ngIf="userForm.get('city')?.hasError('required')">City is required</small>
+                                    </div>
+                                </div> 
+                            </div>
+                            <div class="row mb-3" style="font-family: 'Rajdhani', sans-serif; padding: 10px;">
+                                <div class="col-12 col-md-4">
+                                    <label for="state" class="form-label">State</label>
+                                    <input type="text" class="form-control" formControlName="state" maxlength="02"  (input)="formatLettersOnly($event)">
+                                    <div *ngIf="userForm.get('state')?.invalid && (userForm.get('state')?.dirty || userForm.get('state')?.touched)" class="form-text text-danger">
+                                        <small *ngIf="userForm.get('state')?.hasError('required')">State is required</small>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-4">
+                                    <label for="country" class="form-label">Country</label>
+                                    <input type="text" class="form-control" formControlName="country" maxlength="06"  (input)="formatLettersOnly($event)"> 
+                                    <div *ngIf="userForm.get('country')?.invalid && (userForm.get('country')?.dirty || userForm.get('country')?.touched)" class="form-text text-danger">
+                                        <small *ngIf="userForm.get('country')?.hasError('required')">Country is required</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="card" style="margin-top: 50px;">
+                <div class="card-header" style="font-family: 'Rajdhani', sans-serif;">Payment</div>
+                <div class="card-body">
+                    <div class="form-group">
+                        <form [formGroup]="userForm" (ngupdate)="updateUser()">
+                            <div class="row mb-3" style="font-family: 'Rajdhani', sans-serif; padding: 10px;">
+                                <div class="col-12 col-md-4">
+                                    <label for="card_number" class="form-label">Card Number</label>
+                                    <input placeholder="0000 0000 0000 0000"type="text" class="form-control" (blur)="formatAndSearchCreditCardNumber($event)" formControlName="card_number" maxlength="19">
+                                    <div *ngIf="userForm.get('card_number')?.invalid && (userForm.get('card_number')?.dirty || userForm.get('card_number')?.touched)" class="form-text text-danger">
+                                        <small *ngIf="userForm.get('card_number')?.hasError('required')">Card Number is required</small>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-4">
+                                    <label for="type_card" class="form-label">Type Card</label>
+                                    <input type="text" class="form-control"  (input)="formatLettersOnly($event)" formControlName="type_card" maxlength="10">
+                                    <div *ngIf="userForm.get('type_card')?.invalid && (userForm.get('type_card')?.dirty || userForm.get('type_card')?.touched)" class="form-text text-danger">
+                                        <small *ngIf="userForm.get('type_card')?.hasError('required')">Type Card is required</small>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-4">
+                                    <label for="flag" class="form-label">Flag</label>
+                                    <input type="text" class="form-control"  (input)="formatLettersOnly($event)" formControlName="flag" maxlength="20">
+                                    <div *ngIf="userForm.get('flag')?.invalid && (userForm.get('flag')?.dirty || userForm.get('flag')?.touched)" class="form-text text-danger">
+                                        <small *ngIf="userForm.get('flag')?.hasError('required')">Flag is required</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mb-3" style="font-family: 'Rajdhani', sans-serif; padding: 10px;">
+                                <div class="col-12 col-md-4">
+                                    <label for="bank" class="form-label">Bank</label>
+                                    <input type="text" class="form-control"  (input)="formatLettersOnly($event)" formControlName="bank" maxlength="50">
+                                    <div *ngIf="userForm.get('bank')?.invalid && (userForm.get('bank')?.dirty || userForm.get('bank')?.touched)" class="form-text text-danger">
+                                        <small *ngIf="userForm.get('bank')?.hasError('required')">Bank is required</small>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-4">
+                                    <label for="country" class="form-label">Country</label>
+                                    <input type="text" class="form-control" (input)="formatLettersOnly($event)" formControlName="country_bank" maxlength="20">
+                                    <div *ngIf="userForm.get('country_bank')?.invalid && (userForm.get('country_bank')?.dirty || userForm.get('country_bank')?.touched)" class="form-text text-danger">
+                                        <small *ngIf="userForm.get('country_bank')?.hasError('required')">Country is required</small>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-4">
+                                    <label for="card_name" class="form-label">Card Name</label>
+                                    <input type="text" class="form-control" (input)="formatLettersOnly($event)" formControlName="card_name" maxlength="30">
+                                    <div *ngIf="userForm.get('card_name')?.invalid && (userForm.get('card_name')?.dirty || userForm.get('card_name')?.touched)" class="form-text text-danger">
+                                        <small *ngIf="userForm.get('card_name')?.hasError('required')">Card Name is required</small>
+                                    </div>
+                                </div> 
+                            </div>
+                            <div class="row mb-3" style="font-family: 'Rajdhani', sans-serif; padding: 10px;">
+                                <div class="col-12 col-md-4">
+                                    <label for="expiration" class="form-label">Expiration</label>
+                                    <input type="text" class="form-control"  (input)="formatExpiration($event)" formControlName="expiration" maxlength="07">
+                                    <div *ngIf="userForm.get('expiration')?.invalid && (userForm.get('expiration')?.dirty || userForm.get('expiration')?.touched)" class="form-text text-danger">
+                                        <small *ngIf="userForm.get('expiration')?.hasError('required')">Expiration is required</small>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-4">
+                                    <label for="cvv" class="form-label">CVV</label>
+                                    <input type="text" class="form-control"  (input)="formatCVV($event)" formControlName="cvv" maxlength="03">
+                                    <div *ngIf="userForm.get('cvv')?.invalid && (userForm.get('cvv')?.dirty || userForm.get('cvv')?.touched)" class="form-text text-danger"  >
+                                        <small *ngIf="userForm.get('cvv')?.hasError('required')">CVV is required</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </form>
+        <div class="row justify-content-end" style="padding: 20px; font-family: 'Rajdhani', sans-serif;">
+            <div class="col-auto">
+                <button class="btn" [disabled]="!userForm.valid" style="color: #007bff; font-family: 'Rajdhani', sans-serif; border: 1px solid #007bff;" (click)="updateUser()">change</button>
+            </div>
+            <div class="col-auto">
+                <button class="btn" [disabled]="!userForm.valid" style="color: #007bff; font-family: 'Rajdhani', sans-serif; border: 1px solid #007bff;" data-toggle="modal" data-target="#confirmModal">delete</button>
+            </div>
         </div>
-        <app-footer></app-footer>
+        <div class="modal" tabindex="-1" role="dialog" id="confirmModal" style="font-family: 'Rajdhani', sans-serif;">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Confirm Deletion</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                Are you sure you want to delete the your account?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-danger" (click)="deleteUser()">Delete</button>
+                </div>
+                </div>
+            </div>
+        </div>               
     </div>
-</body>
+</div>
+<app-footer></app-footer>
