@@ -92,9 +92,7 @@ export class UpdateBookComponent {
   }
 
   updateBook(){
-
     if(this.bookForm.valid){
-
       let title = this.bookForm.get('title')?.value || ''.toUpperCase();
       let author = this.bookForm.get('author')?.value || ''.toUpperCase();
       let year = this.bookForm.get('year')?.value || ''.toUpperCase();
@@ -157,6 +155,34 @@ export class UpdateBookComponent {
           }
         });
       }
+    }
+  }
+
+  deleteBook(){
+    const id = this.route.snapshot.paramMap.get('id');
+    if(id){
+      const idRequest: GetBookByIdRequest = { id };
+      this.booksService.deleteBookByIdService(idRequest).subscribe({
+        next: (response: any) => {
+          Swal.fire({
+            icon: 'success',
+            title: 'Delete Success!',
+            text: response.message,
+            timer: 3000
+        }).then(() => {
+          window.location.href = "/home";
+        })
+      },
+        error: (error: HttpErrorResponse) => {
+          Swal.fire({
+            icon: 'error',
+            title: 'Attention',
+            text: error.error.message,
+          }).then(() => {
+            location.reload();
+          })
+        }
+      });
     }
   }
 }

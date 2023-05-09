@@ -18,11 +18,6 @@ export class BooksService {
     return getAllBooksResponse
   }
 
-  updateBookList(): Observable<any> {
-    const url = 'http://localhost:5000/getAllBooks';
-    return this.http.get<GetAllBooksResponse>(url);
-  }
-
   getBookByIdService(id: GetBookByIdRequest): Observable<any> {
     let url = `http://localhost:5000/getBookById/${id.id}`;
     let getBookByIdResponse = this.http.get<GetBookByIdResponse>(url);

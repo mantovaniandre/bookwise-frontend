@@ -26,7 +26,7 @@ export class HeaderComponent {
 
   ngOnInit() {
     const token = localStorage.getItem('token');
-    if (token) {
+    if (token && this.router.url !== '/login') { // adicionando verificação da URL
       const UpdateUserRequest = { token: token };
       this.userService.profileUserService(UpdateUserRequest).subscribe((user: any) => {
         const mappingUserType: Record<number, string> = {
@@ -45,6 +45,7 @@ export class HeaderComponent {
     this.isLoading = false;
     this.isLoginPage = this.router.url === '/login';
   }
+
 
   myForm = this.fb.group({
     search: new FormControl('author')

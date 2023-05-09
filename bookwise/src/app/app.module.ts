@@ -20,8 +20,9 @@ import { UpdateBookComponent } from './update-book/update-book.component';
 import { CreateBookComponent } from './create-book/create-book.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { Interceptor } from './utils/interceptors/interceptors';
+// import { Interceptor } from './utils/interceptors/interceptors';
 import { NgxPaginationModule } from 'ngx-pagination';
+
 
 @NgModule({
   declarations: [
@@ -48,9 +49,9 @@ import { NgxPaginationModule } from 'ngx-pagination';
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
-    NgxPaginationModule
+    NgxPaginationModule,
   ],
-  providers: [AuthService, { provide: HTTP_INTERCEPTORS, useClass: Interceptor, multi: true }],
+  providers: [AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
