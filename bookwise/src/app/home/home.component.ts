@@ -57,7 +57,6 @@ export class HomeComponent implements OnInit {
   getBooks(): void {
     this.booksService.getAllBooksService().subscribe(
       data => {
-        console.log('data: ', data)
         this.books = data.book;
         this.categories = [...new Set(this.books.map(book => book.category))];
         this.categories.forEach(category => {

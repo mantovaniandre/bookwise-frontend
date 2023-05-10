@@ -6,6 +6,7 @@ import { formatOnlyNumber } from '../utils/format/format-only-number';
 import { CreateBookRequest } from '../utils/request/book.request';
 import Swal from 'sweetalert2';
 import { HttpErrorResponse } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-create-book',
@@ -14,9 +15,11 @@ import { HttpErrorResponse } from '@angular/common/http';
 })
 export class CreateBookComponent {
   isEditing: boolean = false;
+  isLoading = true;
 
   constructor(private fb: FormBuilder, 
-              private booksService: BooksService){}
+              private booksService: BooksService,
+              private router: Router){}
 
   bookForm = this.fb.group({
     title: ['', Validators.required],
@@ -36,6 +39,16 @@ export class CreateBookComponent {
     price: ['', Validators.required],
     category: ['', Validators.required], 
   });
+
+  ngOnInit(): void {
+    setTimeout(() => {
+      this.isLoading = false;
+      const container = document.querySelector('.container');
+      if (container) {
+        container.classList.add('show');
+      }
+    }, 1000);
+  }
 
 formatLettersOnly(event: any){
   formatLettersOnly(event)
@@ -93,7 +106,7 @@ createBook(){
           text: response.message,
           timer: 3000
       }).then(() => {
-        location.reload();
+        this.router.navigate(['/home'])
       })
     },
       error: (error: HttpErrorResponse) => {

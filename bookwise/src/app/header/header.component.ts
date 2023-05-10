@@ -15,6 +15,8 @@ export class HeaderComponent {
   clientAccess = false;
   isLoading = true;
   isLoginPage!: boolean;
+  searchOption = 'author';
+  searchTerm!: string;
 
   constructor(private fb: FormBuilder,
               private userService: UserService,
@@ -22,6 +24,7 @@ export class HeaderComponent {
               private authService: AuthService) { }
   
   search(){
+    this.router.navigate(['/searchBook'], { queryParams: { option: this.searchOption, term: this.searchTerm } });
   }
 
   ngOnInit() {

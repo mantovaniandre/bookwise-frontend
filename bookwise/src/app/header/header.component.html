@@ -36,13 +36,13 @@
                         </div>
                     </li>
                     <li class="col d-flex nav-item mb-3" role="search" *ngIf="!isLoginPage">
-                        <select class="form-control" style="width: auto; font-family: 'Rajdhani', sans-serif; color: #3f51b5; border: 1px solid #3f51b5;">
-                            <option value="author">Author</option>
-                            <option value="language">Publishing company</option>
-                            <option value="publisher">Language</option>
+                        <select class="form-control" style="width: auto; font-family: 'Rajdhani', sans-serif; color: #3f51b5; border: 1px solid #3f51b5;" [(ngModel)]="searchOption">
+                            <option value="author" >Author</option>
+                            <option value="title">Title</option>
+                            <option value="language">Language</option>
                         </select>
-                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" style="width: 150px; font-size: 15px; font-family: 'Rajdhani', sans-serif;">
-                        <button class="btn" type="submit" style="color: #3f51b5; border: 1px solid; font-family: 'Rajdhani', sans-serif;">Search</button>
+                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" style="width: 150px; font-size: 15px; font-family: 'Rajdhani', sans-serif;" [(ngModel)]="searchTerm">
+                        <button class="btn" type="submit" style="color: #3f51b5; border: 1px solid; font-family: 'Rajdhani', sans-serif;" (click)="search()">Search</button>
                     </li>
                 </ul>
             </div>
