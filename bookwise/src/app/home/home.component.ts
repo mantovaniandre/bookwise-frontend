@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { BooksService } from '../utils/service/book-service';
 import { UserService } from '../utils/service/user.service';
 import { GetAllBooksResponse } from '../utils/response/book.response';
+import { ProfileService } from '../utils/service/profile-service';
 
 @Component({
   selector: 'app-home',
@@ -19,10 +20,8 @@ export class HomeComponent implements OnInit {
   adminAccess = false;
   clientAccess = false;
 
-  constructor(
-    private booksService: BooksService,
-    private userService: UserService
-  ) {}
+  constructor(private booksService: BooksService,
+              private userService: UserService) {}
 
   ngOnInit() {
     this.getBooks();
@@ -57,7 +56,6 @@ export class HomeComponent implements OnInit {
   getBooks(): void {
     this.booksService.getAllBooksService().subscribe(
       data => {
-        console.log('data: ', data)
         this.books = data.book;
         this.categories = [...new Set(this.books.map(book => book.category))];
         this.categories.forEach(category => {

@@ -64,3 +64,8 @@ export interface DeleteBookByIdRequest {
 export interface GetBookByIdRequest {
     id:string;
 }
+
+export interface SearchBooksRequest {
+    option: string,
+    term: string
+}

@@ -2,8 +2,9 @@ import { Component } from '@angular/core';
 import { BooksService } from '../utils/service/book-service';
 import { ActivatedRoute } from '@angular/router';
 import { capitalize } from '../utils/format/format-capitalize';
-import { GetBookByIdResponse } from '../utils/response/book.response';
+import { BooksCartModel, GetBookByIdResponse } from '../utils/response/book.response';
 import { GetBookByIdRequest } from '../utils/request/book.request';
+import { CartService } from '../utils/service/cart-service';
 
 @Component({
   selector: 'app-learn-more',
@@ -19,7 +20,8 @@ export class LearnMoreComponent {
 
 
   constructor(private booksService: BooksService,
-              private route: ActivatedRoute,){}
+              private route: ActivatedRoute,
+              private cartService: CartService){}
 
   ngOnInit(): void {
 
@@ -51,6 +53,18 @@ export class LearnMoreComponent {
         this.book.category = capitalize(this.book.category);
       });
     }
+  }
+
+  addToCart(){
+    const bookToAdd: BooksCartModel = {
+      id: this.book.id,
+      url_img: this.book.url_img,
+      title: this.book.title,
+      quantity: 1,
+      price: this.book.price,
+      stock: this.book.stock
+    };
+    this.cartService.addToCart(bookToAdd)
   }
  
 }

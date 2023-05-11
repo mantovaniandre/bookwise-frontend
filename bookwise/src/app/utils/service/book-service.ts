@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { CreateBookResponse, DeleteBookByIdResponse, GetAllBooksResponse, GetBookByIdResponse, UpdateBookByIdResponse } from '../response/book.response';
-import { CreateBookRequest, DeleteBookByIdRequest, GetBookByIdRequest, UpdateBooksByIdRequest } from '../request/book.request';
+import { CreateBookResponse, DeleteBookByIdResponse, GetAllBooksResponse, GetBookByIdResponse, SearchBooksResponse, UpdateBookByIdResponse } from '../response/book.response';
+import { CreateBookRequest, DeleteBookByIdRequest, GetBookByIdRequest, SearchBooksRequest, UpdateBooksByIdRequest } from '../request/book.request';
 
 
 @Injectable({
@@ -52,6 +52,12 @@ export class BooksService {
       .set('Authorization', `Bearer ${localStorage.getItem('token')}`);
       let deleteBookByIdService = this.http.delete<DeleteBookByIdResponse>(url, { headers });
     return deleteBookByIdService
+  }
+
+  searchBooks(request: SearchBooksRequest): Observable<any> {
+    let url = `http://localhost:5000/searchBooks?option=${request.option}&term=${request.term}`;
+    let searchBooksResponse = this.http.get<SearchBooksResponse>(url);
+    return searchBooksResponse
   }
   
 }
