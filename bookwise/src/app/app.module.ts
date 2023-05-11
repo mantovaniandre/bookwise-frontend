@@ -14,7 +14,6 @@ import { LearnMoreComponent } from './learn-more/learn-more.component';
 import { SearchBookComponent } from './search-book/search-book.component';
 import { MyAccountComponent } from './my-account/my-account.component';
 import { MyRequestsComponent } from './my-requests/my-requests.component';
-import { CartComponent } from './cart/cart.component';
 import { CheckoutComponent } from './checkout/checkout.component';
 import { UpdateBookComponent } from './update-book/update-book.component';
 import { CreateBookComponent } from './create-book/create-book.component';
@@ -22,6 +21,8 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 // import { Interceptor } from './utils/interceptors/interceptors';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { CartComponent } from './cart/cart.component';
+
 
 
 @NgModule({
@@ -36,11 +37,11 @@ import { NgxPaginationModule } from 'ngx-pagination';
     SearchBookComponent,
     MyAccountComponent,
     MyRequestsComponent,
-    CartComponent,
     CheckoutComponent,
     UpdateBookComponent,
     CreateBookComponent,
     DashboardComponent,
+    CartComponent
   ],
   imports: [
     BrowserModule,

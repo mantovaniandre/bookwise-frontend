@@ -1,69 +1,51 @@
-<app-header></app-header>
-<div>
-  <div class="container" id="form-steps" style="margin-top: 100px; margin-bottom: 100px; font-family: 'Rajdhani', sans-serif;">
-    <div class="row">
-      <div class="col card">
-        <div class="card-header" style="font-family: 'Rajdhani', sans-serif;">My Shopping Cart</div>
-        <div class="card-body" style="margin-top: 50px; margin-bottom: 50px;">
-          <div class="card mb-3">
-            <div class="card-header" style="font-family: 'Rajdhani', sans-serif;">Data da Compra</div>
-            <div class="card-body" style="border-bottom: 1px solid rgb(227, 225, 225);">
-              <div class="row mb-3 mt-3" style="display: flex; justify-content: center; align-items: center;">
-                <div class="col-12 col-sm-2 col-md-2 mb-3" style="display: flex; justify-content: center; align-items: center;">
-                  <img class="card-img-top" src="https://m.media-amazon.com/images/I/51Xby92J9KL._SX346_BO1,204,203,200_.jpg" alt="Card image cap"> 
-                </div>
-                <div class="col-12 col-sm-12 col-md-2 mb-3" style="display: flex; justify-content: center; align-items: center;">
-                  <p>O poder do Hábito</p>
-                </div>
-                <div class="col-12 col-sm-12 col-md-2 mb-3" style="display: flex; justify-content: center; align-items: center;">
-                  <input class="form-control me-2" type="search" placeholder="" aria-label="1" style="width: 150px; font-size: 15px; font-family: 'Rajdhani', sans-serif; width: 70px;">
-                </div>
-                <div class="col-12 col-sm-12 col-md-2 mb-3" style="display: flex; justify-content: center; align-items: center;">
-                  <p>15 available</p>
-                </div>
-                <div class="col-12 col-sm-12 col-md-2 mb-3" style="display: flex; justify-content: center; align-items: center;">
-                  <p>R$38,40</p>
-                </div>
-              </div>
-              <div class="row justify-content-end">
-                <div class="col-auto">
-                  <a style="color: #007bff; font-family: 'Rajdhani', sans-serif;">delete</a>
-                </div>
-              </div>
-            </div>
-            <div class="card-body" style="border-bottom: 1px solid rgb(227, 225, 225);">
-              <div class="row mb-3 mt-3" style="display: flex; justify-content: center; align-items: center;">
-                <div class="col-12 col-sm-2 col-md-2 mb-3" style="display: flex; justify-content: center; align-items: center;">
-                  <img class="card-img-top" src="https://m.media-amazon.com/images/I/51Xby92J9KL._SX346_BO1,204,203,200_.jpg" alt="Card image cap"> 
-                </div>
-                <div class="col-12 col-sm-12 col-md-2 mb-3" style="display: flex; justify-content: center; align-items: center;">
-                  <p>O poder do Hábito</p>
-                </div>
-                <div class="col-12 col-sm-12 col-md-2 mb-3" style="display: flex; justify-content: center; align-items: center;">
-                  <input class="form-control me-2" type="search" placeholder="" aria-label="1" style="width: 150px; font-size: 15px; font-family: 'Rajdhani', sans-serif; width: 70px;">
-                </div>
-                <div class="col-12 col-sm-12 col-md-2 mb-3" style="display: flex; justify-content: center; align-items: center;">
-                  <p>15 available</p>
-                </div>
-                <div class="col-12 col-sm-12 col-md-2 mb-3" style="display: flex; justify-content: center; align-items: center;">
-                  <p>R$38,40</p>
-                </div>
-              </div>
-              <div class="row justify-content-end">
-                <div class="col-auto">
-                  <a style="color: #007bff; font-family: 'Rajdhani', sans-serif;">delete</a>
+<body>
+  <div class="spinner-container" *ngIf="isLoading">
+    <div class="spinner"></div>
+  </div>
+  <div class="home-content" *ngIf="!isLoading">  
+    <app-header></app-header>
+    <div>
+      <div class="container" id="form-steps" style="margin-top: 100px; margin-bottom: 100px; font-family: 'Rajdhani', sans-serif;">
+        <div class="row">
+          <div class="col card">
+            <div class="card-header" style="font-family: 'Rajdhani', sans-serif;">My Shopping Cart</div>
+            <div class="card-body" style="margin-top: 50px; margin-bottom: 50px;">
+              <div class="card mb-3" *ngFor="let book of cartItems">
+                <div class="card-body" style="border-bottom: 1px solid rgb(227, 225, 225);">
+                  <div class="row mb-3 mt-3" style="display: flex; justify-content: center; align-items: center;">
+                    <div class="col-12 col-sm-2 col-md-2 mb-3" style="display: flex; justify-content: center; align-items: center;">
+                      <img class="card-img-top" [src]="book.url_img" alt="Book Image">
+                    </div>
+                    <div class="col-12 col-sm-12 col-md-2 mb-3" style="display: flex; justify-content: center; align-items: center;">
+                      <p>{{ book.title }}</p>
+                    </div>
+                    <div class="col-12 col-sm-12 col-md-2 mb-3" style="display: flex; justify-content: center; align-items: center;">
+                      <p>{{ book.quantity }}</p>
+                    </div>
+                    <div class="col-12 col-sm-12 col-md-2 mb-3" style="display: flex; justify-content: center; align-items: center;">
+                      <p>{{ book.stock }} available</p>
+                    </div>
+                    <div class="col-12 col-sm-12 col-md-2 mb-3" style="display: flex; justify-content: center; align-items: center;">
+                      <p>R$ {{ book.price }}</p>
+                    </div>
+                  </div>
+                  <div class="row justify-content-end">
+                    <div class="col-auto">
+                      <a style="color: #007bff; font-family: 'Rajdhani', sans-serif;" (click)="removeFromCart(book)">delete</a>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-        </div>
-        <div class="row justify-content-end" style="padding: 20px;">
-          <div class="col-auto">
-            <a style="color: #007bff; font-family: 'Rajdhani', sans-serif;">Check out</a>
+            <div class="row justify-content-end" style="padding: 20px;">
+              <div class="col-auto">
+                <a style="color: #007bff; font-family: 'Rajdhani', sans-serif;" (click)="checkout()">Check out</a>
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </div>
+    <app-footer></app-footer>
   </div>
-</div>
-<app-footer></app-footer>
+</body>

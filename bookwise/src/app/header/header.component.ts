@@ -3,6 +3,7 @@ import { FormBuilder, FormControl} from '@angular/forms';
 import { UserService } from '../utils/service/user.service';
 import { Router } from '@angular/router';
 import { AuthService } from '../utils/service/auth.service';
+import { ProfileService } from '../utils/service/profile-service';
 
 @Component({
   selector: 'app-header',
@@ -21,7 +22,8 @@ export class HeaderComponent {
   constructor(private fb: FormBuilder,
               private userService: UserService,
               private router: Router,
-              private authService: AuthService) { }
+              private authService: AuthService,
+              private profileService: ProfileService) { }
   
   search(){
     this.router.navigate(['/searchBook'], { queryParams: { option: this.searchOption, term: this.searchTerm } });
@@ -44,6 +46,7 @@ export class HeaderComponent {
           this.clientAccess = true;
         }
       });
+      
     }
     this.isLoading = false;
     this.isLoginPage = this.router.url === '/login';
@@ -56,6 +59,10 @@ export class HeaderComponent {
 
   logoutService(){
     this.authService.logoutService()
+  }
+
+  checkout(): void {
+    this.router.navigate(['/checkout']);
   }
 
 }

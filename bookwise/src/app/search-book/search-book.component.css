@@ -39,3 +39,8 @@
     text-overflow: ellipsis;
     font-weight: 900;
 }
+
+.btn:hover{
+    background-color: #3f51b5 !important;
+    color: white !important;
+}
