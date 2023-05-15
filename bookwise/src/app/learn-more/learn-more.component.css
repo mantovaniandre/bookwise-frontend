@@ -5,25 +5,18 @@
 }
 
 .rating {
-    display: inline-block;
+    direction: ltr; /* Direção da direita para a esquerda */
+    unicode-bidi: bidi-override;
 }
-
-.rating input[type="radio"] {
-    display: none;
-}
-
-.rating label {
-    font-size: 30px;
-    color: #ddd;
+  
+.star {
+    font-size: 2em;
     cursor: pointer;
+    color: #ccc; /* Cor das estrelas não selecionadas */
 }
-
-.rating label:before {
-    content: '\2605';
-}
-
-.rating input[type="radio"]:checked + label:before {
-    color: #3f51b5;
+  
+.star.selected {
+    color: gold; /* Cor das estrelas selecionadas */
 }
 
 .btn:hover{

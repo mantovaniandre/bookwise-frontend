@@ -71,8 +71,8 @@
                                 <input style="font-family: 'Rajdhani', sans-serif;" type="text" class="form-control" formControlName="neighborhood">
                             </div>
                             <div class="col-12 col-md-4">
-                                <label style="font-family: 'Rajdhani', sans-serif;" for="phone" class="form-label">City</label>
-                                <input style="font-family: 'Rajdhani', sans-serif;" type="text" class="form-control" formControlName="phone">
+                                <label style="font-family: 'Rajdhani', sans-serif;" for="city" class="form-label">City</label>
+                                <input style="font-family: 'Rajdhani', sans-serif;" type="text" class="form-control" formControlName="city">
                             </div> 
                         </div>
                         <div class="row" style="padding-top: 20px;">
@@ -148,9 +148,9 @@
                 </div>
               </div>
             </div>
-            <div class="row justify-content-end" style="padding: 20px;">
+            <div class="row justify-content-end" style="padding: 20px;" *ngIf="buttonInvalidConfirm">
                 <div class="col-auto">
-                    <a class="" style="color: #007bff; font-family: 'Rajdhani', sans-serif;" >Confirm</a>
+                    <a class="" style="color: #007bff; font-family: 'Rajdhani', sans-serif;" (click)="confirm()">Confirm</a>
                 </div>
             </div>
         </div>

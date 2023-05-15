@@ -14,7 +14,7 @@
                                 <img class="card-img-top" src={{book.url_img}} alt="Card image cap">
                             </div>
                             <div style="display: flex; justify-content: center; align-items: center; margin-top: 50px;">
-                                <button class="btn" type="submit" style="color: #007bff; font-family: 'Rajdhani', sans-serif; border: 1px solid #007bff;" (click)="addToCart()">Shopping Cart</button>
+                                <button class="btn" type="submit" style="color: #007bff; font-family: 'Rajdhani', sans-serif; border: 1px solid #007bff;" (click)="addToCart()">Add to Cart</button>
                             </div>
                         </div>
                     </div>
@@ -149,13 +149,9 @@
                 <div class="col card">
                     <div class="card-header" style="font-family: 'Rajdhani', sans-serif;">Comment</div>
                     <div class="card-body">
-                        <fieldset class="rating">
-                            <input type="radio" id="star5" name="rating" value="5" /><label for="star5"></label>
-                            <input type="radio" id="star4" name="rating" value="4" /><label for="star4"></label>
-                            <input type="radio" id="star3" name="rating" value="3" /><label for="star3"></label>
-                            <input type="radio" id="star2" name="rating" value="2" /><label for="star2"></label>
-                            <input type="radio" id="star1" name="rating" value="1" /><label for="star1"></label>
-                        </fieldset>
+                        <div class="rating">
+                            <span class="star" [ngClass]="{'selected': star <= rating}" (click)="setRating(star)" *ngFor="let star of [1, 2, 3, 4, 5]">&#9733;</span>
+                        </div>
                         <div class="mb-3" style="font-family: 'Rajdhani', sans-serif;">
                             <label for="exampleFormControlInput1" class="form-label">Title</label>
                             <input type="text" class="form-control" id="exampleFormControlInput1">
@@ -182,13 +178,6 @@
                             <label for="exampleFormControlInput1" class="form-label">Date</label>
                             <input type="email" class="form-control" id="exampleFormControlInput1" [disabled]="!isEditing">
                         </div>
-                        <fieldset class="rating" [disabled]="!isEditing">
-                            <input type="radio" id="star5" name="rating" value="5" /><label for="star5"></label>
-                            <input type="radio" id="star4" name="rating" value="4" /><label for="star4"></label>
-                            <input type="radio" id="star3" name="rating" value="3" /><label for="star3"></label>
-                            <input type="radio" id="star2" name="rating" value="2" /><label for="star2"></label>
-                            <input type="radio" id="star1" name="rating" value="1" /><label for="star1"></label>
-                        </fieldset>
                         <div class="mb-3" style="font-family: 'Rajdhani', sans-serif;">
                             <label for="exampleFormControlTextarea1" class="form-label">Rating Write</label>
                             <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" [disabled]="!isEditing"></textarea>

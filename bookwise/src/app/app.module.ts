@@ -22,6 +22,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 // import { Interceptor } from './utils/interceptors/interceptors';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { CartComponent } from './cart/cart.component';
+import { Interceptor } from './utils/interceptors/interceptors';
 
 
 
@@ -52,7 +53,14 @@ import { CartComponent } from './cart/cart.component';
     ReactiveFormsModule,
     NgxPaginationModule,
   ],
-  providers: [AuthService],
+  providers: [
+    AuthService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: Interceptor,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

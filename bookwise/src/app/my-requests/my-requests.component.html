@@ -1,86 +1,41 @@
-<app-header></app-header>
-<div>
-  <div class="container" id="form-steps" style="margin-top: 100px; margin-bottom: 100px;">
-    <div class="row" style="margin-bottom: 50px;">
-      <div class="col card">
-        <div class="card-header" style="font-family: 'Rajdhani', sans-serif;">My Requests</div>
-        <div class="card-body">
-          <div class="col d-flex nav-item mb-3" role="search">
-            <div class="row" style="display: flex; justify-content: center; align-items: center; padding: 30px;">
-              <div class="col col-sm-5 col-md-5" style="display: flex; justify-content: center; align-items: center;">
-                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" style="font-size: 15px; font-family: 'Rajdhani', sans-serif;">
-              </div>
-              <div class="col col-sm-2 col-md-2" style="display: flex; justify-content: center; align-items: center;">
-                <select class="form-control" style="width: auto; font-family: 'Rajdhani', sans-serif; color: #3f51b5; border: 1px solid #3f51b5;">
-                    <option value="All">All</option>
-                    <option value="thisMonth">This Month</option>
-                    <option value="thisYear">This Year</option>
-                </select>
-              </div>
-              <div class="col col-sm-2 col-md-2" style="display: flex; justify-content: center; align-items: center; font-family: 'Rajdhani', sans-serif;">
-                <button class="btn" type="submit" style="color: #3f51b5; border: 1px solid;">Search</button>
-              </div>
-              <div class="col col-sm-3 col-md-3 d-flex align-items-center" style="font-family: 'Rajdhani', sans-serif;" >
-                <p style="margin: 0;">95 purchases</p>
-              </div>
-            </div>
-          </div>
-          <div class="card mb-3" style="font-family: 'Rajdhani', sans-serif;">
-            <div class="card-body" style="border-bottom: 1px solid rgb(227, 225, 225);">
-              <div class="row" style="display: flex; justify-content: center; align-items: center;">
-                <div class="col col-sm-3 col-md-3" style="display: flex; justify-content: center; align-items: center;">
-                  <img class="card-img-top" src="https://m.media-amazon.com/images/I/51Xby92J9KL._SX346_BO1,204,203,200_.jpg" alt="Card image cap"> 
-                </div>
-                <div class="col col-sm-3 col-md-2" style="display: flex; justify-content: center; align-items: center;">
-                  <p>Nome do livro</p>
-                </div>
-                <div class="col col-sm-3 col-md-2" style="display: flex; justify-content: center; align-items: center;">
-                  <p>Quantidade da compra</p>
-                </div>
-                <div class="col col-sm-3 col-md-2" style="display: flex; justify-content: center; align-items: center;">
-                  <p>Data da compra</p>
-                </div>
-                <div class="col col-sm-3 col-md-2" style="display: flex; justify-content: center; align-items: center;">
-                  <p>Enviado</p>
-                </div>
-              </div>
-            </div>
-            <div class="card-body" style="border-bottom: 1px solid rgb(227, 225, 225);">
-              <div class="row" style="display: flex; justify-content: center; align-items: center;">
-                <div class="col col-sm-3 col-md-3" style="display: flex; justify-content: center; align-items: center;">
-                  <img class="card-img-top" src="https://m.media-amazon.com/images/I/51Xby92J9KL._SX346_BO1,204,203,200_.jpg" alt="Card image cap"> 
-                </div>
-                <div class="col col-sm-3 col-md-2" style="display: flex; justify-content: center; align-items: center;">
-                  <p>Nome do livro</p>
-                </div>
-                <div class="col col-sm-3 col-md-2" style="display: flex; justify-content: center; align-items: center;">
-                  <p>Quantidade da compra</p>
-                </div>
-                <div class="col col-sm-3 col-md-2" style="display: flex; justify-content: center; align-items: center;">
-                  <p>Data da compra</p>
-                </div>
-                <div class="col col-sm-3 col-md-2" style="display: flex; justify-content: center; align-items: center;">
-                  <p>Enviado</p>
+<body>
+  <div class="spinner-container" *ngIf="isLoading">
+    <div class="spinner"></div>
+  </div>
+  <div class="home-content" *ngIf="!isLoading"> 
+    <app-header></app-header>
+    <div>
+      <div class="container" id="form-steps" style="margin-top: 100px; margin-bottom: 100px;">
+        <div class="row" style="margin-bottom: 50px;">
+          <div class="col card">
+            <div class="card-header" style="font-family: 'Rajdhani', sans-serif;">My Requests</div>
+            <div class="card-body">
+              <div class="card mb-3" style="font-family: 'Rajdhani', sans-serif;">
+                <div class="card-body" *ngFor="let purchase of purchases" style="border-bottom: 1px solid rgb(227, 225, 225);">
+                  <div class="row" style="display: flex; justify-content: center; align-items: center;">
+                    <div  class="col col-sm-2 col-md-2" style="display: flex; justify-content: center; align-items: center;">
+                      <img class="card-img-top" [src]="purchase.url_img" alt="Card image cap"> 
+                    </div>
+                    <div class="col col-sm-2 col-md-2" style="display: flex; justify-content: center; align-items: center;">
+                      <p>{{ purchase.book_title }}</p>
+                    </div>
+                    <div class="col col-sm-2 col-md-2" style="display: flex; justify-content: center; align-items: center;">
+                      <p>{{ purchase.quantity }}</p>
+                    </div>
+                    <div class="col col-sm-2 col-md-2" style="display: flex; justify-content: center; align-items: center;">
+                      <p>{{ purchase.price }}</p>
+                    </div>
+                    <div class="col col-sm-2 col-md-2" style="display: flex; justify-content: center; align-items: center;">
+                      <p>{{ purchase.purchase_date }}</p>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-        <nav aria-label="Page navigation example" style="font-family: 'Rajdhani', sans-serif;" >
-          <ul class="pagination justify-content-end">
-            <li class="page-item disabled">
-              <a class="page-link">Previous</a>
-            </li>
-            <li class="page-item"><a class="page-link" href="">1</a></li>
-            <li class="page-item"><a class="page-link" href="">2</a></li>
-            <li class="page-item"><a class="page-link" href="">3</a></li>
-            <li class="page-item">
-              <a class="page-link" href="#">Next</a>
-            </li>
-          </ul>
-        </nav>
       </div>
     </div>
+    <app-footer></app-footer>
   </div>
-</div>
-<app-footer></app-footer>
+</body>

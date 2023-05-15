@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
 import { BooksCartModel } from '../utils/response/book.response';
-import { ActivatedRoute, RouterStateSnapshot } from '@angular/router';
-import { CartService } from '../utils/service/cart-service';
 import { UserService } from '../utils/service/user.service';
-import { UserModel } from '../utils/model/user.model';
 import { capitalize } from '../utils/format/format-capitalize';
 import { FormBuilder } from '@angular/forms';
+import { PurchaseService } from '../utils/service/purchase.service';
+import { PurchaseRequest } from '../utils/request/purchase.request';
+import Swal from 'sweetalert2';
+import { CartDataService } from '../utils/service/cart-data-service';
 
 @Component({
   selector: 'app-checkout',
@@ -15,6 +16,7 @@ import { FormBuilder } from '@angular/forms';
 export class CheckoutComponent{
   books: BooksCartModel[] = [];
   isLoading = true;
+  buttonInvalidConfirm = true;
 
   userForm = this.fb.group({
     first_name:[''],
@@ -44,9 +46,10 @@ export class CheckoutComponent{
     cvv:[''],
   });
 
-  constructor(private cartService: CartService,
+  constructor(private cartDataService: CartDataService,
               private userService: UserService,
-              private fb: FormBuilder) {}
+              private fb: FormBuilder,
+              private purchaseService: PurchaseService) {}
 
   ngOnInit(): void {
     setTimeout(() => {
@@ -57,18 +60,18 @@ export class CheckoutComponent{
       }
     }, 1000);
 
-    this.books = this.cartService.getCartItems();
+    this.books = this.cartDataService.getCartItems();
+    console.log('removeFromCart')
+    if (this.books.length === 0) {
+      this.buttonInvalidConfirm = false;
+    } else {
+      this.buttonInvalidConfirm = true;
+    }
     const token = localStorage.getItem('token');
     if (token) {
       const UpdateUserRequest = { token: token };
       this.userService.profileUserService(UpdateUserRequest).subscribe((user: any) => {
         this.userForm.patchValue({
-          first_name: capitalize(user.user['first_name']),
-          last_name: capitalize(user.user['last_name']),
-          email: user.user['email'].toLowerCase(),
-          cpf: user.user['cpf'],
-          phone: user.user['phone'],
-          birthday: user.user['birthday'],
           zip_code: user.user.address['zip_code'],
           street: capitalize(user.user.address['street']),
           number: user.user.address['number'],
@@ -87,11 +90,8 @@ export class CheckoutComponent{
           cvv: user.user.credit_card['cvv'],
         });
       });
-      console.log('this.userForm: ', this.userForm)
     }
   }
-
-
 
   capitalize(str: string){
     capitalize(str)
@@ -99,7 +99,6 @@ export class CheckoutComponent{
 
   calculateTotal(): number {
     const uniqueBooks: BooksCartModel[] = [];
-  
     for (let book of this.books) {
       const existingBook = uniqueBooks.find(b => b.id === book.id);
   
@@ -107,14 +106,71 @@ export class CheckoutComponent{
         uniqueBooks.push({ ...book });
       }
     }
-  
     let total = 0;
     for (let book of uniqueBooks) {
       const price = parseFloat(book.price);
       total += price;
     }
-  
     return total;
+  }
+
+  confirm() {
+    let purchases: PurchaseRequest[] = [];
+    for (let book of this.books) {
+      let purchase: PurchaseRequest = {
+        id: book.id,
+        quantity: book.quantity,
+        price: book.price,
+      };
+      purchases.push(purchase);
+    }
+    this.purchaseService.purchaseService(purchases).subscribe(
+      (response) => {
+        let successfulPurchases = response.successful_purchases;
+        if (successfulPurchases.length > 0) {
+          let successMessage = 'Successfully purchased book:';
+          for (let purchase of successfulPurchases) {
+            successMessage += `\n ${purchase.book_title}`;
+          }
+          Swal.fire('Sucesso', successMessage, 'success').then(() => {
+            let failedPurchases = response.failed_purchases;
+            if (failedPurchases.length > 0) {
+              let errorMessage = 'Book purchase error:';
+              for (let purchase of failedPurchases) {
+                errorMessage += `\n ${purchase.book_title}`;
+              }
+              Swal.fire('Erro', errorMessage, 'error').then(() => {
+                this.cartDataService.clearCart();
+                location.reload();
+              });
+            } else {
+              this.cartDataService.clearCart();
+              location.reload();
+            }
+          });
+        } else {
+          let failedPurchases = response.failed_purchases;
+          if (failedPurchases.length > 0) {
+            let errorMessage = 'Book purchase error:';
+            for (let purchase of failedPurchases) {
+              errorMessage += `\n ${purchase.book_title}`;
+            }
+            Swal.fire('Erro', errorMessage, 'error').then(() => {
+              this.cartDataService.clearCart();
+              location.reload();
+            });
+          } else {
+            this.cartDataService.clearCart();
+            location.reload();
+          }
+        }
+      },
+      (error) => {
+        Swal.fire('Error', 'There was an error with the purchase', 'error').then(() => {
+          location.reload();
+        });
+      }
+    );
   }
   
   
@@ -122,4 +178,7 @@ export class CheckoutComponent{
   
   
 
+  
+  
+  
 }

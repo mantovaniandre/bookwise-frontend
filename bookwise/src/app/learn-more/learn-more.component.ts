@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { BooksService } from '../utils/service/book-service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { capitalize } from '../utils/format/format-capitalize';
 import { BooksCartModel, GetBookByIdResponse } from '../utils/response/book.response';
 import { GetBookByIdRequest } from '../utils/request/book.request';
@@ -17,11 +17,13 @@ export class LearnMoreComponent {
   book: GetBookByIdResponse = {} as GetBookByIdResponse;
   bookFormated = {}
   isLoading = true;
+  rating = 0;
 
 
   constructor(private booksService: BooksService,
               private route: ActivatedRoute,
-              private cartService: CartService){}
+              private cartService: CartService,
+              private router: Router){}
 
   ngOnInit(): void {
 
@@ -55,7 +57,7 @@ export class LearnMoreComponent {
     }
   }
 
-  addToCart(){
+  addToCart() {
     const bookToAdd: BooksCartModel = {
       id: this.book.id,
       url_img: this.book.url_img,
@@ -64,7 +66,13 @@ export class LearnMoreComponent {
       price: this.book.price,
       stock: this.book.stock
     };
-    this.cartService.addToCart(bookToAdd)
+    this.cartService.addToCart(bookToAdd);
+    this.router.navigate(['/cart']); // Navega para a rota do carrinho
+  }
+
+  setRating(star: number) {
+    this.rating = star;
+    console.log(this.rating); // Aqui você pode fazer o que quiser com a classificação
   }
  
 }
