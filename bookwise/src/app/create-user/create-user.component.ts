@@ -11,6 +11,7 @@ import { formatCVV } from '../utils/format/format-cvv';
 import { formatCreditCardNumber } from '../utils/format/format-credit-card-number';
 import { SearchCreditCardService } from '../utils/service/search-credit-card.service';
 import { formatRemoveSpecialCharacters } from '../utils/format/format-remove-special-characters';
+import { formatCleanCreditCard } from '../utils/format/format-clean-credit-card';
 import Swal from 'sweetalert2';
 import { formatDateOfBirth } from '../utils/format/format-date-of-birthdate';
 import { formatOnlyNumber } from '../utils/format/format-only-number';
@@ -138,7 +139,8 @@ export class CreateUserComponent {
 
   formatAndSearchCreditCardNumber(event: any){
     let creditCardFormatted = formatCreditCardNumber(event)
-    this.searchCreditCardService.searchCreditCardService(creditCardFormatted).subscribe(credit_card => {
+    let creditCardCleaned = formatCleanCreditCard(creditCardFormatted);
+    this.searchCreditCardService.searchCreditCardService(creditCardCleaned).subscribe(credit_card => {
       this.paymentForm.patchValue({
         type_card: credit_card.type,
         flag: credit_card.scheme,
@@ -165,6 +167,7 @@ export class CreateUserComponent {
       let bank = formatRemoveSpecialCharacters(this.paymentForm.get('bank')?.value || '');
       let country_bank = formatRemoveSpecialCharacters(this.paymentForm.get('country_bank')?.value || '');
       let zip_code = formatRemoveSpecialCharacters(this.addressForm.get('zip_code')?.value || '');
+      let card_number = formatCleanCreditCard(this.paymentForm.get('card_number')?.value || '');
 
       let user: CreateUserRequest  = {
         first_name: this.userForm.get('first_name')?.value?.toUpperCase() || '',
@@ -184,7 +187,7 @@ export class CreateUserComponent {
         city: city.toUpperCase(),
         state: state.toUpperCase() || '',
         country: country.toUpperCase() || '',
-        card_number: this.paymentForm.get('card_number')?.value || '',
+        card_number: card_number || '',
         type_card: type_card.toUpperCase() || '',
         flag: flag.toUpperCase() || '',
         bank: bank.toUpperCase() || '',

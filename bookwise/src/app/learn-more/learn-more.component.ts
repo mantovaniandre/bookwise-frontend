@@ -66,7 +66,7 @@ export class LearnMoreComponent {
       price: this.book.price,
       stock: this.book.stock
     };
-    this.cartService.addToCart(bookToAdd);
+    this.cartService.addToCart(Number(this.book.id), 1);
     this.router.navigate(['/cart']); // Navega para a rota do carrinho
   }
 

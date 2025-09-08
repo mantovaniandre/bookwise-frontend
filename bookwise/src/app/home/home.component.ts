@@ -56,7 +56,7 @@ export class HomeComponent implements OnInit {
   getBooks(): void {
     this.booksService.getAllBooksService().subscribe(
       data => {
-        this.books = data.book;
+        this.books = data.books;
         this.categories = [...new Set(this.books.map(book => book.category))];
         this.categories.forEach(category => {
           this.filteredBooks[category] = this.books.filter(book => book.category === category);

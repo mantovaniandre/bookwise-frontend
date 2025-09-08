@@ -12,30 +12,50 @@ export class BooksService {
 
   constructor(private http: HttpClient) { }
 
-  getAllBooksService(): Observable<any> {
-    let url = 'http://localhost:5000/getAllBooks';
+  getAllBooksService(page: number = 1, perPage: number = 20): Observable<any> {
+    let url = `http://localhost:5000/api/books?page=${page}&per_page=${perPage}`;
     let getAllBooksResponse = this.http.get<GetAllBooksResponse>(url);
     return getAllBooksResponse
   }
 
   getBookByIdService(id: GetBookByIdRequest): Observable<any> {
-    let url = `http://localhost:5000/getBookById/${id.id}`;
+    let url = `http://localhost:5000/api/books/${id.id}`;
     let getBookByIdResponse = this.http.get<GetBookByIdResponse>(url);
     return getBookByIdResponse
   }
 
+  getBookBySlugService(slug: string): Observable<any> {
+    let url = `http://localhost:5000/api/books/slug/${slug}`;
+    return this.http.get(url);
+  }
+
+  getFeaturedBooks(): Observable<any> {
+    let url = 'http://localhost:5000/api/books/featured';
+    return this.http.get(url);
+  }
+
+  getBestsellers(): Observable<any> {
+    let url = 'http://localhost:5000/api/books/bestsellers';
+    return this.http.get(url);
+  }
+
+  getCategories(): Observable<any> {
+    let url = 'http://localhost:5000/api/categories';
+    return this.http.get(url);
+  }
+
   createBook(book: CreateBookRequest): Observable<any> {
-    let url = `http://localhost:5000/createBook`;
+    let url = `http://localhost:5000/api/books`;
     const headers = new HttpHeaders()
       .set('Content-Type', 'application/json')
       .set('Accept', 'application/json')
       .set('Authorization', `Bearer ${localStorage.getItem('token')}`);
-      let createBookResponse = this.http.put<CreateBookResponse>(url, book, { headers });
+      let createBookResponse = this.http.post<CreateBookResponse>(url, book, { headers });
     return createBookResponse
   }
 
   updateBookByIdService(book: UpdateBooksByIdRequest, id: GetBookByIdRequest): Observable<any> {
-    let url = `http://localhost:5000/updateBookById/${id.id}`;
+    let url = `http://localhost:5000/api/books/${id.id}`;
     const headers = new HttpHeaders()
       .set('Content-Type', 'application/json')
       .set('Accept', 'application/json')
@@ -45,7 +65,7 @@ export class BooksService {
   }
 
   deleteBookByIdService(id: DeleteBookByIdRequest): Observable<any> {
-    let url = `http://localhost:5000/deleteBookById/${id.id}`;
+    let url = `http://localhost:5000/api/books/${id.id}`;
     const headers = new HttpHeaders()
       .set('Content-Type', 'application/json')
       .set('Accept', 'application/json')
@@ -55,7 +75,7 @@ export class BooksService {
   }
 
   searchBooks(request: SearchBooksRequest): Observable<any> {
-    let url = `http://localhost:5000/searchBooks?option=${request.option}&term=${request.term}`;
+    let url = `http://localhost:5000/api/books/search?option=${request.option}&term=${request.term}`;
     let searchBooksResponse = this.http.get<SearchBooksResponse>(url);
     return searchBooksResponse
   }
